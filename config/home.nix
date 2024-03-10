@@ -101,6 +101,7 @@ in {
       # synergy
       # swaycons
       starship
+      supabase-cli
       terminus-nerdfont
       tldr
       # trash-cli

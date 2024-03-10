@@ -25,18 +25,18 @@ in {
       wget
       # w3m
       # dmenu
-      # neofetch
-      # neovim
-      # starship
-      # bat
-      # brave
-      # cargo
+      bat
+      brave
+      bun
+      cargo
       # celluloid
       chromium
-      # dunst
+      deno
+      dunst
       efibootmgr
       # eww
       # feh
+      fira-code-nerdfont
       flameshot
       flatpak
       floorp
@@ -49,25 +49,29 @@ in {
       gnome.gnome-keyring
       gnugrep
       gnumake
+      go
       gparted
       # gnugrep
       # grub2
-      # kitty
-      # luarocks
+      kitty
+      luarocks
       # lxappearance
-      # mangohud
-      # neovim
+      mangohud
+      neofetch
+      neovim
       # nomacs
       # openssl
       # os-prober
       nerdfonts
       nixpkgs-fmt
       nil
+      nodejs
       oh-my-zsh
       pavucontrol
+      php
       picom
       # polkit_gnome
-      # powershell
+      powershell
       # protonup-ng
       python3Full
       python.pkgs.pip
@@ -81,32 +85,32 @@ in {
       # stdenv
       # synergy
       # swaycons
+      starship
       terminus-nerdfont
-      # tldr
+      tldr
       # trash-cli
       unzip
-      # variety
+      variety
       virt-manager
       vscode
-      volta
-      # xclip
-      # xdg-desktop-portal-gtk
+      xclip
+      xdg-desktop-portal-gtk
       xfce.thunar
-      # xorg.libX11
-      # xorg.libX11.dev
-      # xorg.libxcb
-      # xorg.libXft
-      # xorg.libXinerama
-      # xorg.xinit
-      # xorg.xinput
-      # zoxide
-      # (lutris.override {
-      #   extraPkgs = pkgs: [
-      #     # List package dependencies here
-      #     wineWowPackages.stable
-      #     winetricks
-      #   ];
-      # })
+      xorg.libX11
+      xorg.libX11.dev
+      xorg.libxcb
+      xorg.libXft
+      xorg.libXinerama
+      xorg.xinit
+      xorg.xinput
+      zoxide
+      (lutris.override {
+        extraPkgs = pkgs: [
+          # List package dependencies here
+          wineWowPackages.stable
+          winetricks
+        ];
+      })
       zsh
       zsh-powerlevel10k
       zsh-autosuggestions

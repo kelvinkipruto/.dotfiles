@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 let
-    unstable = import <unstable> {};
+    # unstable = import <unstable> {};
 in  {
     nixpkgs.config.permittedInsecurePackages = [
       "openssl-1.1.1w"
@@ -64,7 +64,7 @@ in  {
       alsa.support32Bit = true;
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
-      #jack.enable = true;
+      jack.enable = true;
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)
@@ -104,13 +104,13 @@ in  {
     # dbeaver
     # discord
     # docker
-    fira-code-nerdfont
+    # fira-code-nerdfont
     # firefox-devedition
     # flameshot
     # flatpak
     # flutter
     gcc
-    # gh
+    gh
     git
     # github-desktop
     # gparted

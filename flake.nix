@@ -3,11 +3,16 @@
 
   inputs = {
     nixpkgs = {
-      url = "nixpkgs/nixos-unstable";
+      url = "nixpkgs/nixos-23.05";
     };
-    vscode-server = {
-      url = "github:nix-community/nixos-vscode-server";
-    };
+    # home-manager = {
+    #   url = "github:nix-community/home-manager/release-23.05";
+    #   inputs= {
+    #     nixpkgs={
+    #       follows="nixpkgs";
+    #     };
+    #   };
+    # };
   };
 
   outputs = {self, nixpkgs, ...}:
@@ -20,6 +25,13 @@
         modules = [./configuration.nix];
       };
     };
+    # homeConfigurations = {
+    #     kipruto = hom/lib/homeManagerConfiguration
+    #     lib.nixosSystem {
+    #     system = "x86_64-linux";
+    #     modules = [./configuration.nix];
+    #   };
+    # }
   };
 
 }

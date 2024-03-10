@@ -3,35 +3,42 @@
 
   inputs = {
     nixpkgs = {
-      url = "nixpkgs/nixos-23.05";
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
-    # home-manager = {
-    #   url = "github:nix-community/home-manager/release-23.05";
-    #   inputs= {
-    #     nixpkgs={
-    #       follows="nixpkgs";
-    #     };
-    #   };
-    # };
-  };
-
-  outputs = {self, nixpkgs, ...}:
-  let
-    lib = nixpkgs.lib;
-  in {
-    nixosConfigurations = {
-      nixos = lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [./configuration.nix];
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs= {
+        nixpkgs={
+          follows="nixpkgs";
+        };
       };
     };
-    # homeConfigurations = {
-    #     kipruto = hom/lib/homeManagerConfiguration
-    #     lib.nixosSystem {
-    #     system = "x86_64-linux";
-    #     modules = [./configuration.nix];
-    #   };
-    # }
+  };
+
+  
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  }: 
+    let
+      user = "kelvin";
+    in {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs self user;};
+      modules = [
+        ./system/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.kelvin = import ./config/home.nix;
+          home-manager.extraSpecialArgs = {inherit inputs self user;};
+        }
+      ];
+    };
   };
 
 }

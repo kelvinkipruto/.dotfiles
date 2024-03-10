@@ -76,6 +76,7 @@ in {
       nixpkgs-fmt
       nil
       nodejs
+      nodePackages.pnpm
       obsidian
       oh-my-zsh
       ollama
@@ -119,6 +120,7 @@ in {
       xorg.libXinerama
       xorg.xinit
       xorg.xinput
+      yarn
       zoxide
       (lutris.override {
         extraPkgs = pkgs: [

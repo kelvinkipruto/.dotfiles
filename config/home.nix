@@ -29,7 +29,7 @@ in {
       # neovim
       # starship
       # bat
-      brave
+      # brave
       # cargo
       # celluloid
       chromium
@@ -37,19 +37,19 @@ in {
       efibootmgr
       # eww
       # feh
-      # flameshot
-      # flatpak
+      flameshot
+      flatpak
       floorp
       fontconfig
       freetype
       gcc
       # gimp
       git
-      # github-desktop
+      github-desktop
       gnome.gnome-keyring
       gnugrep
       gnumake
-      # gparted
+      gparted
       # gnugrep
       # grub2
       # kitty
@@ -84,6 +84,7 @@ in {
       unzip
       # variety
       virt-manager
+      vscode
       # xclip
       # xdg-desktop-portal-gtk
       xfce.thunar

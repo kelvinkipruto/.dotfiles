@@ -132,6 +132,7 @@
     extraGroups = [
       "flatpak"
       "disk"
+      "docker"
       "qemu"
       "kvm"
       "libvirtd"
@@ -174,11 +175,12 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    docker
   ];
 
   virtualisation.libvirtd.enable = true;
-  # virtualisation.docker.enable = true;
-  # virtualisation.docker.enableOnBoot = true;
+  virtualisation.docker.enable = true;
+  virtualisation.docker.enableOnBoot = true;
 
   # xdg.portal = {
   #   enable = true;
@@ -206,4 +208,6 @@
   # };
 
   system.stateVersion = "23.11";
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
 }

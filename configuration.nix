@@ -80,8 +80,8 @@ in  {
       description = "kelvin";
       extraGroups = [ "networkmanager" "wheel" "docker" ];
       packages = with pkgs; [
-        firefox
-        kate
+        # firefox
+        # kate
       ];
     };
 
@@ -97,45 +97,45 @@ in  {
   # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
-    android-tools
-    brave
-    cargo
+    # android-tools
+    # brave
+    # cargo
     chromium
-    dbeaver
-    discord
-    docker
+    # dbeaver
+    # discord
+    # docker
     fira-code-nerdfont
-    firefox-devedition
-    flameshot
-    flatpak
-    flutter
+    # firefox-devedition
+    # flameshot
+    # flatpak
+    # flutter
     gcc
-    gh
+    # gh
     git
-    github-desktop
-    gparted
-    kitty
-    lua
-    luarocks
-    nerdfonts
-    neovim
-    obsidian
-    unstable.ollama
+    # github-desktop
+    # gparted
+    # kitty
+    # lua
+    # luarocks
+    # nerdfonts
+    # neovim
+    # obsidian
+    # unstable.ollama
     openssl
-    skypeforlinux
-    spotify
-    telegram-desktop
-    terminus-nerdfont
-    python3Full
-    qemu
+    # skypeforlinux
+    # spotify
+    # telegram-desktop
+    # terminus-nerdfont
+    # python3Full
+    # qemu
     unzip
-    virt-manager
+    # virt-manager
     vim
-    virtualbox
-    volta
+    # virtualbox
+    # volta
     vscode
     wget
-    wpsoffice
+    # wpsoffice
     zsh
     ];
 
@@ -151,7 +151,7 @@ in  {
 
     # Enable the OpenSSH daemon.
     # services.openssh.enable = true;
-    services.flatpak.enable = true;
+    # services.flatpak.enable = true;
 
     # virtualization
     virtualisation.libvirtd.enable = true;
@@ -159,18 +159,10 @@ in  {
     virtualisation.docker.enableOnBoot = true;
 
     # Open ports in the firewall.
-    networking.firewall.allowedTCPPorts = [ 80 443 11434];
+    networking.firewall.allowedTCPPorts = [ 80 443];
     # networking.firewall.allowedUDPPorts = [ ... ];
     # Or disable the firewall altogether.
     networking.firewall.enable = true;
-
-    # Allow ollama port for local networks
-    networking.firewall.extraCommands = ''
-      iptables -A INPUT -p tcp --dport 11434 -j ACCEPT
-      iptables -A INPUT -p udp --dport 11434 -j ACCEPT
-      iptables -A OUTPUT -p tcp --dport 11434 -j ACCEPT
-      iptables -A OUTPUT -p udp --dport 11434 -j ACCEPT
-    ''      iptables -A OUTPUT -p tcp --dport 11434 -j ACCEPT
 
 
     # This value determines the NixOS release from which the default

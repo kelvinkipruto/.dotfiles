@@ -25,25 +25,32 @@ in {
       wget
       # w3m
       # dmenu
+      android-tools
       bat
       brave
       bun
       cargo
       # celluloid
       chromium
+      dbeaver
+      discord
       deno
       dunst
-      efibootmgr
+      # efibootmgr
       # eww
       # feh
       fira-code-nerdfont
+      # firefox
+      firefox-devedition
       flameshot
       flatpak
       floorp
+      flutter
       fontconfig
       freetype
       gcc
       # gimp
+      gh
       git
       github-desktop
       gnome.gnome-keyring
@@ -53,7 +60,10 @@ in {
       gparted
       # gnugrep
       # grub2
+      hyprland
       kitty
+      libnotify
+      lua
       luarocks
       # lxappearance
       mangohud
@@ -66,7 +76,9 @@ in {
       nixpkgs-fmt
       nil
       nodejs
+      obsidian
       oh-my-zsh
+      ollama
       pavucontrol
       php
       picom
@@ -77,6 +89,8 @@ in {
       python.pkgs.pip
       qemu
       ripgrep
+      spotify
+      telegram-desktop
       # rofi
       # steam
       # steam-run
@@ -93,6 +107,8 @@ in {
       variety
       virt-manager
       vscode
+      waybar
+      wpsoffice
       xclip
       xdg-desktop-portal-gtk
       xfce.thunar
@@ -119,5 +135,6 @@ in {
       zsh-history-substring-search
       zsh-nix-shell
     ];
+
   };
 }

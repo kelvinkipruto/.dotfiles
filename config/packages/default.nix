@@ -4,5 +4,6 @@
     ./git
     ./gpg
     ./zsh
+    # ./hyprland
   ];
 }

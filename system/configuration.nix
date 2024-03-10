@@ -1,4 +1,4 @@
-{pkgs, user, ...}: {
+{pkgs, ...}: {
   
   imports = [
     ./hardware-configuration.nix
@@ -25,9 +25,22 @@
     };
   };
 
-  hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.support32Bit = true;
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport32Bit = true;
+    };
+    pulseaudio = {
+      enable = false;
+      support32Bit = true;
+    };
+    nvidia = {
+      modesetting = {
+        enable = true;
+      };
+    };
+  };
+
 
   boot = {
     kernelParams = ["nohibernate"];
@@ -172,20 +185,29 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    vim
-    docker
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      vim
+      docker
+      # (waybar.overrideAttrs (old: {
+      #   mesonFlags = old.mesonFlags or [] ++ ["-Dexperimental=true"];
+      # }))
+    ];
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      # WLR_NO_HARDWARE_CURSORS = "1";
+    };
+  };
 
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.docker.enableOnBoot = true;
 
-  # xdg.portal = {
-  #   enable = true;
-  #   config.common.default = "*";
-  #   extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  # };
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
 
   # security.polkit.enable = true;
    security.rtkit.enable = true;

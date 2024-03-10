@@ -122,6 +122,8 @@
   #     dwm = prev.dwm.overrideAttrs (old: {src = /home/${user}/CTT-Nix/system/dwm-titus;}); #FIX ME: Update with path to your dwm folder
   #   })
   # ];
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   users.users.kelvin = {
     isNormalUser = true;

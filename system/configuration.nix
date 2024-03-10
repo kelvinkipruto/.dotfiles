@@ -66,7 +66,7 @@
 
   time.timeZone = "Africa/Nairobi";
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_GB.UTF-8";
   console = {
     packages = [pkgs.terminus_font];
     font = "${pkgs.terminus_font}/share/consolefonts/ter-i22b.psf.gz";

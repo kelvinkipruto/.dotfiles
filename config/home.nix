@@ -88,6 +88,7 @@ in {
       # variety
       virt-manager
       vscode
+      volta
       # xclip
       # xdg-desktop-portal-gtk
       xfce.thunar
@@ -107,6 +108,12 @@ in {
       #   ];
       # })
       zsh
+      zsh-powerlevel10k
+      zsh-autosuggestions
+      zsh-syntax-highlighting
+      zsh-completions
+      zsh-history-substring-search
+      zsh-nix-shell
     ];
   };
 }

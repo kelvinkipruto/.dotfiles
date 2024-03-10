@@ -61,6 +61,9 @@ in {
       # openssl
       # os-prober
       nerdfonts
+      nixpkgs-fmt
+      nil
+      oh-my-zsh
       pavucontrol
       picom
       # polkit_gnome
@@ -103,6 +106,7 @@ in {
       #     winetricks
       #   ];
       # })
+      zsh
     ];
   };
 }

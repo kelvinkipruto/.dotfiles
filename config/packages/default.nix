@@ -3,6 +3,6 @@
     ./gh
     ./git
     ./gpg
-    # ./zsh
+    ./zsh
   ];
 }

@@ -43,7 +43,6 @@
 
 
   boot = {
-    kernelParams = ["nohibernate"];
     tmp.cleanOnBoot = true;
     # supportedFilesystems = ["ntfs"];
     loader = {
@@ -59,7 +58,9 @@
       # timeout = 300;
     };
 
-    # kernelModules = ["tcp_bbr"];
+    kernelModules = ["kvm-intel" "vfio-pci"];
+    kernelParams = ["nohibernate" "intel_iommu=on" "iommu=pt"];
+
     # kernel.sysctl = {
     #   "net.ipv4.tcp_congestion_control" = "bbr";
     #   "net.core.default_qdisc" = "fq";
@@ -72,9 +73,24 @@
 
   networking = {
     hostName = "nixos";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+    };
     enableIPv6 = false;
-    firewall.enable = false;
+    firewall = {
+      enable = true;
+    };
+    # interfaces = {
+    #   br0 = {
+    #     useDHCP = true;
+    #   };
+    # };
+    # bridges = {
+    #   br0 = {
+    #     interfaces = ["enp0s25"];
+    #     priority = 100;
+    #   };
+    # };
   };
 
   time.timeZone = "Africa/Nairobi";
@@ -188,7 +204,10 @@
   environment = {
     systemPackages = with pkgs; [
       vim
+      wget
       docker
+      libvirt
+      virt-manager
       # (waybar.overrideAttrs (old: {
       #   mesonFlags = old.mesonFlags or [] ++ ["-Dexperimental=true"];
       # }))
@@ -199,9 +218,23 @@
     };
   };
 
-  virtualisation.libvirtd.enable = true;
-  virtualisation.docker.enable = true;
-  virtualisation.docker.enableOnBoot = true;
+  # virtualisation.libvirtd.enable = true;
+  # virtualisation.docker.enable = true;
+  # virtualisation.docker.enableOnBoot = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm = {
+          enable = true;
+        };
+      };
+    };
+    docker = {
+      enable = true;
+      enableOnBoot = true;
+    };
+  };
 
   xdg.portal = {
     enable = true;

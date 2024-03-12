@@ -21,8 +21,6 @@ in {
     stateVersion = "23.11";
 
     packages = with pkgs; [
-      vim
-      wget
       # w3m
       # dmenu
       android-tools
@@ -107,7 +105,6 @@ in {
       # trash-cli
       unzip
       variety
-      virt-manager
       vscode
       waybar
       wpsoffice

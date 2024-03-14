@@ -120,6 +120,7 @@
 
       displayManager = {
         sddm.enable = true;
+        defaultSession = "hyprland";
         # lightdm.enable = true;
         # setupCommands = ''
         #   ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal
@@ -131,7 +132,10 @@
       };
 
       desktopManager = {
-        plasma5.enable = true;
+        plasma5= {
+          enable = true;
+        };
+        # default = "hyprland";
       };
     };
 
@@ -151,7 +155,18 @@
   #     dwm = prev.dwm.overrideAttrs (old: {src = /home/${user}/CTT-Nix/system/dwm-titus;}); #FIX ME: Update with path to your dwm folder
   #   })
   # ];
-  programs.zsh.enable = true;
+  # programs.zsh.enable = true;
+  programs = {
+    zsh = {
+      enable = true;
+    };
+    hyprland = {
+      enable = true;
+      xwayland = {
+        enable = true;
+      };
+    };
+  };
   users.defaultUserShell = pkgs.zsh;
 
   users.users.kelvin = {
@@ -206,8 +221,16 @@
       vim
       wget
       docker
+      dunst
+      hyprland
+      kitty
+      libnotify
       libvirt
+      networkmanagerapplet
+      rofi-wayland
+      swww
       virt-manager
+      waybar
       # (waybar.overrideAttrs (old: {
       #   mesonFlags = old.mesonFlags or [] ++ ["-Dexperimental=true"];
       # }))

@@ -23,6 +23,13 @@
           "python-2.7.18.7"
       ];
     };
+    overlays = [
+      (self: super: {
+        waybar = super.waybar.overrideAttrs (oldAttrs: {
+          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    });
+  })
+];
   };
 
   hardware = {
@@ -226,11 +233,20 @@
       kitty
       libnotify
       libvirt
+      meson
       networkmanagerapplet
       rofi-wayland
       swww
       virt-manager
       waybar
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+      wofi
+      xwayland
+      wayland-protocols
+      wayland-utils
+      wl-clipboard
+      wlroots
       # (waybar.overrideAttrs (old: {
       #   mesonFlags = old.mesonFlags or [] ++ ["-Dexperimental=true"];
       # }))
@@ -261,6 +277,7 @@
 
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
     config.common.default = "*";
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };

@@ -58,13 +58,14 @@ in {
       gparted
       # gnugrep
       # grub2
-      hyprland
+      # hyprland
       kitty
       libnotify
       lua
       luarocks
       # lxappearance
       mangohud
+      meson
       neofetch
       neovim
       # nomacs
@@ -88,7 +89,9 @@ in {
       python.pkgs.pip
       qemu
       ripgrep
+      rofi-wayland
       spotify
+      swww
       telegram-desktop
       # rofi
       # steam
@@ -108,8 +111,14 @@ in {
       vscode
       waybar
       wpsoffice
+      wofi
+      wayland-protocols
+      wayland-utils
+      wl-clipboard
+      wlroots
       xclip
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
       xfce.thunar
       xorg.libX11
       xorg.libX11.dev
@@ -118,6 +127,7 @@ in {
       xorg.libXinerama
       xorg.xinit
       xorg.xinput
+      xwayland
       yarn
       zoxide
       (lutris.override {
@@ -135,6 +145,7 @@ in {
       zsh-history-substring-search
       zsh-nix-shell
     ];
+
 
   };
 }

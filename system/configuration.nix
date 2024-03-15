@@ -2,6 +2,7 @@
   
   imports = [
     ./hardware-configuration.nix
+    ../common/wayland.nix
   ];
 
   documentation.nixos.enable = false;
@@ -126,7 +127,10 @@
       };
 
       displayManager = {
-        sddm.enable = true;
+        sddm = {
+          enable = true;
+          enableHidpi= true;
+        };
         defaultSession = "hyprland";
         # lightdm.enable = true;
         # setupCommands = ''
@@ -167,12 +171,12 @@
     zsh = {
       enable = true;
     };
-    hyprland = {
-      enable = true;
-      xwayland = {
-        enable = true;
-      };
-    };
+    # hyprland = {
+    #   enable = true;
+    #   xwayland = {
+    #     enable = true;
+    #   };
+    # };
   };
   users.defaultUserShell = pkgs.zsh;
 
@@ -228,33 +232,36 @@
       vim
       wget
       docker
-      dunst
-      hyprland
-      kitty
-      libnotify
+      firefox
+      # dunst
+      # hyprland
+      # kitty
+      # libnotify
       libvirt
-      meson
+      # meson
       networkmanagerapplet
-      rofi-wayland
-      swww
+      # rofi-wayland
+      # swww
       virt-manager
-      waybar
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-      wofi
-      xwayland
-      wayland-protocols
-      wayland-utils
-      wl-clipboard
-      wlroots
+      # waybar
+      # xdg-desktop-portal-gtk
+      # xdg-desktop-portal-hyprland
+      # wofi
+      # xwayland
+      # wayland-protocols
+      # wayland-utils
+      # wl-clipboard
+      # wlroots
       # (waybar.overrideAttrs (old: {
       #   mesonFlags = old.mesonFlags or [] ++ ["-Dexperimental=true"];
       # }))
     ];
-    sessionVariables = {
-      NIXOS_OZONE_WL = "1";
-      # WLR_NO_HARDWARE_CURSORS = "1";
-    };
+    # sessionVariables = {
+    #   NIXOS_OZONE_WL = "1";
+    #   WLR_NO_HARDWARE_CURSORS = "1";
+    #   MOZ_ENABLE_WAYLAND = "1";
+    #   MOZ_WEBRENDER = "1";
+    # };
   };
 
   # virtualisation.libvirtd.enable = true;

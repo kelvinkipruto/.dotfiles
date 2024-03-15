@@ -13,6 +13,10 @@
         };
       };
     };
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+    };
+    
   };
 
   
@@ -20,6 +24,7 @@
     self,
     nixpkgs,
     home-manager,
+    hyprland,
     ...
   }: 
     let

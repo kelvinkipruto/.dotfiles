@@ -1,6 +1,8 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   username = "kelvin";
-in {
+in
+{
   imports = [
     ./packages
   ];

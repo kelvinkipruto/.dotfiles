@@ -1,25 +1,26 @@
-{pkgs, lib, config, inputs, ... }:
-let startupScript = pkgs.pkgs.writeShellScriptBin "start.sh" ''
-#!/usr/bin/env bash
-${pkgs.waybar}/bin/waybar &
-${pkgs.swww}/bin/swww init &
-sleep 1
+{ pkgs, lib, config, inputs, ... }:
+let
+  startupScript = pkgs.pkgs.writeShellScriptBin "start.sh" ''
+    #!/usr/bin/env bash
+    ${pkgs.waybar}/bin/waybar &
+    ${pkgs.swww}/bin/swww init &
+    sleep 1
 
-${pkgs.swww}/bin/swww img ${./wallpaper.jpg} &
-${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
+    ${pkgs.swww}/bin/swww img ${./wallpaper.jpg} &
+    ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
 
-${pkgs.dunst}/bin/dunst
+    ${pkgs.dunst}/bin/dunst
 
   '';
 in
 {
   home.packages = with pkgs; [
-      wl-clipboard
-      grim
-      slurp
-      swww
-      rofi-wayland
-      waybar
+    wl-clipboard
+    grim
+    slurp
+    swww
+    rofi-wayland
+    waybar
   ];
 
   wayland = {
@@ -124,55 +125,59 @@ in
 
         '';
         settings = {
-           "$mod" = "SUPER";
-            bind =
-              [
-                "$mod, C, killactive"
-                "$mod, E, exec, thunar"
-                "$mod, F, exec, firefox"
-                "$mod, J, togglesplit"
-                "$mod, M, exit"
-                "$mod, Q, exec, kitty"
-                "$mod, V, togglefloating"
-                # Rofi
-                "$mode, space,  exec, rofi -show drun -show-icons"
-                # move focus
-                "$mod, left, movefocus, l"
-                "$mod, right, movefocus, r"
-                "$mod, up, movefocus, u"
-                "$mod, down, movefocus, d"
-                # scratchpad
-                "$mod, S, togglespecialworkspace, magic"
-                "$mod SHIFT, S, movetoworkspace, special:magic"
-                # Scroll through existing workspaces with mainMod + scroll
-                "$mod, mouse_down, workspace, e+1"
-                "$mod, mouse_up, workspace, e-1"
-              ]
+          "$mod" = "SUPER";
+          bind =
+            [
+              "$mod, C, killactive"
+              "$mod, E, exec, thunar"
+              "$mod, F, exec, firefox"
+              "$mod, J, togglesplit"
+              "$mod, M, exit"
+              "$mod, Q, exec, kitty"
+              "$mod, V, togglefloating"
+              # Rofi
+              "$mode, space,  exec, rofi -show drun -show-icons"
+              # move focus
+              "$mod, left, movefocus, l"
+              "$mod, right, movefocus, r"
+              "$mod, up, movefocus, u"
+              "$mod, down, movefocus, d"
+              # scratchpad
+              "$mod, S, togglespecialworkspace, magic"
+              "$mod SHIFT, S, movetoworkspace, special:magic"
+              # Scroll through existing workspaces with mainMod + scroll
+              "$mod, mouse_down, workspace, e+1"
+              "$mod, mouse_up, workspace, e-1"
+            ]
             ++ (
-            # workspaces
-            # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-            builtins.concatLists (builtins.genList (
-                x: let
-                  ws = let
-                    c = (x + 1) / 10;
+              # workspaces
+              # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+              builtins.concatLists (builtins.genList
+                (
+                  x:
+                  let
+                    ws =
+                      let
+                        c = (x + 1) / 10;
+                      in
+                      builtins.toString (x + 1 - (c * 10));
                   in
-                    builtins.toString (x + 1 - (c * 10));
-                  in [
+                  [
                     "$mod, ${ws}, workspace, ${toString (x + 1)}"
                     "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-                    ]
+                  ]
                 )
-            10)
-          );
+                10)
+            );
 
-          bindm = 
+          bindm =
             [
               "$mod, mouse:272, movewindow"
               "$mod, mouse:273, resizewindow"
             ];
 
           exec-once = "${startupScript}/bin/start.sh";
-          
+
         };
       };
     };

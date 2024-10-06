@@ -16,29 +16,29 @@
     # hyprland = {
     #   url = "github:hyprwm/Hyprland";
     # };
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin/master";
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-    };
-    nix-homebrew = {
-      url = "github:zhaofengli-wip/nix-homebrew";
-    };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
+    # nix-darwin = {
+    #   url = "github:LnL7/nix-darwin/master";
+    #   inputs = {
+    #     nixpkgs = {
+    #       follows = "nixpkgs";
+    #     };
+    #   };
+    # };
+    # nix-homebrew = {
+    #   url = "github:zhaofengli-wip/nix-homebrew";
+    # };
+    # homebrew-core = {
+    #   url = "github:homebrew/homebrew-core";
+    #   flake = false;
+    # };
+    # homebrew-cask = {
+    #   url = "github:homebrew/homebrew-cask";
+    #   flake = false;
+    # };
+    # homebrew-bundle = {
+    #   url = "github:homebrew/homebrew-bundle";
+    #   flake = false;
+    # };
     # this is a quick util a good GitHub samaritan wrote to solve for
     # https://github.com/nix-community/home-manager/issues/1341#issuecomment-1791545015
     mac-app-util = {
@@ -53,10 +53,10 @@
     , home-manager
     , # hyprland,
       nix-darwin
-    , nix-homebrew
-    , homebrew-bundle
-    , homebrew-core
-    , homebrew-cask
+      # , nix-homebrew
+      # , homebrew-bundle
+      # , homebrew-core
+      # , homebrew-cask
     , mac-app-util
     , ...
     }  @inputs: {
@@ -107,12 +107,20 @@
                 ];
               };
             }
+            # nix-homebrew.darwinModules.nix-homebrew
+            # {
+            #   nix-homebrew = {
+            #     enable = true;
+            #     enableRosetta = true;
+            #     user = "kelvinkipruto";
+            #   };
+            # }
           ];
         };
       };
-      packages.aarch64-darwin = {
-        default = nixpkgs.legacyPackages.aarch64-darwin.hello;
-      };
-      defaultPackage.aarch64-darwin = self.packages.aarch64-darwin.default;
+      # packages.aarch64-darwin = {
+      #   default = nixpkgs.legacyPackages.aarch64-darwin.hello;
+      # };
+      # defaultPackage.aarch64-darwin = self.packages.aarch64-darwin.default;
     };
 }

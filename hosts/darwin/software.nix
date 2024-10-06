@@ -26,9 +26,8 @@
       extraFlags = [ "--verbose" ];
     };
     taps = [
-      "homebrew/cask-versions"
+      # "homebrew/cask-versions"
       "homebrew/services"
-      "FairwindsOps/tap"
     ];
     brews = [
       "git"

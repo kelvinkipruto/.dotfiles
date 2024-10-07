@@ -6,7 +6,12 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      cat = "bat --paging=never";
+      ls = "eza --icons=always";
       ll = "ls -l";
+      la = "ls -la";
+      lt = "eza --tree";
+      lg = "lazygit";
       update = "sudo nixos-rebuild switch";
       clean = "sudo nix-collect-garbage -d";
     };
@@ -15,8 +20,8 @@
     # Oh my zsh setup
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" "docker-compose" "gh" "vscode" ];
-      theme = "crunch";
+      plugins = [ "bun" "deno" "docker" "docker-compose" "gh" "git" "history" "node" "npm" "vscode" ];
+      theme = "robbyrussell";
     };
 
     plugins = [
@@ -49,6 +54,7 @@
 
     initExtra = ''
       source ~/.p10k.zsh
+      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
     '';
 
   };

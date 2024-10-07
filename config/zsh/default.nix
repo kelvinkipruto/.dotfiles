@@ -15,7 +15,7 @@
     # Oh my zsh setup
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "adb" "docker" "docker-compose" "gh" "vscode" ];
+      plugins = [ "git" "docker" "docker-compose" "gh" "vscode" ];
       theme = "crunch";
     };
 

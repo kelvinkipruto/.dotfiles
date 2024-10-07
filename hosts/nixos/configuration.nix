@@ -2,7 +2,7 @@
 
   imports = [
     ./hardware-configuration.nix
-    ../../common/wayland.nix
+    ./wayland.nix
   ];
 
   documentation.nixos.enable = false;

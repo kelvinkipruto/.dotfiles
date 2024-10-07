@@ -8,6 +8,7 @@
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
+      clean = "sudo nix-collect-garbage -d";
     };
     history.size = 10000;
 

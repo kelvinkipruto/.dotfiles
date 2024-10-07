@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    ./packages
+    # ./packages
   ];
 
   fonts.fontconfig.enable = true;

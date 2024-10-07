@@ -1,9 +1,8 @@
-{
+{ inputs, pkgs, self, ... }: {
   imports = [
     ./gh
     ./git
-    ./gpg
+    # ./gpg
     ./zsh
-    ./hyprland
   ];
 }

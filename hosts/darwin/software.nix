@@ -1,17 +1,9 @@
 { pkgs, ... }: {
   environment = {
     loginShell = pkgs.zsh;
-
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos rebuild switch";
-    };
-
-    systemPackages = with pkgs; [
-      git
-      kitty
-      vim
-    ];
+    # systemPackages = [ pkgs.coreutils ];
+    # systemPath = [ "/opt/homebrew/bin" ];
+    # pathsToLink = [ "/Applications" ];
   };
 
   homebrew = {
@@ -45,9 +37,9 @@
     ];
     casks = [
       # "bitwarden"
-      # "chatgpt"
+      "chatgpt"
       # "chromium"
-      # "dbeaver-community"
+      "dbeaver-community"
       # "docker"
       # "firefox"
       # "google-chrome"

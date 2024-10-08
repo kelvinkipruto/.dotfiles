@@ -16,6 +16,7 @@ in
         bat
         bun
         cargo
+        deno
         discord
         eza
         fira-code-nerdfont
@@ -31,6 +32,7 @@ in
         nodejs
         obsidian
         ollama
+        pnpm
         python3Full
         raycast
         rectangle

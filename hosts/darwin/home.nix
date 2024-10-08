@@ -17,16 +17,15 @@ in
         bun
         cargo
         discord
-        # firefox-devedition
         eza
         fira-code-nerdfont
         flameshot
         flutter
         gleam
         lazydocker
+        localsend
         lua
         luarocks
-        # neovim
         nerdfonts
         nixpkgs-fmt
         nodejs
@@ -34,9 +33,10 @@ in
         ollama
         python3Full
         raycast
-        # spotify
+        rectangle
+        slack
+        spotify
         telegram-desktop
-        # volta
         zip
       ];
   };
@@ -48,9 +48,6 @@ in
     bat = {
       enable = true;
     };
-    # neovim = {
-    #   enable = true;
-    # };
     eza = {
       enable = true;
       enableZshIntegration = true;
@@ -69,6 +66,9 @@ in
       enable = true;
     };
     lazygit = {
+      enable = true;
+    };
+    neovim = {
       enable = true;
     };
     ripgrep = {

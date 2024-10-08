@@ -54,10 +54,10 @@ in
     zsh
   ];
 
-  # environment.variables = {
-  #   EDITOR = "nvim";
-  #   VISUAL = "nvim";
-  # };
+  environment.variables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
 
   homebrew = {
     enable = true;
@@ -77,6 +77,7 @@ in
     casks = [
       "chatgpt"
       "dbeaver-community"
+      "docker"
       "firefox"
       # "google-chrome"
       # "visual-studio-code"

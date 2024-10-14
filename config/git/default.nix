@@ -22,7 +22,7 @@
       br = "branch";
       co = "checkout";
       st = "status";
-      cm = "commit";
+      cm = "commit -m";
       ca = "commit --amend";
       unstage = "reset HEAD --";
       ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";

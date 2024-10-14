@@ -23,6 +23,7 @@ in
         flameshot
         flutter
         gleam
+        httrack
         lazydocker
         localsend
         lua

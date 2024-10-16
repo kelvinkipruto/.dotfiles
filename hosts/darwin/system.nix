@@ -1,8 +1,5 @@
+{ self, ... }:
 {
-  system.defaults.finder.AppleShowAllExtensions = true;
-  system.defaults.finder._FXShowPosixPathInTitle = true;
-  system.defaults.finder._FXSortFoldersFirst = true;
-  system.defaults.finder.QuitMenuItem = true;
   system.defaults.finder.ShowPathbar = true;
   system.defaults.finder.ShowStatusBar = true;
 
@@ -16,5 +13,8 @@
   system.defaults.trackpad.Clicking = true;
 
   system.configurationRevision = self.rev or self.dirtyRev or null;
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
   system.stateVersion = 5;
 }

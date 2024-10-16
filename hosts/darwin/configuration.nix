@@ -1,5 +1,7 @@
 { nixpkgs, self, ... }:
-let pkgs = import nixpkgs { system = "aarch64-darwin"; };
+let
+  pkgs = import nixpkgs { system = "aarch64-darwin"; };
+  systemDefaults = import ./system.nix { inherit self; };
 in
 {
   nixpkgs.hostPlatform = "aarch64-darwin";

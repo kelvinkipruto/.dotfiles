@@ -2,7 +2,8 @@
 let
   pkgs = import nixpkgs { system = "aarch64-darwin"; };
   systemDefaults = import ./system.nix { inherit self; };
-  services = import ./services.nix { inherit self; };
+  servicesConfig = import ./services.nix { inherit self; };
+  environmentConfig = import ./environment.nix { inherit self pkgs; };
 in
 {
   nixpkgs = {
@@ -25,7 +26,8 @@ in
 
   imports = [
     systemDefaults
-    services
+    servicesConfig
+    environmentConfig
   ];
 
   # services.nix-daemon.enable = true;
@@ -44,24 +46,24 @@ in
 
   # networking.hostName = "kelvinkipruto";
 
-  users.users.kelvinkipruto = {
-    name = "kelvinkipruto";
-    home = "/Users/kelvinkipruto";
-  };
+  # users.users.kelvinkipruto = {
+  #   name = "kelvinkipruto";
+  #   home = "/Users/kelvinkipruto";
+  # };
 
   programs.zsh.enable = true;
-  environment.systemPackages = with pkgs; [
-    git
-    neofetch
-    # neovim
-    vim
-    zsh
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   git
+  #   neofetch
+  #   # neovim
+  #   vim
+  #   zsh
+  # ];
 
-  environment.variables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-  };
+  # environment.variables = {
+  #   EDITOR = "nvim";
+  #   VISUAL = "nvim";
+  # };
 
   homebrew = {
     enable = true;
@@ -88,9 +90,9 @@ in
     ];
   };
 
-  security.pam.enableSudoTouchIdAuth = true;
+  # security.pam.enableSudoTouchIdAuth = true;
 
-  time.timeZone = "Africa/Nairobi";
+  # time.timeZone = "Africa/Nairobi";
 
   fonts = {
     packages = with pkgs; [

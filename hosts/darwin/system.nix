@@ -54,4 +54,12 @@
   networking = {
     hostName = "kelvinkipruto";
   };
+  security = {
+    pam = {
+      enableSudoTouchIdAuth = true;
+    };
+  };
+  time = {
+    timezone = "Africa/Nairobi";
+  };
 }

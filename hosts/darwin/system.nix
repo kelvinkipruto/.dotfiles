@@ -34,7 +34,7 @@
   };
 
   networking = {
-    hostName = ${hostName};
+    hostName = hostName;
   };
   security = {
     pam = {

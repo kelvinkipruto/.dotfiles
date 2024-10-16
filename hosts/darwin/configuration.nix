@@ -2,49 +2,46 @@
 let
   pkgs = import nixpkgs { system = "aarch64-darwin"; };
   systemDefaults = import ./system.nix { inherit self; };
+  services = import ./services.nix { inherit self; };
 in
 {
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs = {
+    hostPlatform = "aarch64-darwin";
+    config = {
+      allowUnfree = true;
+    };
+  };
+  # nixpkgs.hostPlatform = "aarch64-darwin";
+
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+    };
+  };
 
   imports = [
     systemDefaults
   ];
 
-  services.nix-daemon.enable = true;
-  nixpkgs.config.allowUnfree = true;
+  # services.nix-daemon.enable = true;
+  # nixpkgs.config.allowUnfree = true;
 
 
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-  };
+  # nix.settings = {
+  #   experimental-features = [ "nix-command" "flakes" ];
+  # };
 
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 7d";
-  };
-
-
-  networking.hostName = "kelvinkipruto";
+  # nix.gc = {
+  #   automatic = true;
+  #   options = "--delete-older-than 7d";
+  # };
 
 
-  # TODO: Move to a separate module
-  # system.defaults.finder.AppleShowAllExtensions = true;
-  # system.defaults.finder._FXShowPosixPathInTitle = true;
-  # system.defaults.finder._FXSortFoldersFirst = true;
-  # system.defaults.finder.QuitMenuItem = true;
-  # system.defaults.finder.ShowPathbar = true;
-  # system.defaults.finder.ShowStatusBar = true;
-
-  # system.defaults.dock.autohide = true;
-  # system.defaults.dock.show-recents = false;
-
-  # system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
-  # system.defaults.NSGlobalDomain.InitialKeyRepeat = 14;
-  # system.defaults.NSGlobalDomain.KeyRepeat = 1;
-
-  # system.defaults.trackpad.Clicking = true;
-
-  # system.configurationRevision = self.rev or self.dirtyRev or null;
+  # networking.hostName = "kelvinkipruto";
 
   users.users.kelvinkipruto = {
     name = "kelvinkipruto";
@@ -114,8 +111,4 @@ in
       })
     ];
   };
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  # system.stateVersion = 5;
 }

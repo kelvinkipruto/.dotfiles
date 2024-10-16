@@ -46,8 +46,8 @@
       };
 
       # System settings
-      configurationRevision = self.rev or self.dirtyRev or null;
     };
+    configurationRevision = self.rev or self.dirtyRev or null;
     stateVersion = "5";
   };
 

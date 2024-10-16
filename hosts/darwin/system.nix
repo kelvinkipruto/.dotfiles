@@ -1,4 +1,4 @@
-# { self, ... }:
+{ self, ... }:
 {
   system.defaults.finder.ShowPathbar = true;
   system.defaults.finder.ShowStatusBar = true;

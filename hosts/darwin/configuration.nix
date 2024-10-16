@@ -25,6 +25,7 @@ in
 
   imports = [
     systemDefaults
+    services
   ];
 
   # services.nix-daemon.enable = true;

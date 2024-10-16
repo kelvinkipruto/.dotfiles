@@ -1,3 +1,4 @@
+{ self, pkgs, ... }:
 {
   programs = {
     zsh = {

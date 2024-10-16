@@ -1,4 +1,4 @@
-{ self,pkgs, ... }:
+{ self, pkgs, ... }:
 {
   fonts = {
     packages = with pkgs; [

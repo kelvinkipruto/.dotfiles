@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, hostName, ... }:
 {
   system = {
     defaults = {
@@ -34,7 +34,7 @@
   };
 
   networking = {
-    hostName = "kelvinkipruto";
+    hostName = ${hostName};
   };
   security = {
     pam = {

@@ -46,8 +46,9 @@
     }  @inputs:
     let
       user = "kelvinkipruto";
-      darwinConfig = import ./hosts/darwin/configuration.nix { inherit nixpkgs self; };
-      nixOSConfig = import ./hosts/nixos/configuration.nix { inherit nixpkgs self; };
+      hostName = "kelvinkipruto";
+      darwinConfig = import ./hosts/darwin/configuration.nix { inherit nixpkgs self user hostName; };
+      nixOSConfig = import ./hosts/nixos/configuration.nix { inherit nixpkgs self user hostName; };
     in
     {
       darwinConfigurations.${user} = nix-darwin.lib.darwinSystem {

@@ -1,7 +1,7 @@
-{ self, pkgs, ... }:
+{ self, pkgs, user, ... }:
 {
   users.users.kelvinkipruto = {
-    name = "kelvinkipruto";
+    name = ${user};
     home = "/Users/kelvinkipruto";
   };
 }

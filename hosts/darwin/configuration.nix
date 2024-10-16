@@ -4,6 +4,7 @@ let
   systemDefaults = import ./system.nix { inherit self; };
   servicesConfig = import ./services.nix { inherit self; };
   environmentConfig = import ./environment.nix { inherit self pkgs; };
+  userConfig = import ./user.nix { inherit self pkgs; };
 in
 {
   nixpkgs = {
@@ -28,6 +29,7 @@ in
     systemDefaults
     servicesConfig
     environmentConfig
+    userConfig
   ];
 
   # services.nix-daemon.enable = true;

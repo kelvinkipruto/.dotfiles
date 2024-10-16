@@ -59,7 +59,8 @@
       enableSudoTouchIdAuth = true;
     };
   };
+
   time = {
-    timezone = "Africa/Nairobi";
+    timeZone = "Africa/Nairobi";
   };
 }

@@ -5,6 +5,9 @@ let
   servicesConfig = import ./services.nix { inherit self; };
   environmentConfig = import ./environment.nix { inherit self pkgs; };
   userConfig = import ./user.nix { inherit self pkgs; };
+  fontsConfig = import ./fonts.nix { inherit self pkgs; };
+  programsConfig = import ./programs.nix { inherit self pkgs; };
+  homeConfig = import ./homebrew.nix { inherit self pkgs; };
 in
 {
   nixpkgs = {
@@ -30,6 +33,9 @@ in
     servicesConfig
     environmentConfig
     userConfig
+    fontsConfig
+    programsConfig
+    homeConfig
   ];
 
   # services.nix-daemon.enable = true;
@@ -53,7 +59,7 @@ in
   #   home = "/Users/kelvinkipruto";
   # };
 
-  programs.zsh.enable = true;
+  # programs.zsh.enable = true;
   # environment.systemPackages = with pkgs; [
   #   git
   #   neofetch
@@ -67,53 +73,53 @@ in
   #   VISUAL = "nvim";
   # };
 
-  homebrew = {
-    enable = true;
-    caskArgs.no_quarantine = true;
-    onActivation = {
-      autoUpdate = true;
-      cleanup = "zap";
-      upgrade = true;
-      extraFlags = [ "--verbose" ];
-    };
-    taps = [
-      "homebrew/services"
-    ];
-    brews = [
-      "wget"
-    ];
-    casks = [
-      "chatgpt"
-      "dbeaver-community"
-      "docker"
-      "firefox"
-      # "google-chrome"
-      # "visual-studio-code"
-    ];
-  };
+  # homebrew = {
+  #   enable = true;
+  #   caskArgs.no_quarantine = true;
+  #   onActivation = {
+  #     autoUpdate = true;
+  #     cleanup = "zap";
+  #     upgrade = true;
+  #     extraFlags = [ "--verbose" ];
+  #   };
+  #   taps = [
+  #     "homebrew/services"
+  #   ];
+  #   brews = [
+  #     "wget"
+  #   ];
+  #   casks = [
+  #     "chatgpt"
+  #     "dbeaver-community"
+  #     "docker"
+  #     "firefox"
+  #     # "google-chrome"
+  #     # "visual-studio-code"
+  #   ];
+  # };
 
   # security.pam.enableSudoTouchIdAuth = true;
 
   # time.timeZone = "Africa/Nairobi";
 
-  fonts = {
-    packages = with pkgs; [
-      fira-code
-      fira-code-nerdfont
-      fira-code-symbols
-      material-design-icons
-      font-awesome
+  # fonts = {
+  #   packages = with pkgs; [
+  #     fira-code
+  #     fira-code-nerdfont
+  #     fira-code-symbols
+  #     material-design-icons
+  #     font-awesome
 
-      (nerdfonts.override {
-        fonts = [
-          # symbols icon only
-          "NerdFontsSymbolsOnly"
-          # Characters
-          "FiraCode"
-          "JetBrainsMono"
-          "Iosevka"
-        ];
-      })
-    ];
-  };
+  #     (nerdfonts.override {
+  #       fonts = [
+  #         # symbols icon only
+  #         "NerdFontsSymbolsOnly"
+  #         # Characters
+  #         "FiraCode"
+  #         "JetBrainsMono"
+  #         "Iosevka"
+  #       ];
+  #     })
+  #   ];
+  # };
 }

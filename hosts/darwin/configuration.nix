@@ -7,7 +7,7 @@ in
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   imports = [
-    ./system.nix
+    systemDefaults
   ];
 
   services.nix-daemon.enable = true;

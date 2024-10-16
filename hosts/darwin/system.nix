@@ -10,11 +10,15 @@
         QuitMenuItem = true;
         ShowPathbar = true;
         ShowStatusBar = true;
+        FXEnableExtensionChangeWarning = false;
       };
       # Dock settings
       dock = {
         autohide = true;
         show-recents = false;
+        orientation = "left";
+        minimize-to-application = true;
+        appswitcher-all-displays = true;
       };
       # Global settings
       NSGlobalDomain = {
@@ -26,8 +30,12 @@
       trackpad = {
         Clicking = true;
       };
+      # Window settings
+      WindowManager = {
+        AutoHide = true;
+        EnableStandardClickToShowDesktop = false;
+      };
 
-      # System settings
     };
     configurationRevision = self.rev or self.dirtyRev or null;
     stateVersion = 5;

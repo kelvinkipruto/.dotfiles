@@ -55,6 +55,10 @@
     initExtra = ''
       source ~/.p10k.zsh
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+      # Start ollama in the background with tmux
+      tmux new-session -d -s ollama ollama start
+      #Bun
+      export PATH="/Users/kelvinkipruto/.bun/bin:$PATH" 
     '';
 
   };

@@ -38,6 +38,8 @@
       rba = "rebase --abort";
       m = "merge";
       ma = "merge --abort";
+      pl = "pull";
+      ps = "push";
     };
 
   };

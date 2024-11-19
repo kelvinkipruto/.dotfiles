@@ -15,7 +15,7 @@ in
         android-tools
         bat
         bun
-        cargo
+        # cargo
         deno
         discord
         eza
@@ -23,6 +23,7 @@ in
         flameshot
         flutter
         gleam
+        go
         httrack
         lazydocker
         localsend
@@ -33,13 +34,20 @@ in
         nodejs
         obsidian
         ollama
+        php
+        pipx
         pnpm
         python3Full
+        python312Packages.pip
         raycast
         rectangle
+        rustup
         slack
         spotify
         telegram-desktop
+        temurin-bin
+        utm
+        uv
         zip
       ];
   };

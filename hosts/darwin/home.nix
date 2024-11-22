@@ -44,6 +44,7 @@ in
         rustup
         slack
         spotify
+        stockfish
         telegram-desktop
         temurin-bin
         utm

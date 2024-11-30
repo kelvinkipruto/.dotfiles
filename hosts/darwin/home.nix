@@ -47,7 +47,9 @@ in
         stockfish
         telegram-desktop
         temurin-bin
-        utm
+        # TODO: utm permission errors
+        # FIX chmod +uw ~/Library/Containers/com.utmapp.UTM/Data/Documents/[VM NAME].utm/Data/efi_vars.fd
+        # utm
         uv
         zip
       ];

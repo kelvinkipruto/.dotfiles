@@ -56,7 +56,25 @@
       source ~/.p10k.zsh
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
       #Bun
-      export PATH="/Users/kelvinkipruto/.bun/bin:$PATH" 
+      export PATH="/Users/kelvinkipruto/.bun/bin:$PATH"
+      #Flutter
+      export PATH="/Users/kelvinkipruto/sdk/flutter/bin:$PATH"
+      #Java
+      export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+      export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
+      #Dart
+      export PATH="$PATH":"$HOME/.pub-cache/bin"
+      #Mysql
+      export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+      #Android
+      export ANDROID_HOME="/Users/kelvinkipruto/Library/Android/sdk"
+
+      # PNPM
+      export PNPM_STORE_DIR="/Users/kelvinkipruto/.pnpm-global-store"
+
+      # Cargo
+      export PATH="$HOME/.cargo/bin:$PATH"
+      
     '';
 
   };

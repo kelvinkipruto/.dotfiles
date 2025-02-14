@@ -12,29 +12,36 @@ in
 
     packages = with pkgs;
       [
+        alacritty
         android-tools
+        # android-studio
         bat
         bun
         # cargo
+        cocoapods
         deno
         discord
         eza
         fira-code-nerdfont
         flameshot
-        flutter
+        # TODO: Fix flutter, gradler issues
+        # flutter
         gleam
         go
+        # gradle
         httrack
         lazydocker
         localsend
         lua
         luarocks
         nerdfonts
+        ngrok
         nixpkgs-fmt
         nodejs
+        ocaml
         obsidian
         ollama
-        php
+        # php
         pipx
         pnpm
         python3Full
@@ -46,11 +53,14 @@ in
         spotify
         stockfish
         telegram-desktop
-        temurin-bin
+        # temurin-bin
         # TODO: utm permission errors
         # FIX chmod +uw ~/Library/Containers/com.utmapp.UTM/Data/Documents/[VM NAME].utm/Data/efi_vars.fd
         # utm
+        turso-cli
+        unrar
         uv
+        # zed-editor
         zip
       ];
   };

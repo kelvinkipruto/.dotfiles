@@ -22,6 +22,7 @@
       br = "branch";
       co = "checkout";
       st = "status";
+      iac = "!git init && git add . && git commit -m 'Init'";
       cm = "commit -m";
       ca = "commit --amend";
       unstage = "reset HEAD --";

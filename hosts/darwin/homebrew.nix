@@ -13,6 +13,11 @@
       "homebrew/services"
     ];
     brews = [
+      "ideviceinstaller"
+      "libimobiledevice"
+      "mysql-client"
+      "openjdk@17"
+      "openapi-generator"
       "wget"
     ];
     casks = [

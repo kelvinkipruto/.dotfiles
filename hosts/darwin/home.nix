@@ -14,22 +14,27 @@ in
       [
         alacritty
         android-tools
+        apktool
         # android-studio
         bat
         bun
         # cargo
         cocoapods
         deno
+        dex2jar
         discord
         eza
         fira-code-nerdfont
         flameshot
+        frida-tools
         # TODO: Fix flutter, gradler issues
         # flutter
         gleam
         go
         # gradle
         httrack
+        jadx
+        kotlin
         lazydocker
         localsend
         lua

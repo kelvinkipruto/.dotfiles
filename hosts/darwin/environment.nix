@@ -7,7 +7,7 @@
       vim
       zsh
       (php.buildEnv {
-        extensions = ({enabled, all}: enabled ++ (with all; [
+        extensions = ({ enabled, all }: enabled ++ (with all; [
           grpc
           xdebug
         ]));

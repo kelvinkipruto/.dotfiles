@@ -8,7 +8,7 @@
       material-design-icons
       font-awesome
 
-# TODO: Fix this
+      # TODO: Fix this
       # (nerd-fonts.override {
       #   fonts = [
       #     # symbols icon only

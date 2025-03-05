@@ -26,6 +26,7 @@ in
         eza
         fira-code-nerdfont
         flameshot
+        fnm
         frida-tools
         # TODO: Fix flutter, gradler issues
         # flutter
@@ -42,13 +43,13 @@ in
         # nerdfonts
         ngrok
         nixpkgs-fmt
-        nodejs
+        # nodejs
         ocaml
         obsidian
         ollama
         # php
         pipx
-        pnpm
+        # pnpm
         python3Full
         python312Packages.pip
         raycast

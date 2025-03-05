@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, config, ... }:
+let
+  cfg = config.programs.zsh;
+  homeDir = config.home.homeDirectory;
+in
+{
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -56,26 +61,24 @@
       source ~/.p10k.zsh
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
       #Bun
-      export PATH="/Users/kelvinkipruto/.bun/bin:$PATH"
+      export PATH="${homeDir}/.bun/bin:$PATH"
       #Flutter
-      export PATH="/Users/kelvinkipruto/sdk/flutter/bin:$PATH"
+      export PATH="${homeDir}/sdk/flutter/bin:$PATH"
       #Java
       export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
       export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
       #Dart
-      export PATH="$PATH":"$HOME/.pub-cache/bin"
+      export PATH="$PATH":"${homeDir}/.pub-cache/bin"
       #Mysql
       export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
       #Android
-      export ANDROID_HOME="/Users/kelvinkipruto/Library/Android/sdk"
-
-      # PNPM
-      export PNPM_STORE_DIR="/Users/kelvinkipruto/.pnpm-global-store"
+      export ANDROID_HOME="${homeDir}/Library/Android/sdk"
 
       # Cargo
       export PATH="$HOME/.cargo/bin:$PATH"
-      
-    '';
 
+      # FNM
+      eval "$(fnm env --use-on-cd --shell zsh)"
+    '';
   };
 }

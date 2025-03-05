@@ -73,7 +73,7 @@ in
       # nomacs
       # openssl
       # os-prober
-      nerdfonts
+      # nerdfonts
       nixpkgs-fmt
       nil
       nodejs

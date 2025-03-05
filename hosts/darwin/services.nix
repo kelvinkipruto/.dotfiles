@@ -1,8 +1,8 @@
 { self, ... }:
 {
   services = {
-    nix-daemon = {
-      enable = true;
-    };
+    # nix-daemon = {
+    #   enable = true;
+    # };
   };
 }

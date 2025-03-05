@@ -8,16 +8,17 @@
       material-design-icons
       font-awesome
 
-      (nerdfonts.override {
-        fonts = [
-          # symbols icon only
-          "NerdFontsSymbolsOnly"
-          # Characters
-          "FiraCode"
-          "JetBrainsMono"
-          "Iosevka"
-        ];
-      })
+# TODO: Fix this
+      # (nerd-fonts.override {
+      #   fonts = [
+      #     # symbols icon only
+      #     "NerdFontsSymbolsOnly"
+      #     # Characters
+      #     "FiraCode"
+      #     "JetBrainsMono"
+      #     "Iosevka"
+      #   ];
+      # })
     ];
   };
 }

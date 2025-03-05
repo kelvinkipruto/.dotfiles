@@ -215,7 +215,7 @@
       source-han-sans
       source-han-sans-japanese
       source-han-serif-japanese
-      (nerdfonts.override { fonts = [ "Meslo" ]; })
+      # (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
     fontconfig = {
       enable = true;

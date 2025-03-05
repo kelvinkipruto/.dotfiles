@@ -39,7 +39,7 @@ in
         localsend
         lua
         luarocks
-        nerdfonts
+        # nerdfonts
         ngrok
         nixpkgs-fmt
         nodejs

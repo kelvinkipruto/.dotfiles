@@ -22,7 +22,7 @@ in
         cocoapods
         deno
         dex2jar
-        discord
+        # discord
         eza
         fira-code-nerdfont
         flameshot
@@ -32,11 +32,13 @@ in
         # flutter
         gleam
         go
+        git-lfs
         # gradle
         httrack
         jadx
         kotlin
         lazydocker
+        # legcord
         localsend
         lua
         luarocks
@@ -100,6 +102,13 @@ in
     };
     neovim = {
       enable = true;
+    };
+    direnv ={
+      enable=true;
+      enableBashIntegration = true; 
+      enableZshIntegration = true;
+
+      nix-direnv.enable = true;
     };
     ripgrep = {
       enable = true;

@@ -69,6 +69,7 @@ in
         unrar
         uv
         # zed-editor
+        yt-dlp
         zip
       ];
   };

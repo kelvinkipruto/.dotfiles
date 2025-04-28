@@ -43,6 +43,7 @@ in
         lua
         luarocks
         # nerdfonts
+        nmap
         ngrok
         nixpkgs-fmt
         # nodejs

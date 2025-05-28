@@ -13,6 +13,7 @@
       "homebrew/services"
     ];
     brews = [
+      "deno"
       "ideviceinstaller"
       "libimobiledevice"
       "mysql-client"

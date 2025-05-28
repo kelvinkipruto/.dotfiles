@@ -20,7 +20,7 @@ in
         bun
         # cargo
         cocoapods
-        deno
+        # deno
         dex2jar
         # discord
         eza

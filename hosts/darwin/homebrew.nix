@@ -25,6 +25,7 @@
       "dbeaver-community"
       "docker"
       "firefox"
+      "firefox@developer-edition"
       # "google-chrome"
       # "visual-studio-code"
     ];

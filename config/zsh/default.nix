@@ -12,9 +12,9 @@ in
 
     shellAliases = {
       cat = "bat --paging=never";
-      ls = "eza --icons=always";
-      ll = "ls -l";
-      la = "ls -la";
+      ls = "eza --icons=always --color=always --group-directories-first";
+      ll = "eza --icons=always --color=always --group-directories-first -l";
+      la = "eza --icons=always --color=always --group-directories-first -la";
       lt = "eza --tree";
       lg = "lazygit";
       update = "sudo nixos-rebuild switch";
@@ -57,7 +57,7 @@ in
       }
     ];
 
-    initExtra = ''
+    initContent = ''
       source ~/.p10k.zsh
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
       #Bun
@@ -73,6 +73,8 @@ in
       export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
       #Android
       export ANDROID_HOME="${homeDir}/Library/Android/sdk"
+      export PATH=$PATH:$ANDROID_HOME/emulator
+      export PATH=$PATH:$ANDROID_HOME/platform-tools
 
       # Cargo
       export PATH="$HOME/.cargo/bin:$PATH"

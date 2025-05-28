@@ -39,7 +39,8 @@ in
       # efibootmgr
       # eww
       # feh
-      fira-code-nerdfont
+      # fira-code-nerdfont
+      nerd-fonts.fira-code
       # firefox
       firefox-devedition
       flameshot

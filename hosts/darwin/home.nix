@@ -24,7 +24,8 @@ in
         dex2jar
         # discord
         eza
-        fira-code-nerdfont
+        # fira-code-nerdfont
+        nerd-fonts.fira-code
         flameshot
         fnm
         frida-tools
@@ -69,6 +70,7 @@ in
         turso-cli
         unrar
         uv
+        watchman
         # zed-editor
         yt-dlp
         zip

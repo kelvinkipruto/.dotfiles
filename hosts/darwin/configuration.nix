@@ -1,7 +1,7 @@
 { nixpkgs, self, user, hostName, ... }:
 let
   pkgs = import nixpkgs { system = "aarch64-darwin"; };
-  systemDefaults = import ./system.nix { inherit self hostName; };
+  systemDefaults = import ./system.nix { inherit self hostName user; };
   servicesConfig = import ./services.nix { inherit self; };
   environmentConfig = import ./environment.nix { inherit self pkgs; };
   userConfig = import ./user.nix { inherit self pkgs user; };

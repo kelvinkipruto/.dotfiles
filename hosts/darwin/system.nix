@@ -1,6 +1,8 @@
-{ self, hostName, ... }:
+{ self, hostName, user, ... }:
 {
   system = {
+    # Primary User
+    primaryUser = user;
     defaults = {
       # Finder settings
       finder = {
@@ -38,7 +40,7 @@
 
     };
     configurationRevision = self.rev or self.dirtyRev or null;
-    stateVersion = 5;
+    stateVersion = 6;
   };
 
   networking = {

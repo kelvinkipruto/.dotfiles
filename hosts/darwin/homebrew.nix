@@ -13,17 +13,11 @@
       "homebrew/services"
     ];
     brews = [
-      "deno"
-      "ideviceinstaller"
-      "libimobiledevice"
-      "mysql-client"
       "openjdk@17"
-      "openapi-generator"
       "wget"
     ];
     casks = [
       "chatgpt"
-      "dbeaver-community"
       "docker"
       "firefox"
       "firefox@developer-edition"

@@ -20,12 +20,13 @@ in
         bun
         # cargo
         cocoapods
-        # deno
+        deno
         dex2jar
         # discord
         eza
         # fira-code-nerdfont
         nerd-fonts.fira-code
+        ffmpeg
         flameshot
         fnm
         frida-tools

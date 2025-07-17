@@ -20,11 +20,12 @@ in
         bun
         # cargo
         cocoapods
+        colima
         deno
         dex2jar
         # discord
+        docker
         eza
-        # fira-code-nerdfont
         nerd-fonts.fira-code
         ffmpeg
         flameshot
@@ -44,17 +45,15 @@ in
         localsend
         lua
         luarocks
+        mise
         # nerdfonts
         nmap
         ngrok
         nixpkgs-fmt
-        # nodejs
         ocaml
         obsidian
         ollama
-        # php
         pipx
-        # pnpm
         python3Full
         python312Packages.pip
         raycast
@@ -72,7 +71,6 @@ in
         unrar
         uv
         watchman
-        # zed-editor
         yt-dlp
         zip
       ];

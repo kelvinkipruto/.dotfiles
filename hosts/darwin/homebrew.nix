@@ -13,12 +13,13 @@
       "homebrew/services"
     ];
     brews = [
+      # "docker"
+      "biome"
       "openjdk@17"
       "wget"
     ];
     casks = [
       "chatgpt"
-      "docker"
       "firefox"
       "firefox@developer-edition"
       # "google-chrome"

@@ -10,23 +10,23 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.hack
     nerd-fonts.sauce-code-pro
-    
+
     # Programming fonts
     fira-code
     jetbrains-mono
     source-code-pro
     hack-font
-    
+
     # System fonts
     inter
     roboto
     open-sans
-    
+
     # Icon fonts
     font-awesome
     material-icons
   ];
-  
+
   # Font configuration for home-manager
   fontconfig = {
     enable = true;

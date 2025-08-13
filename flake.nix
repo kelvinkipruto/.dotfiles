@@ -2,12 +2,8 @@
   description = "My Dotfiles Flake for NixOS and macOS";
 
   inputs = {
-    nixpkgs = {
-      url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
-    };
-    nixpkgs-unstable = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,10 +47,10 @@
     let
       user = "kelvinkipruto";
       hostName = "kelvinkipruto";
-      
+
       # System definitions
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      
+
       # Package sets with overlays
       pkgsFor = system: import nixpkgs {
         inherit system;
@@ -72,7 +68,7 @@
           })
         ];
       };
-      
+
       darwinConfig = import ./hosts/darwin/configuration.nix { inherit nixpkgs self user hostName; };
     in
     {
@@ -118,7 +114,7 @@
           }
         ];
       };
-      
+
       # Development shells for each system
       devShells = nixpkgs.lib.genAttrs systems (system:
         let pkgs = pkgsFor system; in {

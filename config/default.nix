@@ -4,6 +4,6 @@
     ./git
     # ./gpg
     ./zsh
-    # ./alacritty
+    ./alacritty
   ];
 }

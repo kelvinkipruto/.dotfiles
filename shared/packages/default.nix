@@ -13,7 +13,7 @@ in
   forNixOS = common ++ nixos;
 
   # Auto-detect system if provided
-  forSystem = 
+  forSystem =
     if system == "x86_64-darwin" || system == "aarch64-darwin" then
       common ++ darwin
     else if system == "x86_64-linux" || system == "aarch64-linux" then

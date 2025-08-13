@@ -87,25 +87,25 @@ in
       elif [ -f "~/.p10k.zsh" ]; then
         source ~/.p10k.zsh
       fi
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+      # export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
       #Bun
-      export PATH="${homeDir}/.bun/bin:$PATH"
+      # export PATH="${homeDir}/.bun/bin:$PATH"
       #Flutter
-      export PATH="${homeDir}/sdk/flutter/bin:$PATH"
+      # export PATH="${homeDir}/sdk/flutter/bin:$PATH"
       #Java
       # export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
       # export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
       #Dart
-      export PATH="$PATH":"${homeDir}/.pub-cache/bin"
+      # export PATH="$PATH":"${homeDir}/.pub-cache/bin"
       #Mysql
-      export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+      # export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
       #Android
-      export ANDROID_HOME="${homeDir}/Library/Android/sdk"
-      export PATH=$PATH:$ANDROID_HOME/emulator
-      export PATH=$PATH:$ANDROID_HOME/platform-tools
+      # export ANDROID_HOME="${homeDir}/Library/Android/sdk"
+      # export PATH=$PATH:$ANDROID_HOME/emulator
+      # export PATH=$PATH:$ANDROID_HOME/platform-tools
 
       # Cargo
-      export PATH="$HOME/.cargo/bin:$PATH"
+      # export PATH="$HOME/.cargo/bin:$PATH"
       # Mise
       eval "$(mise activate zsh)"
     '';

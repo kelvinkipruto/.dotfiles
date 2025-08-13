@@ -8,7 +8,7 @@ let
 in
 {
   inherit packages programs user environment fonts;
-  
+
   # Convenience exports
   inherit (packages) common darwin nixos forDarwin forNixOS forSystem;
 }

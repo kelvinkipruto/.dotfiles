@@ -15,6 +15,9 @@
             StandardErrorPath = "/tmp/ollama-serve.err";
           };
         };
+        colima-restart = {
+          command = "${pkgs.colima} restart";
+        };
       };
     };
   };

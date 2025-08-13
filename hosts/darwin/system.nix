@@ -56,16 +56,4 @@
   time = {
     timeZone = "Africa/Nairobi";
   };
-
-  # Activation scripts to run after system rebuild
-  system.activationScripts.installMiseTools = {
-    text = ''
-      echo "Running mise tools installation..."
-      if [ -f "/Users/kelvinkipruto/.dotfiles/scripts/install-mise-tools.sh" ]; then
-        /bin/bash "/Users/kelvinkipruto/.dotfiles/scripts/install-mise-tools.sh"
-      else
-        echo "Warning: mise tools installation script not found"
-      fi
-    '';
-  };
 }

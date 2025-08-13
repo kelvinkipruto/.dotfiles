@@ -21,21 +21,18 @@ in
     stateVersion = shared.user.stateVersion;
 
     packages = shared.packages.forNixOS ++ shared.fonts.packages ++ [
-       # Additional NixOS-specific packages not in shared
-       pkgs.chromium  # Only available on Linux
-       pkgs.wpsoffice # Only available on x86_64-linux
-       # Add any custom packages here
-     ];
+      # Additional NixOS-specific packages not in shared
+    ];
   };
 
   programs = shared.programs // {
     # NixOS-specific program overrides or additions
     # Add any Linux-specific program configurations here
   };
-  
+
   # Import shared environment variables
   home.sessionVariables = shared.environment.sessionVariables;
-  
+
   # Import shared font configuration
   fonts.fontconfig = shared.fonts.fontconfig;
 }

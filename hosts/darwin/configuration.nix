@@ -7,7 +7,7 @@ let
   userConfig = import ./user.nix { inherit self pkgs user; };
   fontsConfig = import ./fonts.nix { inherit self pkgs; };
   programsConfig = import ./programs.nix { inherit self pkgs; };
-  homeConfig = import ./homebrew.nix { inherit self pkgs; };
+  homebrewConfig = import ./homebrew.nix { inherit self pkgs; };
   autostartConfig = import ./autostart.nix { inherit self pkgs; };
 in
 {
@@ -35,7 +35,7 @@ in
     userConfig
     fontsConfig
     programsConfig
-    homeConfig
+    homebrewConfig
     autostartConfig
   ];
 }

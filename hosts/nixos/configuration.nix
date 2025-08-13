@@ -110,9 +110,6 @@
     useXkbConfig = true;
   };
 
-  sound.enable = true;
-
-
   services = {
     flatpak.enable = true;
     dbus.enable = true;

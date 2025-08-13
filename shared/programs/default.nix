@@ -5,20 +5,7 @@
     enable = true;
   };
   
-  # Terminal tools
-  alacritty = {
-    enable = true;
-    settings = {
-      window = {
-        decorations = "full";
-        opacity = 0.95;
-      };
-      font = {
-        normal.family = "FiraCode Nerd Font";
-        size = 14;
-      };
-    };
-  };
+  # Note: alacritty configuration is handled by config/alacritty/default.nix
   
   bat = {
     enable = true;
@@ -62,32 +49,10 @@
     enable = true;
   };
   
-  # Development tools
-  git = {
-    enable = true;
-    userName = "Kelvin Kipruto";
-    userEmail = "kelvin@example.com"; # Update with your actual email
-    extraConfig = {
-      init.defaultBranch = "main";
-      push.default = "simple";
-      pull.rebase = true;
-    };
-  };
+  # Note: git configuration is handled by config/git/default.nix
   
-  gh = {
-    enable = true;
-    settings = {
-      git_protocol = "ssh";
-      prompt = "enabled";
-    };
-  };
-  
-  gpg = {
-    enable = true;
-    settings = {
-      default-key = "your-key-id"; # Update with your actual GPG key ID
-    };
-  };
+  # Note: gh configuration is handled by config/gh/default.nix
+  # Note: gpg configuration is handled by config/gpg/default.nix
   
   # Editors
   neovim = {
@@ -133,20 +98,7 @@
     enableZshIntegration = true;
   };
   
-  # Shell configuration
-  zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    
-    # Shell aliases are imported from shared environment
-    shellAliases = (import ../environment.nix { inherit pkgs; }).shellAliases;
-    
-    initExtra = ''
-      # Load p10k configuration if it exists
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-    '';
-  };
+  # Note: zsh configuration is handled by config/zsh/default.nix
+  # to avoid conflicts with existing configurations
 
 }

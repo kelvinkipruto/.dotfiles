@@ -20,11 +20,7 @@
     XDEBUG_CLIENT_HOST = "127.0.0.1";
     
     # Path additions
-    PATH = [
-      "$HOME/.local/bin"
-      "$HOME/.cargo/bin"
-      "$HOME/go/bin"
-    ];
+    PATH = "$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH";
   };
   
   # Shell aliases (can be imported by shell configurations)

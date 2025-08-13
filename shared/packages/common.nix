@@ -7,7 +7,7 @@
   pkgs.apktool
   # pkgs.bat # Managed via programs.bat
   pkgs.bun
-  pkgs.cargo
+  # pkgs.cargo # Provided by rustup
   pkgs.cloudflared
   pkgs.deno
   pkgs.dex2jar

@@ -3,12 +3,122 @@
     enable = true;
     font = {
       name = "MesloLGS NF";
-      size = 12;
+      size = 13;
     };
     settings = {
-      # Additional kitty settings can be added here
+      # Window appearance
       background_opacity = "0.95";
-      window_padding_width = 4;
+      window_padding_width = 8;
+      window_margin_width = 0;
+      single_window_margin_width = 0;
+      window_border_width = "1pt";
+      draw_minimal_borders = "yes";
+      window_resize_step_cells = 2;
+      window_resize_step_lines = 2;
+
+      # Cursor
+      cursor_shape = "block";
+      cursor_blink_interval = "0.75";
+      cursor_stop_blinking_after = "15.0";
+
+      # Scrollback
+      scrollback_lines = 10000;
+      scrollback_pager_history_size = 0;
+      wheel_scroll_multiplier = "3.0";
+
+      # Mouse
+      mouse_hide_wait = "3.0";
+      url_style = "curly";
+      open_url_modifiers = "kitty_mod";
+      open_url_with = "default";
+      copy_on_select = "yes";
+
+      # Performance
+      repaint_delay = 10;
+      input_delay = 3;
+      sync_to_monitor = "yes";
+
+      # Bell
+      enable_audio_bell = "no";
+      visual_bell_duration = "0.0";
+
+      # Tab bar
+      tab_bar_edge = "bottom";
+      tab_bar_margin_width = "0.0";
+      tab_bar_style = "powerline";
+      tab_powerline_style = "slanted";
+      tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
+
+      # Color scheme - Tokyo Night
+      foreground = "#c0caf5";
+      background = "#1a1b26";
+      selection_foreground = "#c0caf5";
+      selection_background = "#33467c";
+
+      # Cursor colors
+      cursor = "#c0caf5";
+      cursor_text_color = "#1a1b26";
+
+      # URL underline color when hovering with mouse
+      url_color = "#73daca";
+
+      # Kitty window border colors
+      active_border_color = "#7aa2f7";
+      inactive_border_color = "#292e42";
+      bell_border_color = "#ff9e64";
+
+      # OS Window titlebar colors
+      wayland_titlebar_color = "system";
+      macos_titlebar_color = "system";
+
+      # Tab bar colors
+      active_tab_foreground = "#1d202f";
+      active_tab_background = "#7aa2f7";
+      inactive_tab_foreground = "#787c99";
+      inactive_tab_background = "#1f2335";
+      tab_bar_background = "#15161e";
+
+      # Colors for marks (marked text in the terminal)
+      mark1_foreground = "#1a1b26";
+      mark1_background = "#73daca";
+      mark2_foreground = "#1a1b26";
+      mark2_background = "#f7768e";
+      mark3_foreground = "#1a1b26";
+      mark3_background = "#e0af68";
+
+      # The 16 terminal colors
+
+      # black
+      color0 = "#15161e";
+      color8 = "#414868";
+
+      # red
+      color1 = "#f7768e";
+      color9 = "#f7768e";
+
+      # green
+      color2 = "#9ece6a";
+      color10 = "#9ece6a";
+
+      # yellow
+      color3 = "#e0af68";
+      color11 = "#e0af68";
+
+      # blue
+      color4 = "#7aa2f7";
+      color12 = "#7aa2f7";
+
+      # magenta
+      color5 = "#bb9af7";
+      color13 = "#bb9af7";
+
+      # cyan
+      color6 = "#7dcfff";
+      color14 = "#7dcfff";
+
+      # white
+      color7 = "#a9b1d6";
+      color15 = "#c0caf5";
     };
   };
 }

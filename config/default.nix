@@ -6,5 +6,6 @@
     ./zsh
     ./alacritty
     ./kitty
+    ./tmux
   ];
 }

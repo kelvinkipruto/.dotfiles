@@ -74,24 +74,7 @@
     enable = true;
   };
 
-  tmux = {
-    enable = true;
-    clock24 = true;
-    keyMode = "vi";
-    extraConfig = ''
-      # Set prefix to Ctrl-a
-      set -g prefix C-a
-      unbind C-b
-      bind C-a send-prefix
-      
-      # Enable mouse support
-      set -g mouse on
-      
-      # Start windows and panes at 1
-      set -g base-index 1
-      setw -g pane-base-index 1
-    '';
-  };
+  # Note: tmux configuration is handled by config/tmux/default.nix
 
   zoxide = {
     enable = true;

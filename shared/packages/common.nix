@@ -1,24 +1,41 @@
 { pkgs, ... }:
+let
+  phpWithXdebug = pkgs.php.buildEnv {
+    extensions = ({ enabled, all }: enabled ++ (with all; [
+      grpc
+      xdebug
+    ]));
+    extraConfig = ''
+      xdebug.mode = debug
+      xdebug.start_with_request = yes
+      xdebug.client_host = 127.0.0.1
+      xdebug.client_port = 9003
+      xdebug.remote_enable = true
+      xdebug.remote_host = 127.0.0.1
+      xdebug.remote_port = 9000
+    '';
+  };
+in
 # Common packages shared between Darwin and NixOS
-# Note: ollama uses stable version for better reliability
+  # Note: ollama uses stable version for better reliability
 [
   # Development tools
   pkgs.android-tools
   pkgs.apktool
   # pkgs.bat # Managed via programs.bat
-  pkgs.bun
+  # pkgs.bun
   # pkgs.cargo # Provided by rustup
   pkgs.cloudflared
-  pkgs.deno
+  # pkgs.deno
   pkgs.dex2jar
   pkgs.ffmpeg
-  pkgs.fnm
+  # pkgs.fnm
   pkgs.frida-tools
   # pkgs.git # Managed via programs.git
   # pkgs.gh # Managed via programs.gh
   pkgs.git-lfs
   pkgs.gleam
-  pkgs.go
+  # pkgs.go
   pkgs.httrack
   pkgs.jadx
   pkgs.kotlin
@@ -34,8 +51,9 @@
   pkgs.obsidian
   pkgs.ocaml
   pkgs.ollama # Using stable version
+  phpWithXdebug
   pkgs.pipx
-  pkgs.python3Full
+  # pkgs.python3Full
   # pkgs.ripgrep # Managed via programs.ripgrep
   pkgs.rustup
   pkgs.slack-cli
@@ -48,6 +66,7 @@
 
   # Browsers
   pkgs.brave
+  pkgs.firefox
   pkgs.firefox-devedition
 
   # Applications
@@ -65,6 +84,8 @@
   pkgs.yt-dlp
   pkgs.zip
   pkgs.unrar
+
+  pkgs.wget
 
   # Terminal and shell tools
   pkgs.zsh

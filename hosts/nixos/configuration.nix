@@ -253,7 +253,7 @@
       # (waybar.overrideAttrs (old: {
       #   mesonFlags = old.mesonFlags or [] ++ ["-Dexperimental=true"];
       # }))
-      
+
       # PHP with global debugging enabled
       (php.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [

@@ -28,4 +28,9 @@ in
   
   # Import shared font configuration
   fonts.fontconfig = shared.fonts.fontconfig;
+  
+  # Link configuration files
+  home.file = {
+    ".p10k.zsh".source = ../../config/zsh/p10k.zsh;
+  };
 }

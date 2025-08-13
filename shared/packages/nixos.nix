@@ -2,12 +2,9 @@
 # NixOS (Linux) specific packages
 [
   # Linux specific applications
-  pkgs.brave
   pkgs.chromium
   pkgs.discord
-  pkgs.firefox-devedition
   pkgs.floorp
-  pkgs.kitty
   pkgs.vscode
 
   # Linux desktop environment tools
@@ -41,15 +38,12 @@
   pkgs.xorg.xinput
 
   # Development tools
-  pkgs.cargo
-  pkgs.dbeaver
+  pkgs.dbeaver-bin
   pkgs.flutter
   pkgs.gcc
   pkgs.github-desktop
   pkgs.gparted
   pkgs.meson
-  pkgs.nodePackages.pnpm
-  pkgs.php
   pkgs.powershell
   pkgs.qemu
   pkgs.supabase-cli
@@ -59,7 +53,7 @@
   pkgs.flatpak
   pkgs.fontconfig
   pkgs.freetype
-  pkgs.gnome.gnome-keyring
+  pkgs.gnome-keyring
   pkgs.gnugrep
   pkgs.gnumake
   pkgs.mangohud

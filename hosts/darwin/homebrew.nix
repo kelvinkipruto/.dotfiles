@@ -14,14 +14,14 @@
     ];
     brews = [
       # "docker"
-      "biome"
-      "openjdk@17"
-      "wget"
+      # "biome"
+      # "openjdk@17"
+      # "wget"
     ];
     casks = [
-      "chatgpt"
-      "firefox"
-      "firefox@developer-edition"
+      # "chatgpt"
+      # "firefox"
+      # "firefox@developer-edition"
       # "google-chrome"
       # "visual-studio-code"
     ];

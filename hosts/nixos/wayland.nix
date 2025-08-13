@@ -1,8 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 {
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # Using default hyprland package from nixpkgs instead of inputs
+    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland = {
       enable = true;
     };

@@ -51,6 +51,7 @@ in
         # nerdfonts
         nmap
         ngrok
+        nixd
         nixpkgs-fmt
         ocaml
         obsidian

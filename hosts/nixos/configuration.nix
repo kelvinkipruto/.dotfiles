@@ -180,9 +180,10 @@
   };
   users.defaultUserShell = pkgs.zsh;
 
-  users.users.kelvin = {
+  users.users.kelvinkipruto = {
     isNormalUser = true;
     description = "Kelvin Kipruto";
+    shell = pkgs.zsh;
     extraGroups = [
       "flatpak"
       "disk"
@@ -255,6 +256,23 @@
       # (waybar.overrideAttrs (old: {
       #   mesonFlags = old.mesonFlags or [] ++ ["-Dexperimental=true"];
       # }))
+      
+      # PHP with global debugging enabled
+      (php.buildEnv {
+        extensions = ({ enabled, all }: enabled ++ (with all; [
+          grpc
+          xdebug
+        ]));
+        extraConfig = ''
+          xdebug.mode = debug
+          xdebug.start_with_request = yes
+          xdebug.client_host = 127.0.0.1
+          xdebug.client_port = 9003
+          xdebug.remote_enable = true
+          xdebug.remote_host = 127.0.0.1
+          xdebug.remote_port = 9000
+        '';
+      })
     ];
     # sessionVariables = {
     #   NIXOS_OZONE_WL = "1";

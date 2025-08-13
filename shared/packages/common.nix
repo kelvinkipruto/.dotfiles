@@ -1,0 +1,79 @@
+{ pkgs, ... }:
+# Common packages shared between Darwin and NixOS
+# Note: ollama uses stable version for better reliability
+[
+  # Development tools
+  pkgs.android-tools
+  pkgs.apktool
+  # pkgs.bat # Managed via programs.bat
+  pkgs.bun
+  pkgs.cargo
+  pkgs.cloudflared
+  pkgs.deno
+  pkgs.dex2jar
+  pkgs.ffmpeg
+  pkgs.fnm
+  pkgs.frida-tools
+  # pkgs.git # Managed via programs.git
+  # pkgs.gh # Managed via programs.gh
+  pkgs.git-lfs
+  pkgs.gleam
+  pkgs.go
+  pkgs.httrack
+  pkgs.jadx
+  pkgs.kotlin
+  pkgs.lazydocker
+  pkgs.lua
+  pkgs.luarocks
+  pkgs.mise
+  # pkgs.neovim # Managed via programs.neovim
+  pkgs.ngrok
+  pkgs.nixd
+  pkgs.nixpkgs-fmt
+  pkgs.nmap
+  pkgs.obsidian
+  pkgs.ocaml
+  pkgs.ollama # Using stable version
+  pkgs.pipx
+  pkgs.python3Full
+  # pkgs.ripgrep # Managed via programs.ripgrep
+  pkgs.rustup
+  pkgs.slack-cli
+  pkgs.stockfish
+  pkgs.telegram-desktop
+  pkgs.turso-cli
+  pkgs.unzip
+  pkgs.uv
+  # pkgs.zoxide # Managed via programs.zoxide
+
+  # Browsers
+  pkgs.brave
+  pkgs.firefox-devedition
+
+  # Applications
+  # pkgs.alacritty # Managed via programs.alacritty
+  pkgs.colima
+  pkgs.docker
+  pkgs.kitty
+
+  # Fonts
+  pkgs.nerd-fonts.fira-code
+
+  # Media and utilities
+  pkgs.flameshot
+  pkgs.spotify
+  pkgs.yt-dlp
+  pkgs.zip
+  pkgs.unrar
+
+  # Terminal and shell tools
+  pkgs.zsh
+  # pkgs.tmux # Managed via programs.tmux
+  # pkgs.htop # Managed via programs.htop
+  # pkgs.jq # Managed via programs.jq
+  # pkgs.fd # Managed via programs.fd
+  # pkgs.fzf # Managed via programs.fzf
+  # pkgs.eza # Managed via programs.eza
+  # pkgs.lazygit # Managed via programs.lazygit
+  # pkgs.direnv # Managed via programs.direnv
+]

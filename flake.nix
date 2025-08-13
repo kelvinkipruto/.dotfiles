@@ -3,10 +3,13 @@
 
   inputs = {
     nixpkgs = {
+      url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    };
+    nixpkgs-unstable = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:LnL7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
@@ -19,7 +22,7 @@
       flake = false;
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs = {
         nixpkgs = {
           follows = "nixpkgs";
@@ -37,6 +40,7 @@
   outputs =
     { self
     , nixpkgs
+    , nixpkgs-unstable
     , home-manager
     , nix-darwin
     , mac-app-util
@@ -47,8 +51,29 @@
     let
       user = "kelvinkipruto";
       hostName = "kelvinkipruto";
+      
+      # System definitions
+      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      
+      # Package sets with overlays
+      pkgsFor = system: import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          allowBroken = false;
+        };
+        overlays = [
+          # Add unstable packages as overlay
+          (final: prev: {
+            unstable = import nixpkgs-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          })
+        ];
+      };
+      
       darwinConfig = import ./hosts/darwin/configuration.nix { inherit nixpkgs self user hostName; };
-      nixOSConfig = import ./hosts/nixos/configuration.nix { inherit nixpkgs self user hostName; };
     in
     {
       darwinConfigurations.${user} = nix-darwin.lib.darwinSystem {
@@ -67,6 +92,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit inputs self user; };
 
               users.${user} = {
                 imports = [
@@ -78,19 +104,30 @@
           }
         ];
       };
-      nixOSConfigurations.${user} = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.${user} = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          nixOSConfig
+          ./hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.kelvin = import ./hosts/nixos/home.nix;
+            home-manager.users.kelvinkipruto = import ./hosts/nixos/home.nix;
             home-manager.extraSpecialArgs = { inherit inputs self user; };
           }
         ];
-
       };
+      
+      # Development shells for each system
+      devShells = nixpkgs.lib.genAttrs systems (system:
+        let pkgs = pkgsFor system; in {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              nixd
+              nixpkgs-fmt
+            ];
+          };
+        }
+      );
     };
 }

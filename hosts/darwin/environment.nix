@@ -2,10 +2,8 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      git
       neofetch
-      vim
-      zsh
+      # PHP with global debugging enabled
       (php.buildEnv {
         extensions = ({ enabled, all }: enabled ++ (with all; [
           grpc
@@ -13,16 +11,15 @@
         ]));
         extraConfig = ''
           xdebug.mode = debug
+          xdebug.start_with_request = yes
+          xdebug.client_host = 127.0.0.1
+          xdebug.client_port = 9003
           xdebug.remote_enable = true
           xdebug.remote_host = 127.0.0.1
           xdebug.remote_port = 9000
         '';
       })
     ];
-    variables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
-
+    # Environment variables are now handled by shared configuration
   };
 }

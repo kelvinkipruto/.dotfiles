@@ -1,132 +1,31 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
-  # TODO: investigate how to share applications between nixos and darwin
-  # sharedApps = import ../../shared { inherit pkgs; };
+  shared = import ../../shared { inherit pkgs lib; system = pkgs.system; };
 in
 {
   imports = [
     ../../config
   ];
+  
   home = {
-    stateVersion = "25.05";
+    username = shared.user.user.name;
+    homeDirectory = shared.user.getHomeDirectory pkgs.system;
+    stateVersion = shared.user.stateVersion;
 
-    packages = with pkgs;
-      [
-        alacritty
-        android-tools
-        apktool
-        # android-studio
-        asdf-vm
-        bat
-        bun
-        # cargo
-        cloudflared
-        cocoapods
-        colima
-        deno
-        dex2jar
-        # discord
-        docker
-        eza
-        nerd-fonts.fira-code
-        ffmpeg
-        flameshot
-        fnm
-        frida-tools
-        # TODO: Fix flutter, gradler issues
-        # flutter
-        gleam
-        go
-        git-lfs
-        # gradle
-        httrack
-        jadx
-        kotlin
-        lazydocker
-        # legcord
-        localsend
-        lua
-        luarocks
-        mise
-        # nerdfonts
-        nmap
-        ngrok
-        nixd
-        nixpkgs-fmt
-        ocaml
-        obsidian
-        ollama
-        pipx
-        python3Full
-        python312Packages.pip
-        raycast
-        rectangle
-        rustup
-        slack
-        slack-cli
-        spotify
-        stockfish
-        telegram-desktop
-        # temurin-bin
-        # TODO: utm permission errors
-        # FIX chmod +uw ~/Library/Containers/com.utmapp.UTM/Data/Documents/[VM NAME].utm/Data/efi_vars.fd
-        # utm
-        turso-cli
-        unrar
-        uv
-        watchman
-        yt-dlp
-        zip
-      ];
+    packages = shared.packages.forDarwin ++ shared.fonts.packages ++ [
+      # Additional Darwin-specific packages not in shared
+      # Add any custom packages here
+    ];
   };
 
-  programs = {
-    home-manager = {
-      enable = true;
-    };
-    bat = {
-      enable = true;
-    };
-    eza = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    fd = {
-      enable = true;
-    };
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    htop = {
-      enable = true;
-    };
-    jq = {
-      enable = true;
-    };
-    lazygit = {
-      enable = true;
-    };
-    neovim = {
-      enable = true;
-    };
-    direnv = {
-      enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-
-      nix-direnv.enable = true;
-    };
-    ripgrep = {
-      enable = true;
-    };
-    tmux = {
-      enable = true;
-    };
-    zoxide = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-
+  programs = shared.programs // {
+    # Darwin-specific program overrides or additions
+    # Add any macOS-specific program configurations here
   };
+  
+  # Import shared environment variables
+  home.sessionVariables = shared.environment.sessionVariables;
+  
+  # Import shared font configuration
+  fonts.fontconfig = shared.fonts.fontconfig;
 }

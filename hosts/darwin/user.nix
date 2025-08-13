@@ -3,5 +3,6 @@
   users.users.${user} = {
     name = user;
     home = "/Users/kelvinkipruto";
+    shell = pkgs.zsh;
   };
 }

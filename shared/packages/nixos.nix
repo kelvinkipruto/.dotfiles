@@ -60,7 +60,7 @@
   pkgs.neofetch
   pkgs.nil
   pkgs.starship
-  pkgs.terminus-nerdfont
+  pkgs.nerd-fonts.terminess-ttf
   pkgs.tldr
   pkgs.wpsoffice
   pkgs.xfce.thunar

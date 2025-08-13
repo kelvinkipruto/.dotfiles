@@ -34,14 +34,11 @@
   };
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
-    pulseaudio = {
-      enable = false;
-      support32Bit = true;
-    };
+
     nvidia = {
       modesetting = {
         enable = true;
@@ -105,8 +102,8 @@
 
   i18n.defaultLocale = "en_GB.UTF-8";
   console = {
-    packages = [ pkgs.terminus_font ];
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-i22b.psf.gz";
+    packages = [ pkgs.nerd-fonts.terminess-ttf ];
+    font = "${pkgs.nerd-fonts.terminess-ttf}/share/consolefonts/ter-i22b.psf.gz";
     useXkbConfig = true;
   };
 
@@ -115,6 +112,22 @@
     dbus.enable = true;
     picom.enable = true;
 
+    displayManager = {
+      sddm = {
+        enable = true;
+        enableHidpi = true;
+      };
+      defaultSession = "hyprland";
+      # lightdm.enable = true;
+      # setupCommands = ''
+      #   ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal
+      # '';
+      # autoLogin = {
+      #   enable = true;
+      #   user = "kelvin";
+      # };
+    };
+
     xserver = {
       enable = true;
       # windowManager.dwm.enable = true;
@@ -122,32 +135,21 @@
         layout = "us";
         variant = "";
       };
+    };
 
-      displayManager = {
-        sddm = {
-          enable = true;
-          enableHidpi = true;
-        };
-        defaultSession = "hyprland";
-        # lightdm.enable = true;
-        # setupCommands = ''
-        #   ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal
-        # '';
-        # autoLogin = {
-        #   enable = true;
-        #   user = "kelvin";
-        # };
+    desktopManager = {
+      plasma6 = {
+        enable = true;
       };
-
-      desktopManager = {
-        plasma5 = {
-          enable = true;
-        };
-        # default = "hyprland";
-      };
+      # default = "hyprland";
     };
 
     printing.enable = true;
+
+    pulseaudio = {
+      enable = false;
+      support32Bit = true;
+    };
 
     pipewire = {
       enable = true;
@@ -207,7 +209,7 @@
   fonts = {
     packages = with pkgs; [
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       font-awesome
       source-han-sans

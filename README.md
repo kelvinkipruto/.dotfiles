@@ -84,12 +84,3 @@ Shared program configurations are in `shared/programs/default.nix`. OS-specific 
 1. **System-specific packages**: Add to the respective host's `home.nix` file
 2. **Program overrides**: Use the merge operator `//` in the programs section
 3. **New shared programs**: Add to `shared/programs/default.nix`
-
-## Architecture
-
-This configuration follows Nix best practices:
-
-- **DRY Principle**: No duplication between Darwin and NixOS configurations
-- **Modularity**: Each component has a single responsibility
-- **Flexibility**: Easy to add new systems or modify existing ones
-- **Maintainability**: Clear structure makes updates straightforward

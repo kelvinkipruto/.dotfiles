@@ -5,5 +5,6 @@
     # ./gpg
     ./zsh
     ./alacritty
+    ./kitty
   ];
 }

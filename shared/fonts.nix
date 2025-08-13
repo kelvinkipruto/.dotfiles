@@ -31,7 +31,7 @@
   fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = [ "FiraCode Nerd Font" "JetBrains Mono" ];
+      monospace = [ "FiraCode Nerd Font" "JetBrains Mono" "MesloLG Nerd Font" ];
       sansSerif = [ "Inter" "Roboto" ];
       serif = [ "Times New Roman" ];
     };

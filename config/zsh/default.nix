@@ -18,7 +18,7 @@ in
       lt = "eza --tree";
       lg = "lazygit";
       update = "sudo nixos-rebuild switch";
-      clean = "sudo nix-collect-garbage -d";
+      clean = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
     };
     history.size = 10000;
 

@@ -8,7 +8,7 @@ in
     ../../config
   ];
   home = {
-    stateVersion = "24.11";
+    stateVersion = "25.05";
 
     packages = with pkgs;
       [
@@ -16,9 +16,11 @@ in
         android-tools
         apktool
         # android-studio
+        asdf-vm
         bat
         bun
         # cargo
+        cloudflared
         cocoapods
         colima
         deno
@@ -60,6 +62,7 @@ in
         rectangle
         rustup
         slack
+        slack-cli
         spotify
         stockfish
         telegram-desktop

@@ -7,5 +7,6 @@
     ./alacritty
     ./kitty
     ./tmux
+    ./yazi
   ];
 }

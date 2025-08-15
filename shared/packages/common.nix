@@ -90,6 +90,7 @@ in
   # Terminal and shell tools
   pkgs.zsh
   # pkgs.tmux # Managed via programs.tmux
+  # pkgs.yazi # Managed via programs.yazi
   # pkgs.htop # Managed via programs.htop
   # pkgs.jq # Managed via programs.jq
   # pkgs.fd # Managed via programs.fd
@@ -97,4 +98,9 @@ in
   # pkgs.eza # Managed via programs.eza
   # pkgs.lazygit # Managed via programs.lazygit
   # pkgs.direnv # Managed via programs.direnv
+
+  #Misc
+  pkgs.poppler
+  pkgs.imagemagick
+  pkgs.resvg
 ]

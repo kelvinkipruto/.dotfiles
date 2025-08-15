@@ -74,14 +74,11 @@
     enable = true;
   };
 
-  # Note: tmux configuration is handled by config/tmux/default.nix
-
   zoxide = {
     enable = true;
     enableZshIntegration = true;
   };
 
-  # Note: zsh configuration is handled by config/zsh/default.nix
-  # to avoid conflicts with existing configurations
+
 
 }

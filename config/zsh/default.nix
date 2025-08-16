@@ -30,6 +30,11 @@ let
     # Nix shortcuts
     nix-search = "nix search nixpkgs";
     nix-shell = "nix-shell --run zsh";
+
+    # Zoxide shortcuts
+    zi = "z -i"; # Interactive selection
+    zq = "z -";
+    zb = "z -b"; # Go back
   };
 in
 {

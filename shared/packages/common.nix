@@ -103,4 +103,8 @@ in
   pkgs.poppler
   pkgs.imagemagick
   pkgs.resvg
+
+
+  # dotnet
+  pkgs.dotnet-sdk_9
 ]

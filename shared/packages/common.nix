@@ -98,6 +98,7 @@ in
   # pkgs.eza # Managed via programs.eza
   # pkgs.lazygit # Managed via programs.lazygit
   # pkgs.direnv # Managed via programs.direnv
+  pkgs.nushell
 
   #Misc
   pkgs.poppler

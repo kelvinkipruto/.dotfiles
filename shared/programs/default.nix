@@ -79,7 +79,7 @@
     enableZshIntegration = true;
     enableBashIntegration = true;
     options = [
-      "--cmd cd"  # Replace cd with zoxide
+      "--cmd cd" # Replace cd with zoxide
     ];
   };
 

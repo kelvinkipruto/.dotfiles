@@ -108,4 +108,7 @@ in
 
   # dotnet
   pkgs.dotnet-sdk_9
+
+  # pdf
+  pkgs.qpdf
 ]

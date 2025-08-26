@@ -11,4 +11,5 @@
   pkgs.rectangle
   pkgs.slack
   pkgs.localsend
+  pkgs.shottr
 ]

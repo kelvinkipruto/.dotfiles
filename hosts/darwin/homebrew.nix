@@ -13,6 +13,7 @@
       "homebrew/services"
     ];
     brews = [
+      "elixir"
     ];
     casks = [
       "chatgpt"

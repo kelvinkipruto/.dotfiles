@@ -74,6 +74,7 @@ in
   pkgs.colima
   pkgs.docker
   pkgs.kitty
+  pkgs.duckdb
 
   # Fonts
   pkgs.nerd-fonts.fira-code
@@ -86,6 +87,7 @@ in
   pkgs.unrar
 
   pkgs.wget
+  pkgs.imhex
 
   # Terminal and shell tools
   pkgs.zsh
@@ -105,10 +107,12 @@ in
   pkgs.imagemagick
   pkgs.resvg
 
-
   # dotnet
   pkgs.dotnet-sdk_9
 
   # pdf
   pkgs.qpdf
+
+  #other
+  pkgs.qbittorrent
 ]

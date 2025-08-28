@@ -55,7 +55,7 @@ in
   pkgs.pipx
   # pkgs.python3Full
   # pkgs.ripgrep # Managed via programs.ripgrep
-  pkgs.rustup
+  # pkgs.rustup
   pkgs.slack-cli
   pkgs.stockfish
   pkgs.telegram-desktop
@@ -115,4 +115,5 @@ in
 
   #other
   pkgs.qbittorrent
+  pkgs.mkcert
 ]

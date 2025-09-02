@@ -22,6 +22,7 @@ in
   # Development tools
   pkgs.android-tools
   pkgs.apktool
+  pkgs.cmake
   # pkgs.bat # Managed via programs.bat
   # pkgs.bun
   # pkgs.cargo # Provided by rustup

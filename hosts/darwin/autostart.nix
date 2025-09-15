@@ -16,7 +16,7 @@
           };
         };
         colima-restart = {
-          command = "${pkgs.colima} restart";
+          command = "${pkgs.colima}/bin/colima restart";
         };
       };
     };

@@ -117,4 +117,11 @@ in
   #other
   pkgs.qbittorrent
   pkgs.mkcert
+
+  #raylib
+  pkgs.raylib
+
+  #c++
+  pkgs.vcpkg
+  pkgs.ninja
 ]

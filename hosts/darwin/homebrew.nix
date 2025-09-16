@@ -11,9 +11,11 @@
     };
     taps = [
       "homebrew/services"
+      "null-dev/firefox-profile-switcher"
     ];
     brews = [
       "elixir"
+      "firefox-profile-switcher-connector"
     ];
     casks = [
       "chatgpt"

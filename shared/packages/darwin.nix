@@ -12,4 +12,5 @@
   pkgs.slack
   pkgs.localsend
   pkgs.shottr
+  pkgs.alt-tab-macos
 ]

@@ -49,7 +49,7 @@ in
   pkgs.nixd
   pkgs.nixpkgs-fmt
   pkgs.nmap
-  pkgs.obsidian
+  # pkgs.obsidian
   pkgs.ocaml
   pkgs.ollama # Using stable version
   phpWithXdebug
@@ -59,7 +59,7 @@ in
   # pkgs.rustup
   pkgs.slack-cli
   pkgs.stockfish
-  pkgs.telegram-desktop
+  # pkgs.telegram-desktop
   pkgs.turso-cli
   pkgs.unzip
   pkgs.uv
@@ -86,6 +86,7 @@ in
   pkgs.yt-dlp
   pkgs.zip
   pkgs.unrar
+  pkgs.croc
 
   pkgs.wget
   pkgs.imhex
@@ -113,6 +114,7 @@ in
 
   # pdf
   pkgs.qpdf
+  # pkgs.wkhtmltopdf
 
   #other
   pkgs.qbittorrent
@@ -124,4 +126,11 @@ in
   #c++
   pkgs.vcpkg
   pkgs.ninja
+
+  #db
+  pkgs.redis
+  pkgs.mongodb-tools
+
+  #other
+  pkgs.pkg-config
 ]

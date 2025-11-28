@@ -19,8 +19,6 @@
     ];
     casks = [
       "chatgpt"
-      # "google-chrome"
-      # "visual-studio-code"
     ];
   };
 }

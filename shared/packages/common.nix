@@ -133,4 +133,5 @@ in
 
   #other
   pkgs.pkg-config
+  pkgs.dnsmasq
 ]

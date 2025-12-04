@@ -113,6 +113,7 @@ in
       # export PATH="$HOME/.cargo/bin:$PATH"
       # Mise
       eval "$(mise activate zsh)"
+      eval "$(devbox global shellenv)"
     '';
   };
 }

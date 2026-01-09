@@ -18,7 +18,7 @@
         };
       };
 
-      aliases = {
+      alias = {
         br = "branch";
         co = "checkout";
         st = "status";

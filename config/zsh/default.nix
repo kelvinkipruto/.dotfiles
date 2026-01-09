@@ -1,41 +1,7 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, userConfig, ... }:
 let
-  cfg = config.programs.zsh;
   homeDir = config.home.homeDirectory;
-  sharedAliases = {
-    # File and directory operations
-    cat = "bat --paging=never";
-    ls = "eza --icons=always --color=always --group-directories-first";
-    ll = "eza --icons=always --color=always --group-directories-first -l";
-    la = "eza --icons=always --color=always --group-directories-first -la";
-    lt = "eza --tree";
-
-    # Git and development
-    lg = "lazygit";
-
-    # System maintenance
-    clean = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
-
-    # Common shortcuts
-    grep = "rg";
-    find = "fd";
-    top = "htop";
-
-    # Docker shortcuts
-    dc = "docker-compose";
-    dcu = "docker-compose up";
-    dcd = "docker-compose down";
-    dcb = "docker-compose build";
-
-    # Nix shortcuts
-    nix-search = "nix search nixpkgs";
-    nix-shell = "nix-shell --run zsh";
-
-    # Zoxide shortcuts
-    zi = "z -i"; # Interactive selection
-    zq = "z -";
-    zb = "z -b"; # Go back
-  };
+  shared = import ../../shared { inherit pkgs lib userConfig; system = pkgs.system; };
 in
 {
   programs.zsh = {
@@ -44,10 +10,9 @@ in
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = sharedAliases // {
-      # System-specific aliases can be added here
-      update = "sudo nixos-rebuild switch";
-    };
+    shellAliases =
+      shared.aliases.shellAliases
+      // lib.optionalAttrs pkgs.stdenv.isLinux { update = "sudo nixos-rebuild switch"; };
     history.size = 10000;
 
     # Oh my zsh setup

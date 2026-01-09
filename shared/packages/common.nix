@@ -77,9 +77,6 @@ in
   pkgs.kitty
   pkgs.duckdb
 
-  # Fonts
-  pkgs.nerd-fonts.fira-code
-
   # Media and utilities
   pkgs.flameshot
   pkgs.spotify
@@ -102,7 +99,12 @@ in
   # pkgs.eza # Managed via programs.eza
   # pkgs.lazygit # Managed via programs.lazygit
   # pkgs.direnv # Managed via programs.direnv
+  pkgs.bottom
+  pkgs.dua
+  pkgs.duf
   pkgs.nushell
+  pkgs.just
+  pkgs.tokei
 
   #Misc
   pkgs.poppler

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, userConfig, ... }: {
 
   imports = [
     ./hardware-configuration.nix
@@ -63,8 +63,12 @@
       # timeout = 300;
     };
 
-    kernelModules = [ "kvm-intel" "vfio-pci" ];
-    kernelParams = [ "nohibernate" "intel_iommu=on" "iommu=pt" ];
+    kernelModules =
+      lib.optionals pkgs.stdenv.isx86_64 [ "kvm-intel" "vfio-pci" ]
+      ++ lib.optionals pkgs.stdenv.isAarch64 [ "kvm" ];
+    kernelParams =
+      [ "nohibernate" ]
+      ++ lib.optionals pkgs.stdenv.isx86_64 [ "intel_iommu=on" "iommu=pt" ];
 
     # kernel.sysctl = {
     #   "net.ipv4.tcp_congestion_control" = "bbr";
@@ -179,9 +183,9 @@
   };
   users.defaultUserShell = pkgs.zsh;
 
-  users.users.kelvinkipruto = {
+  users.users.${userConfig.name} = {
     isNormalUser = true;
-    description = "Kelvin Kipruto";
+    description = userConfig.fullName;
     shell = pkgs.zsh;
     extraGroups = [
       "flatpak"

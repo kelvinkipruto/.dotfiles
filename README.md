@@ -17,6 +17,8 @@ A well-structured Nix configuration for both macOS (Darwin) and NixOS systems.
 │   │   └── default.nix    # Package set exports
 │   ├── programs/
 │   │   └── default.nix    # Shared program configurations
+│   ├── aliases.nix        # Central shell aliases
+│   ├── user.nix           # Shared user metadata and home paths
 │   └── default.nix        # Main shared exports
 └── flake.nix              # Main flake configuration
 ```
@@ -28,6 +30,7 @@ A well-structured Nix configuration for both macOS (Darwin) and NixOS systems.
 - **Stable + Unstable**: Uses nixpkgs-unstable by default with stable packages available via `pkgs.stable.*`
 - **Modular Structure**: Easy to maintain and extend
 - **Program Configurations**: Shared program settings across both systems
+- **Single Source of Identity**: Username and email live in `flake.nix` and are reused everywhere
 
 ## Usage
 
@@ -51,11 +54,23 @@ sudo nixos-rebuild switch --flake .#kelvinkipruto
 nix build .#nixosConfigurations.kelvinkipruto.config.system.build.toplevel
 ```
 
+### NixOS (aarch64)
+
+```bash
+# Build and switch
+sudo nixos-rebuild switch --flake .#kelvinkipruto-aarch64
+
+# Build only
+nix build .#nixosConfigurations.kelvinkipruto-aarch64.config.system.build.toplevel
+```
+
 ### Development Shell
 
 ```bash
 nix develop
 ```
+
+The dev shell provides `nixd` and `nixpkgs-fmt` to keep module work fast and consistent.
 
 ## Package Management
 
@@ -78,6 +93,12 @@ pkgs.packageName         # Uses unstable version (default)
 ## Program Configurations
 
 Shared program configurations are in `shared/programs/default.nix`. OS-specific overrides can be added in the respective `home.nix` files.
+
+## Identity and Aliases
+
+- Update username and email once in `flake.nix` under `userConfig`.
+- Shared shell aliases live in `shared/aliases.nix` and are pulled into the Zsh module.
+- Git identity is wired from `userConfig` via `config/git/default.nix`.
 
 ## Customization
 

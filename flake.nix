@@ -2,7 +2,6 @@
   description = "My Dotfiles Flake for NixOS and macOS";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin/master";
@@ -44,7 +43,12 @@
     , homebrew-cask
     }  @inputs:
     let
-      user = "kelvinkipruto";
+      userConfig = {
+        name = "kelvinkipruto";
+        fullName = "Kelvin Kipruto";
+        email = "kelvin@example.com";
+      };
+      user = userConfig.name;
       hostName = "kelvinkipruto";
 
       # System definitions
@@ -61,7 +65,9 @@
         ];
       };
 
-      darwinConfig = import ./hosts/darwin/configuration.nix { inherit nixpkgs self user hostName; };
+      darwinConfig = import ./hosts/darwin/configuration.nix {
+        inherit nixpkgs self user userConfig hostName;
+      };
     in
     {
       darwinConfigurations.${user} = nix-darwin.lib.darwinSystem {
@@ -82,7 +88,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
-              extraSpecialArgs = { inherit inputs self user; };
+              extraSpecialArgs = { inherit inputs self user userConfig; };
 
               users.${user} = {
                 imports = [
@@ -96,14 +102,30 @@
       };
       nixosConfigurations.${user} = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs self user userConfig; };
         modules = [
           ./hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.kelvinkipruto = import ./hosts/nixos/home.nix;
-            home-manager.extraSpecialArgs = { inherit inputs self user; };
+            home-manager.users.${user} = import ./hosts/nixos/home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs self user userConfig; };
+          }
+        ];
+      };
+
+      nixosConfigurations."${user}-aarch64" = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { inherit inputs self user userConfig; };
+        modules = [
+          ./hosts/nixos/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${user} = import ./hosts/nixos/home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs self user userConfig; };
           }
         ];
       };

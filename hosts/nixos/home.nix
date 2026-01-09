@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, userConfig, ... }:
 let
-  shared = import ../../shared { inherit pkgs lib; system = pkgs.system; };
+  shared = import ../../shared { inherit pkgs lib userConfig; system = pkgs.system; };
 in
 {
   imports = [

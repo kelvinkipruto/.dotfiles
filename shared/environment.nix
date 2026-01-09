@@ -22,31 +22,4 @@
     # Path additions
     PATH = "$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH";
   };
-
-  # Shell aliases (can be imported by shell configurations)
-  shellAliases = {
-    # File operations
-    ll = "eza -la";
-    la = "eza -la";
-    ls = "eza";
-    cat = "bat";
-    cd = "z";
-
-    # Git shortcuts
-    g = "git";
-    gs = "git status";
-    ga = "git add";
-    gc = "git commit";
-    gp = "git push";
-    gl = "git pull";
-    gd = "git diff";
-
-    # System shortcuts
-    reload = "source ~/.zshrc";
-    cls = "clear";
-
-    # Development
-    serve = "python3 -m http.server";
-    myip = "curl -s https://ipinfo.io/ip";
-  };
 }

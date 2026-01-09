@@ -1,3 +1,4 @@
+{ userConfig, ... }:
 {
   programs.git = {
     enable = true;
@@ -5,10 +6,9 @@
     settings = {
       init.defaultBranch = "main";
       pull.rebase = true;
-      # TODO: Pass the user name and email as arguments
       user = {
-        name = "kelvinkipruto";
-        email = "hello@kipruto.dev";
+        name = userConfig.name;
+        email = userConfig.email;
       };
       delta = {
         enable = true;

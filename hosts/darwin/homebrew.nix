@@ -16,6 +16,7 @@
     brews = [
       "elixir"
       "firefox-profile-switcher-connector"
+      "media-control"
     ];
     casks = [
       "chatgpt"

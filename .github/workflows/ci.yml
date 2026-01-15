@@ -21,11 +21,18 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Flake check
         run: nix flake check
+      - name: Free disk space
+        run: |
+          sudo rm -rf /opt/hostedtoolcache
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf /usr/local/share/powershell
       - name: Build NixOS config
         continue-on-error: true
         run: |
           for i in 1 2 3; do
-            nix build .#nixosConfigurations.kelvinkipruto.config.system.build.toplevel && exit 0
+            nix build --no-link .#nixosConfigurations.kelvinkipruto.config.system.build.toplevel && exit 0
             echo "Build failed (attempt $i). Retrying..."
             sleep 5
           done

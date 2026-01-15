@@ -2,7 +2,6 @@
 
   imports = [
     ./hardware-configuration.nix
-    ./wayland.nix
     ../../shared/modules/nix.nix
     ../../shared/modules/fonts.nix
     ../../shared/modules/zsh.nix
@@ -124,7 +123,7 @@
         enable = true;
         enableHidpi = true;
       };
-      defaultSession = "hyprland";
+      defaultSession = "plasma";
       # lightdm.enable = true;
       # setupCommands = ''
       #   ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal
@@ -256,7 +255,6 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
     config.common.default = "*";
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };

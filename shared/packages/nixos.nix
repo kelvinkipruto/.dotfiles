@@ -10,23 +10,22 @@
   # Linux desktop environment tools
   pkgs.dunst
   pkgs.rofi
-  pkgs.waybar
-  pkgs.wofi
-  pkgs.swww
-  pkgs.variety
+  # pkgs.waybar
+  # pkgs.wofi
+  # pkgs.swww
+  # pkgs.variety
   pkgs.picom
   pkgs.libnotify
   pkgs.pavucontrol
 
   # Wayland/X11 tools
-  pkgs.wayland-protocols
-  pkgs.wayland-utils
-  pkgs.wl-clipboard
-  pkgs.wlroots
+  # pkgs.wayland-protocols
+  # pkgs.wayland-utils
+  # pkgs.wl-clipboard
   pkgs.xclip
   pkgs.xdg-desktop-portal-gtk
-  pkgs.xdg-desktop-portal-hyprland
-  pkgs.xwayland
+  # pkgs.xdg-desktop-portal-hyprland
+  # pkgs.xwayland
 
   # X11 libraries
   pkgs.xorg.libX11

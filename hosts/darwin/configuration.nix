@@ -1,11 +1,8 @@
-{ nixpkgs, self, user, userConfig, hostName, ... }:
+{ pkgs, self, user, userConfig, hostName, nixpkgsConfig, systemStateVersion, ... }:
 let
-  pkgs = import nixpkgs { system = "aarch64-darwin"; };
-  systemDefaults = import ./system.nix { inherit self hostName user; };
+  systemDefaults = import ./system.nix { inherit self hostName user systemStateVersion; };
   servicesConfig = import ./services.nix { inherit self; };
-  environmentConfig = import ./environment.nix { inherit self pkgs; };
   userModule = import ./user.nix { inherit self pkgs userConfig; };
-  fontsConfig = import ./fonts.nix { inherit self pkgs; };
   programsConfig = import ./programs.nix { inherit self pkgs; };
   homebrewConfig = import ./homebrew.nix { inherit self pkgs; };
   autostartConfig = import ./autostart.nix { inherit self pkgs; };
@@ -14,28 +11,18 @@ in
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
     config = {
-      allowUnfree = true;
-    };
-  };
-
-  nix = {
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-    };
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 7d";
+      inherit (nixpkgsConfig) allowUnfree allowBroken;
     };
   };
 
   imports = [
+    ../../shared/modules/nix.nix
     systemDefaults
     servicesConfig
-    environmentConfig
     userModule
-    fontsConfig
     programsConfig
     homebrewConfig
     autostartConfig
+    ./overrides.nix
   ];
 }

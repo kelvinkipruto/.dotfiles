@@ -8,14 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs = {
@@ -39,8 +31,6 @@
     , nix-darwin
     , mac-app-util
     , nix-homebrew
-    , homebrew-core
-    , homebrew-cask
     }  @inputs:
     let
       userConfig = {
@@ -50,29 +40,32 @@
       };
       user = userConfig.name;
       hostName = "kelvinkipruto";
+      systemStateVersion = {
+        nixos = "26.05";
+        darwin = 6;
+      };
 
       # System definitions
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
+      nixpkgsConfig = {
+        allowUnfree = true;
+        allowBroken = false;
+      };
+
       # Package sets with overlays
       pkgsFor = system: import nixpkgs {
         inherit system;
-        config = {
-          allowUnfree = true;
-          allowBroken = false;
-        };
+        config = nixpkgsConfig;
         overlays = [
         ];
-      };
-
-      darwinConfig = import ./hosts/darwin/configuration.nix {
-        inherit nixpkgs self user userConfig hostName;
       };
     in
     {
       darwinConfigurations.${user} = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit inputs self user userConfig hostName nixpkgsConfig systemStateVersion; };
         modules = [
-          darwinConfig
+          ./hosts/darwin/configuration.nix
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
@@ -102,14 +95,18 @@
       };
       nixosConfigurations.${user} = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs self user userConfig; };
+        specialArgs = { inherit inputs self user userConfig hostName nixpkgsConfig systemStateVersion; };
         modules = [
           ./hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${user} = import ./hosts/nixos/home.nix;
+            home-manager.users.${user} = {
+              imports = [
+                ./hosts/nixos/home.nix
+              ];
+            };
             home-manager.extraSpecialArgs = { inherit inputs self user userConfig; };
           }
         ];
@@ -117,14 +114,18 @@
 
       nixosConfigurations."${user}-aarch64" = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = { inherit inputs self user userConfig; };
+        specialArgs = { inherit inputs self user userConfig hostName nixpkgsConfig systemStateVersion; };
         modules = [
           ./hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${user} = import ./hosts/nixos/home.nix;
+            home-manager.users.${user} = {
+              imports = [
+                ./hosts/nixos/home.nix
+              ];
+            };
             home-manager.extraSpecialArgs = { inherit inputs self user userConfig; };
           }
         ];

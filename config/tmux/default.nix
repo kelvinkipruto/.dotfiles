@@ -16,6 +16,11 @@
     # Terminal settings
     terminal = "screen-256color";
 
+    plugins = with pkgs.tmuxPlugins; [
+      resurrect
+      continuum
+    ];
+
     extraConfig = ''
       # ===== TOKYO NIGHT THEME =====
       # Status bar colors
@@ -169,6 +174,10 @@
       
       # Aggressive resize
       setw -g aggressive-resize on
+
+      # ===== RESURRECT/CONTINUUM =====
+      set -g @resurrect-capture-pane-contents 'on'
+      set -g @continuum-restore 'on'
     '';
   };
 }

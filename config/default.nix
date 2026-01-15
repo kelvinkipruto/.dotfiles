@@ -2,7 +2,7 @@
   imports = [
     ./gh
     ./git
-    # ./gpg
+    ./gpg
     ./zsh
     ./alacritty
     ./kitty

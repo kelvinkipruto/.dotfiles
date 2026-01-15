@@ -1,35 +1,14 @@
-{ pkgs, lib, userConfig, ... }:
-let
-  shared = import ../../shared { inherit pkgs lib userConfig; system = pkgs.system; };
-in
+{ lib, pkgs, ... }:
 {
   imports = [
+    ../../shared/home-manager
     ../../config
   ];
 
-  home = {
-    username = shared.user.user.name;
-    homeDirectory = shared.user.getHomeDirectory pkgs.system;
-    stateVersion = shared.user.stateVersion;
+  home.packages = lib.mkAfter (with pkgs; [
+    # Darwin-specific packages go here.
+  ]);
 
-    packages = shared.packages.forDarwin ++ shared.fonts.packages ++ [
-      # Additional Darwin-specific packages not in shared
-      # Add any custom packages here
-    ];
-  };
-
-  programs = shared.programs // {
-    # Darwin-specific program overrides or additions
-    # Add any macOS-specific program configurations here
-  };
-
-  # Import shared environment variables
-  home.sessionVariables = shared.environment.sessionVariables;
-
-  # Import shared font configuration
-  fonts.fontconfig = shared.fonts.fontconfig;
-
-  # Link configuration files
   home.file = {
     ".p10k.zsh".source = ../../config/zsh/p10k.zsh;
   };

@@ -1,7 +1,8 @@
 { pkgs, lib, config, userConfig, ... }:
 let
   homeDir = config.home.homeDirectory;
-  shared = import ../../shared { inherit pkgs lib userConfig; system = pkgs.system; };
+  system = pkgs.stdenv.hostPlatform.system;
+  shared = import ../../shared { inherit pkgs lib userConfig system; };
 in
 {
   programs.zsh = {

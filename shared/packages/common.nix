@@ -30,6 +30,7 @@ in
   # pkgs.deno
   pkgs.dex2jar
   pkgs.ffmpeg
+  pkgs.neofetch
   # pkgs.fnm
   pkgs.frida-tools
   # pkgs.git # Managed via programs.git

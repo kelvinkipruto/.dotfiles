@@ -1,8 +1,12 @@
-{ pkgs, lib, userConfig, ... }: {
+{ pkgs, lib, userConfig, nixpkgsConfig, systemStateVersion, ... }: {
 
   imports = [
     ./hardware-configuration.nix
     ./wayland.nix
+    ../../shared/modules/nix.nix
+    ../../shared/modules/fonts.nix
+    ../../shared/modules/zsh.nix
+    ./overrides.nix
   ];
 
   documentation.nixos.enable = false;
@@ -10,14 +14,13 @@
   nix = {
     settings = {
       warn-dirty = false;
-      experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
   };
 
   nixpkgs = {
     config = {
-      allowUnfree = true;
+      inherit (nixpkgsConfig) allowUnfree allowBroken;
 
       permittedInsecurePackages = [
         "openssl-1.1.1w"
@@ -169,20 +172,6 @@
   #     dwm = prev.dwm.overrideAttrs (old: {src = /home/${user}/CTT-Nix/system/dwm-titus;}); #FIX ME: Update with path to your dwm folder
   #   })
   # ];
-  # programs.zsh.enable = true;
-  programs = {
-    zsh = {
-      enable = true;
-    };
-    # hyprland = {
-    #   enable = true;
-    #   xwayland = {
-    #     enable = true;
-    #   };
-    # };
-  };
-  users.defaultUserShell = pkgs.zsh;
-
   users.users.${userConfig.name} = {
     isNormalUser = true;
     description = userConfig.fullName;
@@ -209,27 +198,6 @@
   #   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
   #   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   # };
-
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      font-awesome
-      source-han-sans
-      source-han-sans-japanese
-      source-han-serif-japanese
-      # (nerdfonts.override { fonts = [ "Meslo" ]; })
-    ];
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        monospace = [ "Meslo LG M Regular Nerd Font Complete Mono" ];
-        serif = [ "Noto Serif" "Source Han Serif" ];
-        sansSerif = [ "Noto Sans" "Source Han Sans" ];
-      };
-    };
-  };
 
   environment = {
     systemPackages = with pkgs; [
@@ -259,23 +227,6 @@
       # (waybar.overrideAttrs (old: {
       #   mesonFlags = old.mesonFlags or [] ++ ["-Dexperimental=true"];
       # }))
-
-      # PHP with global debugging enabled
-      (php.buildEnv {
-        extensions = ({ enabled, all }: enabled ++ (with all; [
-          grpc
-          xdebug
-        ]));
-        extraConfig = ''
-          xdebug.mode = debug
-          xdebug.start_with_request = yes
-          xdebug.client_host = 127.0.0.1
-          xdebug.client_port = 9003
-          xdebug.remote_enable = true
-          xdebug.remote_host = 127.0.0.1
-          xdebug.remote_port = 9000
-        '';
-      })
     ];
     # sessionVariables = {
     #   NIXOS_OZONE_WL = "1";
@@ -329,7 +280,7 @@
   #   };
   # };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = systemStateVersion.nixos;
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;
 }

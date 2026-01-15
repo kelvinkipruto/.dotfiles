@@ -14,7 +14,9 @@
         enable = true;
         enableGitIntegration = true;
         options = {
-          features = "side-by-side";
+          features = "side-by-side line-numbers";
+          navigate = true;
+          syntax-theme = "TwoDark";
         };
       };
 

@@ -1,15 +1,18 @@
 # Nix Dotfiles
 
-A well-structured Nix configuration for both macOS (Darwin) and NixOS systems.
+Minimal Nix configuration for macOS (Darwin) and NixOS.
 
 ## Structure
 
 ```
 ├── config/                 # Shared application configurations
+├── docs/                   # Usage docs for configured tools
 ├── hosts/
 │   ├── darwin/            # macOS-specific configurations
 │   └── nixos/             # NixOS-specific configurations
 ├── shared/                # Shared packages and programs
+│   ├── home-manager/      # Shared Home Manager module
+│   ├── modules/           # Shared system modules
 │   ├── packages/
 │   │   ├── common.nix     # Packages shared between both systems
 │   │   ├── darwin.nix     # macOS-specific packages
@@ -22,15 +25,6 @@ A well-structured Nix configuration for both macOS (Darwin) and NixOS systems.
 │   └── default.nix        # Main shared exports
 └── flake.nix              # Main flake configuration
 ```
-
-## Features
-
-- **Shared Package Management**: Common packages are defined once and reused across systems
-- **OS-Specific Packages**: Platform-specific packages are organized separately
-- **Stable + Unstable**: Uses nixpkgs-unstable by default with stable packages available via `pkgs.stable.*`
-- **Modular Structure**: Easy to maintain and extend
-- **Program Configurations**: Shared program settings across both systems
-- **Single Source of Identity**: Username and email live in `flake.nix` and are reused everywhere
 
 ## Usage
 
@@ -70,38 +64,4 @@ nix build .#nixosConfigurations.kelvinkipruto-aarch64.config.system.build.toplev
 nix develop
 ```
 
-The dev shell provides `nixd` and `nixpkgs-fmt` to keep module work fast and consistent.
-
-## Package Management
-
-### Adding Packages
-
-- **Common packages** (both systems): Add to `shared/packages/common.nix`
-- **macOS-only packages**: Add to `shared/packages/darwin.nix`
-- **NixOS-only packages**: Add to `shared/packages/nixos.nix`
-
-### Using Stable Packages
-
-By default, packages come from nixpkgs-unstable. To use a stable version:
-
-```nix
-# In any package list
-pkgs.stable.packageName  # Uses stable version
-pkgs.packageName         # Uses unstable version (default)
-```
-
-## Program Configurations
-
-Shared program configurations are in `shared/programs/default.nix`. OS-specific overrides can be added in the respective `home.nix` files.
-
-## Identity and Aliases
-
-- Update username and email once in `flake.nix` under `userConfig`.
-- Shared shell aliases live in `shared/aliases.nix` and are pulled into the Zsh module.
-- Git identity is wired from `userConfig` via `config/git/default.nix`.
-
-## Customization
-
-1. **System-specific packages**: Add to the respective host's `home.nix` file
-2. **Program overrides**: Use the merge operator `//` in the programs section
-3. **New shared programs**: Add to `shared/programs/default.nix`
+For program usage docs, see `docs/README.md`.

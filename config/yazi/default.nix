@@ -105,6 +105,7 @@
         ];
 
         append_previewers = [
+          { mime = "text/*"; run = "bat"; }
           { name = "*.md"; run = "glow"; }
           { mime = "text/csv"; run = "miller"; }
           { mime = "application/json"; run = "jq"; }

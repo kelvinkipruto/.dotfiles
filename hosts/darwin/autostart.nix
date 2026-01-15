@@ -17,6 +17,9 @@
         };
         colima-restart = {
           command = "${pkgs.colima}/bin/colima restart";
+          serviceConfig = {
+            RunAtLoad = true;
+          };
         };
       };
     };

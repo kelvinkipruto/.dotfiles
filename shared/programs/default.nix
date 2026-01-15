@@ -70,6 +70,15 @@
     nix-direnv.enable = true;
   };
 
+  atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      auto_sync = false;
+      sync_address = "https://api.atuin.sh";
+    };
+  };
+
   ripgrep = {
     enable = true;
   };

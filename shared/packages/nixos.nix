@@ -4,12 +4,12 @@
   # Linux specific applications
   pkgs.chromium
   pkgs.discord
-  pkgs.floorp
+  pkgs.floorp-bin
   pkgs.vscode
 
   # Linux desktop environment tools
   pkgs.dunst
-  pkgs.rofi-wayland
+  pkgs.rofi
   pkgs.waybar
   pkgs.wofi
   pkgs.swww
@@ -63,7 +63,7 @@
   pkgs.nerd-fonts.terminess-ttf
   pkgs.tldr
   pkgs.wpsoffice
-  pkgs.xfce.thunar
+  pkgs.thunar
 
   # Gaming
   (pkgs.lutris.override {

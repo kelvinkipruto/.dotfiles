@@ -7,6 +7,8 @@ Minimal Nix configuration for macOS (Darwin) and NixOS.
 ```
 ├── config/                 # Shared application configurations
 ├── docs/                   # Usage docs for configured tools
+│   ├── tools/              # Tool usage guides
+│   └── workflows/          # Practical workflows
 ├── hosts/
 │   ├── darwin/            # macOS-specific configurations
 │   └── nixos/             # NixOS-specific configurations

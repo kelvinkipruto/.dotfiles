@@ -19,7 +19,7 @@ in
     grim
     slurp
     swww
-    rofi-wayland
+    rofi
     waybar
   ];
 

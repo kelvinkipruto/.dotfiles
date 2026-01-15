@@ -3,6 +3,7 @@ Dotfiles Docs
 This folder contains usage guides for the productivity tools configured in this repo.
 
 Index
+- Workflows: docs/workflows/README.md
 - Terminal multiplexing: docs/tools/tmux.md
 - File manager: docs/tools/yazi.md
 - Terminals: docs/tools/kitty.md, docs/tools/alacritty.md
@@ -15,3 +16,4 @@ Index
 - Git UI: docs/tools/lazygit.md
 - Editor: docs/tools/neovim.md
 - Environment: docs/tools/direnv.md
+- Git hooks: docs/workflows/git-hooks.md

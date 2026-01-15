@@ -11,5 +11,6 @@ Input and selection
 
 Notes
 - Font: MesloLGS NF at size 13.
+- Theme values are centralized in `shared/themes/terminal.nix`.
 
 Full docs: docs/tools/alacritty.md

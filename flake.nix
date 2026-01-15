@@ -138,6 +138,8 @@
             buildInputs = with pkgs; [
               nixd
               nixpkgs-fmt
+              deadnix
+              statix
             ];
           };
         }

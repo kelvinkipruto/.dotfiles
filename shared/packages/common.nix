@@ -49,6 +49,8 @@ in
   pkgs.ngrok
   pkgs.nixd
   pkgs.nixpkgs-fmt
+  pkgs.statix
+  pkgs.deadnix
   pkgs.nmap
   # pkgs.obsidian
   pkgs.ocaml

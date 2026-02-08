@@ -70,8 +70,8 @@ in
 
   # Browsers
   pkgs.brave
-  pkgs.firefox
-  pkgs.firefox-devedition
+  pkgs.firefox-bin
+  # pkgs.firefox-devedition
 
   # Applications
   # pkgs.alacritty # Managed via programs.alacritty
@@ -115,7 +115,8 @@ in
   pkgs.resvg
 
   # dotnet
-  pkgs.dotnet-sdk_9
+  # pkgs.dotnet-sdk_9 # Causes massive build from source (Swift, etc.)
+  # pkgs.dotnet-sdk_8
 
   # pdf
   pkgs.qpdf

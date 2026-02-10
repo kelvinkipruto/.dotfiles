@@ -143,4 +143,5 @@ in
 
   #Android
   pkgs.scrcpy
+  pkgs.flutter
 ]

@@ -30,7 +30,7 @@ in
   # pkgs.deno
   pkgs.dex2jar
   pkgs.ffmpeg
-  pkgs.neofetch
+  pkgs.fastfetch
   # pkgs.fnm
   pkgs.frida-tools
   # pkgs.git # Managed via programs.git
@@ -130,8 +130,8 @@ in
   pkgs.raylib
 
   #c++
-  pkgs.vcpkg
-  pkgs.ninja
+  # pkgs.vcpkg
+  # pkgs.ninja
 
   #db
   pkgs.redis

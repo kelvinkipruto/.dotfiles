@@ -75,6 +75,20 @@ in
       # export PATH=$PATH:$ANDROID_HOME/emulator
       # export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+      # Kill process by port
+      killport() {
+        if [ -z "$1" ]; then
+          echo "Usage: killport <port>"; return 1;
+        fi
+        local pids
+        pids=$(lsof -tiTCP:$1 -sTCP:LISTEN 2>/dev/null)
+        if [ -z "$pids" ]; then
+          echo "No process listening on port $1"; return 0;
+        fi
+        echo "$pids" | xargs kill -9
+        echo "Killed $pids on port $1"
+      }
+
       # Cargo
       # export PATH="$HOME/.cargo/bin:$PATH"
       # Mise

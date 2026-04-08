@@ -56,7 +56,7 @@
   pkgs.gnugrep
   pkgs.gnumake
   pkgs.mangohud
-  pkgs.neofetch
+  pkgs.fastfetch
   pkgs.nil
   pkgs.starship
   pkgs.nerd-fonts.terminess-ttf

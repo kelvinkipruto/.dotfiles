@@ -18,10 +18,18 @@
     cls = "clear";
 
     # Docker shortcuts
-    dc = "docker-compose";
-    dcu = "docker-compose up";
-    dcd = "docker-compose down";
-    dcb = "docker-compose build";
+    dc = "docker compose";
+    dcu = "docker compose up";
+    dcd = "docker compose down";
+    dcb = "docker compose build";
+    dcub = "docker compose up --build";
+    dcr = "docker compose run";
+    dcl = "docker compose logs";
+    dcp = "docker compose ps";
+    dce = "docker compose exec";
+    dct = "docker compose top";
+    dcs = "docker compose stop";
+    dcrun = "docker compose run --rm";
 
     # Nix shortcuts
     nix-search = "nix search nixpkgs";
@@ -33,6 +41,7 @@
 
     # Tool shortcuts
     lg = "lazygit";
+    kp = "killport";
 
     # Zoxide shortcuts
     zi = "z -i"; # Interactive selection

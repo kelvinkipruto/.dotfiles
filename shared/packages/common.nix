@@ -123,7 +123,7 @@ in
   # pkgs.wkhtmltopdf
 
   #other
-  pkgs.qbittorrent
+  # pkgs.qbittorrent
   pkgs.mkcert
 
   #raylib

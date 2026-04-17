@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 # Shared environment configurations for both Darwin and NixOS
 {
   # Environment variables

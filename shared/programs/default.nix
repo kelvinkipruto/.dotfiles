@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 # Shared program configurations for both Darwin and NixOS
 {
   home-manager = {

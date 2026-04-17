@@ -2,8 +2,8 @@
 {
   # Host-specific overrides go here.
   nixpkgs.overlays = [
-    (final: prev: {
-      nushell = prev.nushell.overrideAttrs (old: {
+    (_final: prev: {
+      nushell = prev.nushell.overrideAttrs (_old: {
         doCheck = false;
         checkPhase = "";
       });

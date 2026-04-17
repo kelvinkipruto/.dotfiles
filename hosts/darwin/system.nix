@@ -48,7 +48,6 @@
   };
   security = {
     pam = {
-      # enableSudoTouchIdAuth = true;
       services.sudo_local.touchIdAuth = true;
     };
   };

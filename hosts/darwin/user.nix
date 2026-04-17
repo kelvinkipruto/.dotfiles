@@ -1,4 +1,4 @@
-{ self, pkgs, userConfig, ... }:
+{ pkgs, userConfig, ... }:
 {
   users.users.${userConfig.name} = {
     name = userConfig.name;

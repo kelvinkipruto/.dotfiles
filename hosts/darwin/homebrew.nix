@@ -1,4 +1,4 @@
-{ self, pkgs, ... }:
+{ ... }:
 {
   homebrew = {
     enable = true;

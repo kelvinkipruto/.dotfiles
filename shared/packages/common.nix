@@ -117,6 +117,7 @@ in
   # dotnet
   # pkgs.dotnet-sdk_9 # Causes massive build from source (Swift, etc.)
   # pkgs.dotnet-sdk_8
+  pkgs.dotnet-sdk_10
 
   # pdf
   pkgs.qpdf

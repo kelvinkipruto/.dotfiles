@@ -52,6 +52,10 @@ in
     ];
 
     initContent = ''
+      # Mise shims keep backend-managed CLIs, including npm tools, from being
+      # shadowed by stale npm globals inside the active Node install.
+      eval "$(mise activate zsh --shims)"
+
       # Source p10k configuration from dotfiles
       if [ -f "${homeDir}/.dotfiles/config/zsh/p10k.zsh" ]; then
         source "${homeDir}/.dotfiles/config/zsh/p10k.zsh"
@@ -91,8 +95,6 @@ in
 
       # Cargo
       # export PATH="$HOME/.cargo/bin:$PATH"
-      # Mise
-      eval "$(mise activate zsh)"
       eval "$(devbox global shellenv)"
     '';
   };

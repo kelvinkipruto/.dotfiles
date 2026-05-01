@@ -3,6 +3,7 @@
     ./gh
     ./git
     ./gpg
+    ./mise
     ./zsh
     ./alacritty
     ./kitty

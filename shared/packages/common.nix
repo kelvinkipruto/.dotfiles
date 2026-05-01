@@ -25,7 +25,7 @@ in
   pkgs.cmake
   # pkgs.bat # Managed via programs.bat
   # pkgs.bun
-  # pkgs.cargo # Provided by rustup
+  # pkgs.cargo # Managed via mise/rust
   pkgs.cloudflared
   # pkgs.deno
   pkgs.dex2jar
@@ -36,11 +36,11 @@ in
   # pkgs.git # Managed via programs.git
   # pkgs.gh # Managed via programs.gh
   pkgs.git-lfs
-  pkgs.gleam
+  # pkgs.gleam # Managed via mise
   # pkgs.go
   pkgs.httrack
   pkgs.jadx
-  pkgs.kotlin
+  # pkgs.kotlin # Managed via mise
   pkgs.lazydocker
   pkgs.lua
   pkgs.luarocks
@@ -53,19 +53,19 @@ in
   pkgs.deadnix
   pkgs.nmap
   # pkgs.obsidian
-  pkgs.ocaml
+  # pkgs.ocaml # Managed via mise/opam
   pkgs.ollama # Using stable version
   phpWithXdebug
   pkgs.pipx
   # pkgs.python3Full
   # pkgs.ripgrep # Managed via programs.ripgrep
-  # pkgs.rustup
+  # pkgs.rustup # Managed via mise/rust
   pkgs.slack-cli
   pkgs.stockfish
   # pkgs.telegram-desktop
   pkgs.turso-cli
   pkgs.unzip
-  pkgs.uv
+  # pkgs.uv # Managed via mise
   # pkgs.zoxide # Managed via programs.zoxide
 
   # Browsers
@@ -139,5 +139,5 @@ in
 
   #Android
   pkgs.scrcpy
-  pkgs.flutter
+  # pkgs.flutter # Managed via mise
 ]

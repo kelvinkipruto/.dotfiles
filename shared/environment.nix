@@ -20,6 +20,6 @@
     XDEBUG_CLIENT_HOST = "127.0.0.1";
 
     # Path additions
-    PATH = "$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH";
+    PATH = "$HOME/.local/bin:$HOME/go/bin:$PATH";
   };
 }

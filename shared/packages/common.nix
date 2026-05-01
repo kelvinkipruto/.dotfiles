@@ -36,14 +36,11 @@ in
   # pkgs.git # Managed via programs.git
   # pkgs.gh # Managed via programs.gh
   pkgs.git-lfs
-  # pkgs.gleam # Managed via mise
   # pkgs.go
   pkgs.httrack
   pkgs.jadx
   # pkgs.kotlin # Managed via mise
   pkgs.lazydocker
-  pkgs.lua
-  pkgs.luarocks
   pkgs.mise
   # pkgs.neovim # Managed via programs.neovim
   pkgs.ngrok
@@ -53,7 +50,6 @@ in
   pkgs.deadnix
   pkgs.nmap
   # pkgs.obsidian
-  # pkgs.ocaml # Managed via mise/opam
   pkgs.ollama # Using stable version
   phpWithXdebug
   pkgs.pipx

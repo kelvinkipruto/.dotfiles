@@ -32,7 +32,6 @@ in
     deno = "latest"
     go = "latest"
     python = "latest"
-    ruby = "latest"
     java = "latest"
     dotnet = "latest"
     rust = "latest"
@@ -40,8 +39,6 @@ in
     "vfox:mise-plugins/vfox-kotlin" = "latest"
     # vfox-dart currently errors on macOS arm64 with mise 2026.4.6.
     "asdf:mise-plugins/mise-dart" = "latest"
-    "github:ocaml/opam" = "latest"
-    "aqua:gleam-lang/gleam" = "latest"
     "aqua:astral-sh/uv" = "latest"
 
     "npm:@openai/codex" = "latest"

@@ -38,7 +38,7 @@
 
   # Development tools
   pkgs.dbeaver-bin
-  pkgs.flutter
+  # pkgs.flutter # Managed via mise
   pkgs.gcc
   pkgs.github-desktop
   pkgs.gparted

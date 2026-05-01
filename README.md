@@ -34,10 +34,10 @@ Minimal Nix configuration for macOS (Darwin) and NixOS.
 
 ```bash
 # Build and switch
-nix run nix-darwin -- switch --flake .#kelvinkipruto
+just switch-darwin
 
 # Build only
-nix build .#darwinConfigurations.kelvinkipruto.system
+just build-darwin
 ```
 
 ### NixOS

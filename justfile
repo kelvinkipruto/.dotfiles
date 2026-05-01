@@ -90,6 +90,12 @@ optimise-nix:
 # Run full Nix maintenance: GC, store optimisation, and a final audit
 maintain-nix: clean-nix optimise-nix audit-nix
 
+# Update Homebrew outside nix-darwin activation
+maintain-brew:
+  brew update
+  brew upgrade --greedy
+  brew cleanup --prune=all
+
 # Show declared and locally installed toolchains
 audit-tools:
   #!/usr/bin/env zsh

@@ -2,11 +2,10 @@
 {
   homebrew = {
     enable = true;
-    caskArgs.no_quarantine = true;
     onActivation = {
-      autoUpdate = true;
+      autoUpdate = false;
       cleanup = "zap";
-      upgrade = true;
+      upgrade = false;
       extraFlags = [ "--verbose" ];
     };
     taps = [
@@ -18,7 +17,19 @@
       "media-control"
     ];
     casks = [
+      "alacritty"
+      "alt-tab"
+      "brave-browser"
       "chatgpt"
+      "flameshot"
+      "imhex"
+      "kitty"
+      "localsend"
+      "raycast"
+      "rectangle"
+      "shottr"
+      "slack"
+      "spotify"
     ];
   };
 }

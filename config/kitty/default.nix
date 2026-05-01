@@ -1,9 +1,14 @@
+{ pkgs, ... }:
 let
   theme = import ../../shared/themes/terminal.nix;
 in
 {
   programs.kitty = {
     enable = true;
+    package =
+      if pkgs.stdenv.hostPlatform.isDarwin
+      then null
+      else pkgs.kitty;
     font = {
       name = theme.font.family;
       size = theme.font.size;

@@ -1,9 +1,14 @@
+{ pkgs, ... }:
 let
   theme = import ../../shared/themes/terminal.nix;
 in
 {
   programs.alacritty = {
     enable = true;
+    package =
+      if pkgs.stdenv.hostPlatform.isDarwin
+      then null
+      else pkgs.alacritty;
     settings = {
       # Window configuration
       window = {

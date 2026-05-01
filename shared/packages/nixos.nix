@@ -3,8 +3,15 @@
 [
   # Linux specific applications
   pkgs.chromium
+  pkgs.brave
   pkgs.discord
+  pkgs.firefox-devedition
+  pkgs.flameshot
   pkgs.floorp-bin
+  pkgs.imhex
+  pkgs.localsend
+  pkgs.slack
+  pkgs.spotify
   pkgs.vscode
 
   # Linux desktop environment tools

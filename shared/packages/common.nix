@@ -65,27 +65,28 @@ in
   # pkgs.zoxide # Managed via programs.zoxide
 
   # Browsers
-  pkgs.brave
-  pkgs.firefox-bin
+  # GUI browsers are installed via Homebrew casks on Darwin and NixOS-specific packages on Linux.
+  # pkgs.brave
+  # pkgs.firefox-bin
   # pkgs.firefox-devedition
 
   # Applications
   # pkgs.alacritty # Managed via programs.alacritty
   pkgs.colima
   pkgs.docker
-  pkgs.kitty
+  # pkgs.kitty # Managed via programs.kitty on Linux and Homebrew cask on Darwin
   pkgs.duckdb
 
   # Media and utilities
-  pkgs.flameshot
-  pkgs.spotify
+  # pkgs.flameshot # Managed via Homebrew cask on Darwin and NixOS-specific packages on Linux
+  # pkgs.spotify # Managed via Homebrew cask on Darwin and NixOS-specific packages on Linux
   pkgs.yt-dlp
   pkgs.zip
   pkgs.unrar
   pkgs.croc
 
   pkgs.wget
-  pkgs.imhex
+  # pkgs.imhex # Managed via Homebrew cask on Darwin and NixOS-specific packages on Linux
 
   # Terminal and shell tools
   pkgs.zsh

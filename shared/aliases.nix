@@ -34,6 +34,7 @@
     # Nix shortcuts
     nix-search = "nix search nixpkgs";
     nix-shell = "nix-shell --run zsh";
+    brew-maintain = "just --justfile ~/.dotfiles/justfile maintain-brew";
     nix-audit = "just --justfile ~/.dotfiles/justfile audit-nix";
     nix-maintain = "just --justfile ~/.dotfiles/justfile maintain-nix";
     nix-optimise = "just --justfile ~/.dotfiles/justfile optimise-nix";

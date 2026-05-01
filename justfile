@@ -36,10 +36,16 @@ audit-tools:
   sed -n '1,120p' "$HOME/.config/mise/config.toml" 2>/dev/null || true
 
   print "\n== active language commands =="
-  type -a node npm bun deno go python python3 uv uvx rustc cargo rustup java javac kotlin kotlinc dotnet dart flutter php lua elixir 2>/dev/null || true
+  type -a mise node npm bun deno go python python3 uv uvx rustc cargo rustup java javac kotlin kotlinc dotnet dart flutter php lua elixir 2>/dev/null || true
 
   print "\n== mise installs by size =="
   du -sh "$HOME"/.local/share/mise/installs/* 2>/dev/null | sort -h || true
+
+  print "\n== mise sidecar data by size =="
+  du -sh "$HOME"/.local/share/mise/dotnet-root "$HOME"/.local/share/mise/rustup "$HOME"/.local/share/mise/cargo 2>/dev/null | sort -h || true
+
+  print "\n== mise prunable candidates =="
+  mise ls --prunable 2>/dev/null || true
 
   print "\n== manual rustup/cargo =="
   du -sh "$HOME"/.rustup "$HOME"/.cargo 2>/dev/null || true

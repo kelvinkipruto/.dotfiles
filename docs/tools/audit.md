@@ -20,6 +20,8 @@ Keep globally:
 - Sometimes-used app runtimes: dotnet
 - AI and mobile CLIs: Codex, OpenCode, Qwen, Gemini, EAS
 
+Dotnet is pinned to the explicit `core:dotnet` backend so an old user plugin cannot override mise's core backend.
+
 Avoid globally unless a current project needs them:
 
 - Ruby
@@ -32,15 +34,24 @@ Prefer project-local `.mise.toml` files for rare toolchains. That keeps login sh
 
 ## Current Cleanup Notes
 
-Rust was previously installed manually through rustup:
+Old installs pruned on 2026-05-01:
 
-- `~/.rustup`
-- `~/.cargo`
+- older Node versions: `22.21.1`, `22.22.2`, `24.5.0`
+- older Bun versions: `1.2.20`, `1.2.21`
+- unused runtimes: Ruby, Gleam, OCaml/opam
+- old shorthand Kotlin install; Kotlin is now managed through `vfox:mise-plugins/vfox-kotlin`
+- obsolete `npm:codex`; Codex is now managed as `npm:@openai/codex`
+- manual Rust state in `~/.rustup` and `~/.cargo`
+- stale manual `~/.local/bin/mise`; mise is now managed through Nix/Home Manager
 
-The repo now removes `~/.cargo/bin` from the managed `PATH` and configures mise Rust state under:
+Rust is now installed through mise under:
 
 - `~/.local/share/mise/rustup`
 - `~/.local/share/mise/cargo`
+
+Core dotnet stores the SDK under `~/.local/share/mise/dotnet-root`; `~/.local/share/mise/installs/dotnet` is mostly symlink metadata.
+
+`UV_PYTHON` points at `~/.local/share/mise/installs/python/latest/bin/python` so uv uses the mise-managed Python interpreter without relying on a mise template that can break non-install commands.
 
 After a successful switch, verify:
 
@@ -51,7 +62,14 @@ rustc --version
 cargo --version
 ```
 
-If they resolve through mise and Rust works, the old manual install can be archived or deleted.
+They should resolve through mise shims or the mise-managed cargo path. If a stale shell still has `RUSTUP_HOME`, `CARGO_HOME`, or `RUSTUP_TOOLCHAIN` pointing at the old locations, open a fresh shell after `just switch-darwin`.
+
+Do not run blanket `mise prune` without inspecting it first. Backend-prefixed tools can appear twice in `mise list`, and `mise ls --prunable` may report active backend install directories such as the vfox/asdf Dart, Flutter, or Kotlin installs. Prefer explicit cleanup:
+
+```sh
+mise ls --prunable
+mise uninstall node@22.21.1
+```
 
 ## Audit Commands
 

@@ -3,6 +3,7 @@ let
   homeDirectory = config.home.homeDirectory;
   rustupHome = "${homeDirectory}/.local/share/mise/rustup";
   cargoHome = "${homeDirectory}/.local/share/mise/cargo";
+  pythonHome = "${homeDirectory}/.local/share/mise/installs/python/latest";
   tomlFormat = pkgs.formats.toml { };
   miseConfig = {
     # Backend preference: core shorthands, then vfox, then binary backends. Use asdf only as a fallback.
@@ -13,7 +14,7 @@ let
       go = "latest";
       python = "latest";
       java = "latest";
-      dotnet = "latest";
+      "core:dotnet" = "latest";
       rust = "latest";
       "vfox:mise-plugins/vfox-flutter" = "latest";
       "vfox:mise-plugins/vfox-kotlin" = "latest";
@@ -31,10 +32,7 @@ let
     env = {
       MISE_RUSTUP_HOME = rustupHome;
       MISE_CARGO_HOME = cargoHome;
-      UV_PYTHON = {
-        value = "{{ tools.python.path }}";
-        tools = true;
-      };
+      UV_PYTHON = "${pythonHome}/bin/python";
     };
 
     settings = {
@@ -65,6 +63,13 @@ in
     "${homeDirectory}/.local/share/mise/shims"
   ];
 
+  home.sessionVariables = {
+    MISE_RUSTUP_HOME = rustupHome;
+    MISE_CARGO_HOME = cargoHome;
+    RUSTUP_HOME = rustupHome;
+    CARGO_HOME = cargoHome;
+  };
+
   home.file.".config/mise/config.toml".source =
     tomlFormat.generate "mise-config.toml" miseConfig;
 
@@ -78,6 +83,8 @@ in
       MISE_RUBY_COMPILE=false \
       MISE_RUSTUP_HOME=${lib.escapeShellArg rustupHome} \
       MISE_CARGO_HOME=${lib.escapeShellArg cargoHome} \
+      RUSTUP_HOME=${lib.escapeShellArg rustupHome} \
+      CARGO_HOME=${lib.escapeShellArg cargoHome} \
       ${pkgs.mise}/bin/mise install --yes
     run ${pkgs.coreutils}/bin/env \
       HOME=${lib.escapeShellArg homeDirectory} \
@@ -85,6 +92,8 @@ in
       MISE_YES=1 \
       MISE_RUSTUP_HOME=${lib.escapeShellArg rustupHome} \
       MISE_CARGO_HOME=${lib.escapeShellArg cargoHome} \
+      RUSTUP_HOME=${lib.escapeShellArg rustupHome} \
+      CARGO_HOME=${lib.escapeShellArg cargoHome} \
       ${pkgs.mise}/bin/mise reshim
   '';
 }

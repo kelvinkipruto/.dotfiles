@@ -83,6 +83,31 @@ clean-nix:
   nix store gc --dry-run || true
   print "\nRun 'just audit-nix' if disk usage still looks high."
 
+# Clean Homebrew downloads and old versions when Homebrew is available
+clean-brew:
+  #!/usr/bin/env zsh
+  set -euo pipefail
+
+  if command -v brew >/dev/null 2>&1; then
+    brew cleanup --prune=all
+  else
+    print "Homebrew not found; skipping."
+  fi
+
+# Prune mise-managed tool versions no longer referenced by tracked configs
+clean-mise:
+  #!/usr/bin/env zsh
+  set -euo pipefail
+
+  if command -v mise >/dev/null 2>&1; then
+    mise prune --yes
+  else
+    print "mise not found; skipping."
+  fi
+
+# Clean safe package-manager leftovers across configured systems
+clean: clean-nix clean-mise clean-brew
+
 # Deduplicate identical files in the Nix store
 optimise-nix:
   nix store optimise
@@ -90,11 +115,34 @@ optimise-nix:
 # Run full Nix maintenance: GC, store optimisation, and a final audit
 maintain-nix: clean-nix optimise-nix audit-nix
 
+# Install, reshim, and prune mise-managed tools
+maintain-mise:
+  #!/usr/bin/env zsh
+  set -euo pipefail
+
+  if command -v mise >/dev/null 2>&1; then
+    mise install --yes
+    mise reshim
+    mise prune --yes
+  else
+    print "mise not found; skipping."
+  fi
+
 # Update Homebrew outside nix-darwin activation
 maintain-brew:
-  brew update
-  brew upgrade --greedy
-  brew cleanup --prune=all
+  #!/usr/bin/env zsh
+  set -euo pipefail
+
+  if command -v brew >/dev/null 2>&1; then
+    brew update
+    brew upgrade --greedy
+    brew cleanup --prune=all
+  else
+    print "Homebrew not found; skipping."
+  fi
+
+# Run broad package-manager maintenance across configured systems
+maintain: maintain-nix maintain-mise maintain-brew
 
 # Show declared and locally installed toolchains
 audit-tools:

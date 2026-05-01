@@ -8,7 +8,8 @@
     lt = "eza --tree";
 
     # System maintenance
-    clean = "just --justfile ~/.dotfiles/justfile clean-nix";
+    clean = "just --justfile ~/.dotfiles/justfile clean";
+    maintain = "just --justfile ~/.dotfiles/justfile maintain";
 
     # Common shortcuts
     grep = "rg";

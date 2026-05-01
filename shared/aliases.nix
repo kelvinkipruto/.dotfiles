@@ -8,7 +8,7 @@
     lt = "eza --tree";
 
     # System maintenance
-    clean = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
+    clean = "just --justfile ~/.dotfiles/justfile clean-nix";
 
     # Common shortcuts
     grep = "rg";
@@ -34,6 +34,9 @@
     # Nix shortcuts
     nix-search = "nix search nixpkgs";
     nix-shell = "nix-shell --run zsh";
+    nix-audit = "just --justfile ~/.dotfiles/justfile audit-nix";
+    nix-maintain = "just --justfile ~/.dotfiles/justfile maintain-nix";
+    nix-optimise = "just --justfile ~/.dotfiles/justfile optimise-nix";
 
     # Development
     serve = "python3 -m http.server";

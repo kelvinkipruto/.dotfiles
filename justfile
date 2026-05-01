@@ -27,6 +27,69 @@ switch-darwin:
 build-nixos:
   nix build .#nixosConfigurations.{{nixos_host}}.config.system.build.toplevel
 
+# Show Nix disk usage, roots, and scratch directories that GC will not remove
+audit-nix:
+  #!/usr/bin/env zsh
+  set -euo pipefail
+  setopt null_glob
+
+  print "== nix volume =="
+  df -h /nix 2>/dev/null || true
+
+  print "\n== nix sizes =="
+  du -sh /nix /nix/store /nix/var/nix /nix/var/nix/builds 2>/dev/null || true
+
+  print "\n== gc dry run =="
+  nix store gc --dry-run || true
+
+  print "\n== important roots =="
+  roots=(
+    /nix/var/nix/profiles/system
+    /nix/var/nix/profiles/default
+    "$HOME/.dotfiles/result"
+    "$HOME/.local/state/home-manager/gcroots/current-home"
+    "$HOME/.local/state/nix/profiles/home-manager"
+    "$HOME/.local/state/nix/profiles"/home-manager-*-link
+    "$HOME/.local/share/devbox/global/default/.devbox/nix/profile/default"
+  )
+  for root in $roots; do
+    [[ -e "$root" || -L "$root" ]] || continue
+    print "\n$root"
+    readlink "$root" 2>/dev/null || true
+    nix path-info -Sh "$root" 2>/dev/null || true
+  done
+
+  print "\n== build scratch =="
+  builds=(/nix/var/nix/builds/*)
+  if (( ${#builds} )); then
+    du -sh $builds 2>/dev/null | sort -h || true
+  else
+    print "none"
+  fi
+
+  print "\n== gc roots =="
+  root_count=$(nix-store --gc --print-roots 2>/dev/null | wc -l | tr -d ' ')
+  print "$root_count roots known to Nix; important persistent roots are listed above."
+
+# Run normal Nix garbage collection and show whether anything remains collectible
+clean-nix:
+  #!/usr/bin/env zsh
+  set -euo pipefail
+
+  nix-collect-garbage -d
+  sudo nix-collect-garbage -d
+
+  print "\n== remaining garbage =="
+  nix store gc --dry-run || true
+  print "\nRun 'just audit-nix' if disk usage still looks high."
+
+# Deduplicate identical files in the Nix store
+optimise-nix:
+  nix store optimise
+
+# Run full Nix maintenance: GC, store optimisation, and a final audit
+maintain-nix: clean-nix optimise-nix audit-nix
+
 # Show declared and locally installed toolchains
 audit-tools:
   #!/usr/bin/env zsh

@@ -10,6 +10,8 @@
     # System maintenance
     clean = "just --justfile ~/.dotfiles/justfile clean";
     maintain = "just --justfile ~/.dotfiles/justfile maintain";
+    sys-build = "just --justfile ~/.dotfiles/justfile build";
+    sys-switch = "just --justfile ~/.dotfiles/justfile switch";
 
     # Common shortcuts
     grep = "rg";

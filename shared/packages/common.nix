@@ -17,28 +17,23 @@ let
   };
 in
 # Common packages shared between Darwin and NixOS
-  # Note: ollama uses stable version for better reliability
 [
   # Development tools
   pkgs.android-tools
-  pkgs.apktool
   pkgs.cmake
   # pkgs.bat # Managed via programs.bat
   # pkgs.bun
   # pkgs.cargo # Managed via mise/rust
   pkgs.cloudflared
   # pkgs.deno
-  pkgs.dex2jar
   pkgs.ffmpeg
   pkgs.fastfetch
   # pkgs.fnm
-  pkgs.frida-tools
   # pkgs.git # Managed via programs.git
   # pkgs.gh # Managed via programs.gh
   pkgs.git-lfs
   # pkgs.go
   pkgs.httrack
-  pkgs.jadx
   # pkgs.kotlin # Managed via mise
   pkgs.lazydocker
   pkgs.mise
@@ -50,7 +45,6 @@ in
   pkgs.deadnix
   pkgs.nmap
   # pkgs.obsidian
-  pkgs.ollama # Using stable version
   phpWithXdebug
   pkgs.pipx
   # pkgs.python3Full

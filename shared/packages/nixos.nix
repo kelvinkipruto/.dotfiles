@@ -35,13 +35,13 @@
   # pkgs.xwayland
 
   # X11 libraries
-  pkgs.xorg.libX11
-  pkgs.xorg.libX11.dev
-  pkgs.xorg.libxcb
-  pkgs.xorg.libXft
-  pkgs.xorg.libXinerama
-  pkgs.xorg.xinit
-  pkgs.xorg.xinput
+  pkgs.libx11
+  pkgs.libx11.dev
+  pkgs.libxcb
+  pkgs.libxft
+  pkgs.libxinerama
+  pkgs.xinit
+  pkgs.xinput
 
   # Development tools
   pkgs.dbeaver-bin
@@ -74,7 +74,7 @@
   # Gaming
   (pkgs.lutris.override {
     extraPkgs = pkgs: [
-      pkgs.wineWowPackages.stable
+      pkgs.wineWow64Packages.stable
       pkgs.winetricks
     ];
   })

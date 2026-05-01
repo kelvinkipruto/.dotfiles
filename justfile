@@ -11,6 +11,39 @@ default:
 fmt:
   nixpkgs-fmt $(find . -name '*.nix' -not -path './.git/*')
 
+# Update flake inputs only
+update:
+  nix flake update
+
+# Update flake inputs and build the current OS system
+update-check:
+  nix flake update
+  just build
+
+# Update flake inputs, build, then switch the current OS system
+update-switch:
+  nix flake update
+  just build
+  just switch
+
+# Build the current OS system without switching
+build:
+  #!/usr/bin/env zsh
+  set -euo pipefail
+
+  case "$(uname -s)" in
+    Darwin)
+      nix build .#darwinConfigurations.{{darwin_host}}.system
+      ;;
+    Linux)
+      nix build .#nixosConfigurations.{{nixos_host}}.config.system.build.toplevel
+      ;;
+    *)
+      print "Unsupported OS: $(uname -s)" >&2
+      exit 1
+      ;;
+  esac
+
 # Build the macOS system without switching
 build-darwin:
   nix build .#darwinConfigurations.{{darwin_host}}.system
@@ -23,9 +56,31 @@ check-darwin:
 switch-darwin:
   sudo darwin-rebuild switch --flake .#{{darwin_host}}
 
+# Apply the current OS system config
+switch:
+  #!/usr/bin/env zsh
+  set -euo pipefail
+
+  case "$(uname -s)" in
+    Darwin)
+      sudo darwin-rebuild switch --flake .#{{darwin_host}}
+      ;;
+    Linux)
+      sudo nixos-rebuild switch --flake .#{{nixos_host}}
+      ;;
+    *)
+      print "Unsupported OS: $(uname -s)" >&2
+      exit 1
+      ;;
+  esac
+
 # Build the NixOS system without switching
 build-nixos:
   nix build .#nixosConfigurations.{{nixos_host}}.config.system.build.toplevel
+
+# Apply the NixOS system config
+switch-nixos:
+  sudo nixos-rebuild switch --flake .#{{nixos_host}}
 
 # Show Nix disk usage, roots, and scratch directories that GC will not remove
 audit-nix:
@@ -70,6 +125,64 @@ audit-nix:
   print "\n== gc roots =="
   root_count=$(nix-store --gc --print-roots 2>/dev/null | wc -l | tr -d ' ')
   print "$root_count roots known to Nix; important persistent roots are listed above."
+
+# Show the largest paths in the current system closure
+audit-closure:
+  #!/usr/bin/env zsh
+  set -euo pipefail
+
+  case "$(uname -s)" in
+    Darwin)
+      root=/nix/var/nix/profiles/system
+      ;;
+    Linux)
+      root=/run/current-system
+      ;;
+    *)
+      print "Unsupported OS: $(uname -s)" >&2
+      exit 1
+      ;;
+  esac
+
+  print "== closure total =="
+  nix path-info -Sh "$root"
+
+  print "\n== largest individual store paths =="
+  nix path-info -rs "$root" \
+    | sort -nk2 \
+    | tail -40 \
+    | awk '
+      function human(bytes, units, i) {
+        split("B KiB MiB GiB TiB", units)
+        i = 1
+        while (bytes >= 1024 && i < 5) {
+          bytes = bytes / 1024
+          i++
+        }
+        return sprintf("%.1f %s", bytes, units[i])
+      }
+      { printf "%10s %s\n", human($2), $1 }
+    '
+
+# Explain why the current system closure depends on a package or store path
+why-depends target:
+  #!/usr/bin/env zsh
+  set -euo pipefail
+
+  case "$(uname -s)" in
+    Darwin)
+      root=/nix/var/nix/profiles/system
+      ;;
+    Linux)
+      root=/run/current-system
+      ;;
+    *)
+      print "Unsupported OS: $(uname -s)" >&2
+      exit 1
+      ;;
+  esac
+
+  nix why-depends "$root" "{{target}}"
 
 # Run normal Nix garbage collection and show whether anything remains collectible
 clean-nix:

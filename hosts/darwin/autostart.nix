@@ -1,9 +1,12 @@
-{ lib, pkgs, packageProfiles ? { ai = true; }, ... }:
+{ lib, pkgs, packageProfiles ? { ai = true; services = { colima = true; ollama = true; }; }, ... }:
+let
+  services = packageProfiles.services or { };
+in
 {
   launchd = {
     user = {
       agents =
-        lib.optionalAttrs (packageProfiles.ai or true)
+        lib.optionalAttrs ((packageProfiles.ai or false) && (services.ollama or false))
           {
             ollama-serve = {
               command = "${pkgs.ollama}/bin/ollama serve";
@@ -18,7 +21,7 @@
               };
             };
           }
-        // {
+        // lib.optionalAttrs (services.colima or false) {
           colima-restart = {
             command = "${pkgs.colima}/bin/colima restart";
             serviceConfig = {

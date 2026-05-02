@@ -44,13 +44,10 @@
   pkgs.xinput
 
   # Development tools
-  pkgs.dbeaver-bin
   # pkgs.flutter # Managed via mise
   pkgs.gcc
-  pkgs.github-desktop
   pkgs.gparted
   pkgs.meson
-  pkgs.powershell
   pkgs.qemu
   pkgs.supabase-cli
   pkgs.yarn
@@ -68,16 +65,7 @@
   pkgs.starship
   pkgs.nerd-fonts.terminess-ttf
   pkgs.tldr
-  pkgs.wpsoffice
   pkgs.thunar
-
-  # Gaming
-  (pkgs.lutris.override {
-    extraPkgs = pkgs: [
-      pkgs.wineWow64Packages.stable
-      pkgs.winetricks
-    ];
-  })
 
   # Shell enhancements
   pkgs.oh-my-zsh

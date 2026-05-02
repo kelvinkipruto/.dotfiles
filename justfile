@@ -33,10 +33,10 @@ build:
 
   case "$(uname -s)" in
     Darwin)
-      nix build .#darwinConfigurations.{{darwin_host}}.system
+      nix build --no-link .#darwinConfigurations.{{darwin_host}}.system
       ;;
     Linux)
-      nix build .#nixosConfigurations.{{nixos_host}}.config.system.build.toplevel
+      nix build --no-link .#nixosConfigurations.{{nixos_host}}.config.system.build.toplevel
       ;;
     *)
       print "Unsupported OS: $(uname -s)" >&2
@@ -46,7 +46,7 @@ build:
 
 # Build the macOS system without switching
 build-darwin:
-  nix build .#darwinConfigurations.{{darwin_host}}.system
+  nix build --no-link .#darwinConfigurations.{{darwin_host}}.system
 
 # Dry-run the macOS system build
 check-darwin:
@@ -76,7 +76,7 @@ switch:
 
 # Build the NixOS system without switching
 build-nixos:
-  nix build .#nixosConfigurations.{{nixos_host}}.config.system.build.toplevel
+  nix build --no-link .#nixosConfigurations.{{nixos_host}}.config.system.build.toplevel
 
 # Apply the NixOS system config
 switch-nixos:
@@ -182,7 +182,12 @@ why-depends target:
       ;;
   esac
 
-  nix why-depends "$root" "{{target}}"
+  target="{{target}}"
+  if [[ "$target" != /* && "$target" != ./* && "$target" != *"#"* ]]; then
+    target="nixpkgs#$target"
+  fi
+
+  nix why-depends "$root" "$target"
 
 # Run normal Nix garbage collection and show whether anything remains collectible
 clean-nix:

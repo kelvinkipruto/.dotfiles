@@ -1,7 +1,16 @@
 {
-  # Keep local AI tooling available by default.
+  # Global package profile defaults. Keep host-specific overrides out until needed.
   ai = true;
-
-  # Enable only when doing Android/security reversing work.
+  php = true;
+  games = true;
+  databases = true;
+  media = false;
   androidSecurity = false;
+  mobile = false;
+  workComms = false;
+
+  services = {
+    colima = true;
+    ollama = true;
+  };
 }

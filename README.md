@@ -19,10 +19,12 @@ Minimal Nix configuration for macOS (Darwin) and NixOS.
 │   │   ├── common.nix     # Packages shared between both systems
 │   │   ├── darwin.nix     # macOS-specific packages
 │   │   ├── nixos.nix      # NixOS-specific packages
+│   │   ├── profiles.nix   # Optional package profile definitions
 │   │   └── default.nix    # Package set exports
 │   ├── programs/
 │   │   └── default.nix    # Shared program configurations
 │   ├── aliases.nix        # Central shell aliases
+│   ├── package-profiles.nix # Global package profile defaults
 │   ├── user.nix           # Shared user metadata and home paths
 │   └── default.nix        # Main shared exports
 └── flake.nix              # Main flake configuration
@@ -30,34 +32,45 @@ Minimal Nix configuration for macOS (Darwin) and NixOS.
 
 ## Usage
 
-### macOS (Darwin)
+### Cross-platform
 
 ```bash
-# Build and switch
+# Build the current OS system
+just build
+
+# Apply the current OS system
+just switch
+
+# Clean safe package-manager leftovers
+just clean
+
+# Run broader maintenance across Nix, mise, and Homebrew
+just maintain
+```
+
+### Updates
+
+```bash
+# Update inputs only
+just update
+
+# Update inputs and build the current OS system
+just update-check
+
+# Update inputs, build, and switch
+just update-switch
+```
+
+### System-specific commands
+
+```bash
+# macOS
+just build-darwin
 just switch-darwin
 
-# Build only
-just build-darwin
-```
-
-### NixOS
-
-```bash
-# Build and switch
-sudo nixos-rebuild switch --flake .#kelvinkipruto
-
-# Build only
-nix build .#nixosConfigurations.kelvinkipruto.config.system.build.toplevel
-```
-
-### NixOS (aarch64)
-
-```bash
-# Build and switch
-sudo nixos-rebuild switch --flake .#kelvinkipruto-aarch64
-
-# Build only
-nix build .#nixosConfigurations.kelvinkipruto-aarch64.config.system.build.toplevel
+# NixOS
+just build-nixos
+just switch-nixos
 ```
 
 ### Development Shell
@@ -66,4 +79,4 @@ nix build .#nixosConfigurations.kelvinkipruto-aarch64.config.system.build.toplev
 nix develop
 ```
 
-For program usage docs, see `docs/README.md`.
+For program and workflow docs, see `docs/README.md`.

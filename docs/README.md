@@ -17,3 +17,4 @@ Index
 - Editor: docs/tools/neovim.md
 - Environment: docs/tools/direnv.md
 - Git hooks: docs/workflows/git-hooks.md
+- Package profiles: docs/workflows/package-profiles.md

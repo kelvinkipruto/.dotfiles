@@ -9,5 +9,6 @@
     ./kitty
     ./tmux
     ./yazi
+    ./zellij
   ];
 }

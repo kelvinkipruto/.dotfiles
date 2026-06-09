@@ -26,7 +26,7 @@
   pkgs.deadnix
   pkgs.nmap
   # pkgs.obsidian
-  pkgs.pipx
+  # pkgs.pipx
   # pkgs.python3Full
   # pkgs.ripgrep # Managed via programs.ripgrep
   # pkgs.rustup # Managed via mise/rust
@@ -45,6 +45,7 @@
   # pkgs.alacritty # Managed via programs.alacritty
   pkgs.colima
   pkgs.docker
+  pkgs.kubectl
   # pkgs.kitty # Managed via programs.kitty on Linux and Homebrew cask on Darwin
 
   # Media and utilities
@@ -59,6 +60,7 @@
 
   # Terminal and shell tools
   pkgs.zsh
+  pkgs.zellij
   # pkgs.tmux # Managed via programs.tmux
   # pkgs.yazi # Managed via programs.yazi
   # pkgs.htop # Managed via programs.htop

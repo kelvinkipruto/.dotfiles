@@ -4,7 +4,7 @@ This folder contains usage guides for the productivity tools configured in this 
 
 Index
 - Workflows: docs/workflows/README.md
-- Terminal multiplexing: docs/tools/tmux.md
+- Terminal multiplexing: docs/tools/tmux.md, docs/tools/zellij.md
 - File manager: docs/tools/yazi.md
 - Terminals: docs/tools/kitty.md, docs/tools/alacritty.md
 - Shell: docs/tools/zsh.md

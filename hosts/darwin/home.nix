@@ -1,13 +1,17 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 {
   imports = [
     ../../shared/home-manager
     ../../config
   ];
 
-  home.packages = lib.mkAfter (with pkgs; [
+  home.sessionPath = [
+    "$HOME/.orbstack/bin"
+  ];
+
+  home.packages = lib.mkAfter [
     # Darwin-specific packages go here.
-  ]);
+  ];
 
   home.file = {
     ".local/bin/brave" = {

@@ -43,9 +43,6 @@
 
   # Applications
   # pkgs.alacritty # Managed via programs.alacritty
-  pkgs.colima
-  pkgs.docker
-  pkgs.kubectl
   # pkgs.kitty # Managed via programs.kitty on Linux and Homebrew cask on Darwin
 
   # Media and utilities

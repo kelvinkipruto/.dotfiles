@@ -45,8 +45,10 @@
 
   # Development tools
   # pkgs.flutter # Managed via mise
+  pkgs.docker
   pkgs.gcc
   pkgs.gparted
+  pkgs.kubectl
   pkgs.meson
   pkgs.qemu
   pkgs.supabase-cli

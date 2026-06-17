@@ -25,6 +25,7 @@
       "imhex"
       "kitty"
       "localsend"
+      "orbstack"
       "raycast"
       "rectangle"
       "shottr"

@@ -18,9 +18,7 @@ let
 in
 {
   common = {
-    ai = [
-      pkgs.ollama
-    ];
+    ai = [ ];
 
     php = [
       phpWithXdebug

@@ -8,9 +8,4 @@
   androidSecurity = false;
   mobile = false;
   workComms = false;
-
-  services = {
-    colima = true;
-    ollama = true;
-  };
 }

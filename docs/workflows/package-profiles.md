@@ -14,7 +14,7 @@ Current defaults
 
 | Profile | Default | Contents |
 | --- | --- | --- |
-| `ai` | on | `ollama` |
+| `ai` | on | No packages currently assigned |
 | `php` | on | PHP with `grpc` and `xdebug` extensions |
 | `games` | on | `stockfish`, `raylib` |
 | `databases` | on | `duckdb`, `redis`, `mongodb-tools`, `turso-cli` |
@@ -23,15 +23,8 @@ Current defaults
 | `mobile` | off | `android-tools`, `scrcpy`; plus `cocoapods` and `watchman` on Darwin |
 | `workComms` | off | `slack-cli` |
 
-Service defaults
-
-| Service flag | Default | Effect |
-| --- | --- | --- |
-| `services.colima` | on | Starts Colima automatically on Darwin and NixOS user sessions |
-| `services.ollama` | on | Starts `ollama serve` on Darwin when the `ai` profile is enabled |
-
 Always-on by design
-- Docker and Colima packages stay always-on because local containers are core workflow dependencies.
+- Docker tooling stays always-on for Linux because local containers are core workflow dependencies.
 - Network tools stay always-on: `cloudflared`, `ngrok`, `httrack`, `nmap`, `dnsmasq`, `mkcert`.
 - Archive basics stay always-on: `zip`, `unzip`, `unrar`.
 - Flutter and Dart stay managed by mise, not Nix.
@@ -62,7 +55,7 @@ Auditing profile impact
 just audit-closure
 
 # Explain why a package is in the current system closure
-just why-depends ollama
+just why-depends raylib
 just why-depends nixpkgs#ffmpeg
 ```
 

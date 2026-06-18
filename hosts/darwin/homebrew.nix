@@ -15,6 +15,7 @@
     brews = [
       "firefox-profile-switcher-connector"
       "media-control"
+      "mole"
     ];
     casks = [
       "alacritty"
@@ -25,10 +26,11 @@
       "imhex"
       "kitty"
       "localsend"
-      "mole"
+      "mole-app"
       "orbstack"
       "raycast"
       "rectangle"
+      "responsively"
       "shottr"
       "slack"
       "spotify"

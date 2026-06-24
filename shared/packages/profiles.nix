@@ -31,6 +31,7 @@ in
 
     databases = [
       pkgs.duckdb
+      pkgs.mariadb.client
       pkgs.mongodb-tools
       pkgs.redis
       pkgs.turso-cli

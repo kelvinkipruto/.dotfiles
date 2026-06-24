@@ -16,6 +16,7 @@
       "firefox-profile-switcher-connector"
       "media-control"
       "mole"
+      "mysql-client"
     ];
     casks = [
       "alacritty"

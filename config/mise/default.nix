@@ -27,6 +27,9 @@ let
       "npm:@qwen-code/qwen-code" = "latest";
       "npm:eas-cli" = "latest";
       "npm:@google/gemini-cli" = "latest";
+
+      #herdr
+      "github:ogulcancelik/herdr" = "latest";
     };
 
     env = {

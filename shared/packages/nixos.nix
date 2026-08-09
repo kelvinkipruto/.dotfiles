@@ -50,6 +50,7 @@
   pkgs.gparted
   pkgs.kubectl
   pkgs.meson
+  pkgs.mise
   pkgs.qemu
   pkgs.supabase-cli
   pkgs.yarn

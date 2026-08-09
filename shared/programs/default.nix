@@ -31,6 +31,15 @@
     enableZshIntegration = true;
     defaultCommand = "fd --type f";
     defaultOptions = [ "--height 40%" "--border" ];
+    # Atuin (history manager, also enabled) owns Ctrl-R in zsh.  Disable fzf's
+    # history widget binding to remove the collision warning.  Atuin search is
+    # richer (SQLite-backed, cross-shell, optional sync) and was explicitly
+    # configured with sync_address, so it takes the hotkey.
+    historyWidget = {
+      zsh = {
+        command = "";
+      };
+    };
   };
 
   htop = {

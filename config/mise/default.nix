@@ -43,8 +43,14 @@ let
       all_compile = false;
     };
   };
-  activationPath = lib.makeBinPath [
-    pkgs.mise
+
+  # Platform split for mise binary:
+  #   Darwin:  mise is installed via Homebrew (bottle).  Activation runs with a
+  #            minimal PATH that does not include Homebrew's prefix, so we must
+  #            inject the two standard macOS Homebrew locations (Apple Silicon
+  #            and Intel) explicitly.
+  #   NixOS:   mise comes from nixpkgs, so reference the store path directly.
+  activationInputs = [
     pkgs.coreutils
     pkgs.bash
     pkgs.curl
@@ -59,7 +65,75 @@ let
     pkgs.git
     pkgs.findutils
     pkgs.which
-  ];
+  ] ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.mise ];
+
+  activationBinPath = lib.makeBinPath activationInputs;
+
+  # Standard Homebrew prefixes on macOS.  One of these will exist on any
+  # supported install; prepending both is harmless.
+  darwinHomebrewBinPaths = "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin";
+
+  # Compute the PATH and mise command for the CURRENT host only.
+  # Since these values differ by host (Darwin vs NixOS) we only ever evaluate the right branch.
+  activationPathForThisHost =
+    if pkgs.stdenv.isLinux
+    then activationBinPath
+    else "${activationBinPath}:${darwinHomebrewBinPaths}";
+
+  miseCmd = if pkgs.stdenv.isLinux then "${pkgs.mise}/bin/mise" else "mise";
+
+  # Single, host-specific bash script.  Two fully-written branches so there is
+  # ZERO Nix string `+` concatenation inside bash blocks — this is what caused
+  # the "unexpected token `fi'" bash parse error.
+  miseActivationBash =
+    if pkgs.stdenv.isDarwin
+    then ''
+      set -euo pipefail
+      export HOME=${lib.escapeShellArg homeDirectory}
+      export PATH=${lib.escapeShellArg activationPathForThisHost}
+      export MISE_YES=1
+      export MISE_ALL_COMPILE=false
+      export MISE_RUBY_COMPILE=false
+      export MISE_RUSTUP_HOME=${lib.escapeShellArg rustupHome}
+      export MISE_CARGO_HOME=${lib.escapeShellArg cargoHome}
+      export RUSTUP_HOME=${lib.escapeShellArg rustupHome}
+      export CARGO_HOME=${lib.escapeShellArg cargoHome}
+
+      if ! ${pkgs.which}/bin/which mise >/dev/null 2>&1; then
+        echo "ERROR: mise binary not found during activation."
+        echo "  Activation PATH=$PATH"
+        echo "  Try: brew install mise"
+        echo "  Expected locations: /opt/homebrew/bin/mise or /usr/local/bin/mise"
+        exit 1
+      fi
+
+      echo "  Using mise at: $(${pkgs.which}/bin/which mise)"
+      ${miseCmd} install --yes
+      ${miseCmd} reshim
+    ''
+    else ''
+      set -euo pipefail
+      export HOME=${lib.escapeShellArg homeDirectory}
+      export PATH=${lib.escapeShellArg activationPathForThisHost}
+      export MISE_YES=1
+      export MISE_ALL_COMPILE=false
+      export MISE_RUBY_COMPILE=false
+      export MISE_RUSTUP_HOME=${lib.escapeShellArg rustupHome}
+      export MISE_CARGO_HOME=${lib.escapeShellArg cargoHome}
+      export RUSTUP_HOME=${lib.escapeShellArg rustupHome}
+      export CARGO_HOME=${lib.escapeShellArg cargoHome}
+
+      if ! ${pkgs.which}/bin/which mise >/dev/null 2>&1; then
+        echo "ERROR: mise binary not found during activation."
+        echo "  Activation PATH=$PATH"
+        echo "  Expected mise in the Nix store (pkgs.mise)"
+        exit 1
+      fi
+
+      echo "  Using mise at: $(${pkgs.which}/bin/which mise)"
+      ${miseCmd} install --yes
+      ${miseCmd} reshim
+    '';
 in
 {
   home.sessionPath = [
@@ -78,25 +152,6 @@ in
 
   home.activation.installMiseTools = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
     echo "Installing mise-managed tools..."
-    run ${pkgs.coreutils}/bin/env \
-      HOME=${lib.escapeShellArg homeDirectory} \
-      PATH=${lib.escapeShellArg activationPath} \
-      MISE_YES=1 \
-      MISE_ALL_COMPILE=false \
-      MISE_RUBY_COMPILE=false \
-      MISE_RUSTUP_HOME=${lib.escapeShellArg rustupHome} \
-      MISE_CARGO_HOME=${lib.escapeShellArg cargoHome} \
-      RUSTUP_HOME=${lib.escapeShellArg rustupHome} \
-      CARGO_HOME=${lib.escapeShellArg cargoHome} \
-      ${pkgs.mise}/bin/mise install --yes
-    run ${pkgs.coreutils}/bin/env \
-      HOME=${lib.escapeShellArg homeDirectory} \
-      PATH=${lib.escapeShellArg activationPath} \
-      MISE_YES=1 \
-      MISE_RUSTUP_HOME=${lib.escapeShellArg rustupHome} \
-      MISE_CARGO_HOME=${lib.escapeShellArg cargoHome} \
-      RUSTUP_HOME=${lib.escapeShellArg rustupHome} \
-      CARGO_HOME=${lib.escapeShellArg cargoHome} \
-      ${pkgs.mise}/bin/mise reshim
+    run ${pkgs.bash}/bin/bash -c ${lib.escapeShellArg miseActivationBash}
   '';
 }

@@ -82,6 +82,19 @@
               enableRosetta = true;
               user = user;
               autoMigrate = true;
+              # Declaratively trust third-party tap items (Homebrew 6.0+ tap-trust).
+              # Prefer formula/cask granularity over whole-tap trust per upstream guidance:
+              # https://docs.brew.sh/Tap-Trust
+              trust = {
+                formulae = [
+                  "null-dev/firefox-profile-switcher/firefox-profile-switcher-connector"
+                ];
+                casks = [
+                  "alielsokary/tap/caskhub"
+                ];
+                commands = [ ];
+                taps = [ ];
+              };
             };
           }
           home-manager.darwinModules.home-manager
@@ -94,7 +107,7 @@
 
               users.${user} = {
                 imports = [
-                  mac-app-util.homeManagerModules.default
+                  # mac-app-util.homeManagerModules.default
                   ./hosts/darwin/home.nix
                 ];
               };

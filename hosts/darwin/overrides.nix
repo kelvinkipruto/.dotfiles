@@ -7,10 +7,6 @@
         doCheck = false;
         checkPhase = "";
       });
-      mise = prev.mise.overrideAttrs (_old: {
-        doCheck = false;
-        checkPhase = "";
-      });
     })
   ];
 }

@@ -11,10 +11,12 @@
     taps = [
       "homebrew/services"
       "null-dev/firefox-profile-switcher"
+      "alielsokary/tap"
     ];
     brews = [
       "firefox-profile-switcher-connector"
       "media-control"
+      "mise"
       "mole"
       "mysql-client"
     ];
@@ -22,12 +24,13 @@
       "alacritty"
       "alt-tab"
       "brave-browser"
+      "alielsokary/tap/caskhub"
       "chatgpt"
       "flameshot"
       "imhex"
       "kitty"
       "localsend"
-      "mole-app"
+      # "mole-app"
       "orbstack"
       "raycast"
       "rectangle"

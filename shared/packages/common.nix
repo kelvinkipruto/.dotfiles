@@ -17,7 +17,7 @@
   pkgs.httrack
   # pkgs.kotlin # Managed via mise
   pkgs.lazydocker
-  pkgs.mise
+  # pkgs.mise # Darwin: installed via Homebrew brew; NixOS: in shared/packages/nixos.nix
   # pkgs.neovim # Managed via programs.neovim
   pkgs.ngrok
   pkgs.nixd

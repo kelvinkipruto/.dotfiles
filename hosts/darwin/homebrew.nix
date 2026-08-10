@@ -12,6 +12,7 @@
       "homebrew/services"
       "null-dev/firefox-profile-switcher"
       "alielsokary/tap"
+      "microsoft/sysinternalstap"
     ];
     brews = [
       "firefox-profile-switcher-connector"
@@ -46,6 +47,9 @@
       "shottr"
       "slack"
       "spotify"
+      # Microsoft Sysinternals ZoomIt (screen zoom, annotation, recording).
+      # Tap-qualified name required since this cask lives in microsoft/sysinternalstap.
+      "microsoft/sysinternalstap/zoomit"
     ];
   };
 }

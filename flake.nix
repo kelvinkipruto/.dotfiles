@@ -91,6 +91,7 @@
                 ];
                 casks = [
                   "alielsokary/tap/caskhub"
+                  "microsoft/sysinternalstap/zoomit"
                 ];
                 commands = [ ];
                 taps = [ ];

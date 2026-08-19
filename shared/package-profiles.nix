@@ -4,8 +4,8 @@
   php = true;
   games = true;
   databases = true;
-  media = false;
-  androidSecurity = false;
+  media = true;
+  androidSecurity = true;
   mobile = false;
   workComms = false;
 }

@@ -21,6 +21,7 @@
   # pkgs.neovim # Managed via programs.neovim
   pkgs.ngrok
   pkgs.nixd
+  pkgs.nim
   pkgs.nixpkgs-fmt
   pkgs.statix
   pkgs.deadnix

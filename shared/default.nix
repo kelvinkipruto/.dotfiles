@@ -5,7 +5,11 @@ let
   programs = import ./programs { inherit pkgs; };
   user = import ./user.nix { inherit lib userConfig; };
   aliases = import ./aliases.nix;
-  environment = import ./environment.nix { inherit pkgs lib packageProfiles; };
+  environment = import ./environment.nix {
+    inherit pkgs lib packageProfiles system;
+    # Pass Nix-managed Android SDK root (or null) for correct env vars.
+    androidSdkRoot = packages.androidSdkRoot;
+  };
   fonts = import ./fonts.nix { inherit pkgs; };
 in
 {

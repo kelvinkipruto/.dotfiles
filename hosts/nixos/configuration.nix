@@ -18,9 +18,7 @@
   };
 
   nixpkgs = {
-    config = {
-      inherit (nixpkgsConfig) allowUnfree allowBroken;
-
+    config = nixpkgsConfig // {
       permittedInsecurePackages = [
         "openssl-1.1.1w"
         "python-2.7.18.7"

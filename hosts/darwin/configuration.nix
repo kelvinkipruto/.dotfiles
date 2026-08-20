@@ -11,9 +11,7 @@ in
 {
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
-    config = {
-      inherit (nixpkgsConfig) allowUnfree allowBroken;
-    };
+    config = nixpkgsConfig;
   };
 
   imports = [

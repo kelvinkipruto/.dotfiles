@@ -88,5 +88,8 @@
   pkgs.dnsmasq
 
   #Android
-  # pkgs.flutter # Managed via mise
+  pkgs.androidenv.androidPkgs.platform-tools
+
+  # Windows
+  pkgs.osslsigncode
 ]

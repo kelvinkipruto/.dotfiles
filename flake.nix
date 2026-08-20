@@ -1,13 +1,6 @@
 {
   description = "My Dotfiles Flake for NixOS and macOS";
 
-  nixConfig = {
-    extra-substituters = [ "https://cache.numtide.com" ];
-    extra-trusted-public-keys = [
-      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
-    ];
-  };
-
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
@@ -60,6 +53,7 @@
       nixpkgsConfig = {
         allowUnfree = true;
         allowBroken = false;
+        android_sdk.accept_license = true;
       };
 
       # Package sets with overlays

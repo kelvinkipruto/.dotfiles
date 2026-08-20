@@ -74,7 +74,8 @@ in
       # export PATH="$PATH":"${homeDir}/.pub-cache/bin"
       #Mysql
       # export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-      #Android
+      # Android: ANDROID_HOME, ANDROID_SDK_ROOT and PATH additions are set via
+      # shared/environment.nix sessionVariables (platform-aware paths).
       # export ANDROID_HOME="${homeDir}/Library/Android/sdk"
       # export PATH=$PATH:$ANDROID_HOME/emulator
       # export PATH=$PATH:$ANDROID_HOME/platform-tools

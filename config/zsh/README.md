@@ -7,7 +7,7 @@ Shell features
 
 Aliases
 - Central aliases live in `shared/aliases.nix`
-- Linux-only alias: `update` runs `sudo nixos-rebuild switch`
+- Linux-only alias: `update` runs `sudo -H nixos-rebuild switch` ( `-H` resets HOME to /var/root so Nix doesn't warn about ownership)
 
 Tooling
 - `mise` and `devbox` are auto-activated in `initContent`

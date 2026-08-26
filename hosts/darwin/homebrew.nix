@@ -36,6 +36,7 @@
       "firefox"
       "firefox@developer-edition"
       "flameshot"
+      "ghostty"
       "imhex"
       "kitty"
       "localsend"

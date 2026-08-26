@@ -13,7 +13,8 @@ in
 
     shellAliases =
       shared.aliases.shellAliases
-      // lib.optionalAttrs pkgs.stdenv.isLinux { update = "sudo nixos-rebuild switch"; };
+      # -H resets HOME to /var/root so Nix doesn't warn that $HOME isn't owned by root.
+      // lib.optionalAttrs pkgs.stdenv.isLinux { update = "sudo -H nixos-rebuild switch"; };
     history.size = 10000;
 
     # Oh my zsh setup

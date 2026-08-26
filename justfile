@@ -1,3 +1,8 @@
+# Some shell init setups (e.g. devbox/mise shell hooks, nix-shell remnants)
+# override TMPDIR to a path like /tmp/nix-shell.XXXX which goes away, causing
+# `just` to fail when it tries to create its shebang-recipe tempfile.
+# Force a stable temp directory before any recipe runs.
+set tempdir := "/tmp"
 set shell := ["zsh", "-c"]
 
 darwin_host := "kelvinkipruto"
@@ -53,8 +58,10 @@ check-darwin:
   nix build .#darwinConfigurations.{{darwin_host}}.system --dry-run
 
 # Apply the macOS system config. nix-darwin system activation runs as root.
+# Use -H so HOME=/var/root (owned by uid 0); otherwise Nix warns about
+# $HOME ('/Users/...') not being owned by the effective user.
 switch-darwin:
-  sudo darwin-rebuild switch --flake .#{{darwin_host}}
+  sudo -H darwin-rebuild switch --flake .#{{darwin_host}}
 
 # Apply the current OS system config
 switch:
@@ -63,10 +70,11 @@ switch:
 
   case "$(uname -s)" in
     Darwin)
-      sudo darwin-rebuild switch --flake .#{{darwin_host}}
+      # -H resets HOME to /var/root so Nix doesn't warn about HOME ownership.
+      sudo -H darwin-rebuild switch --flake .#{{darwin_host}}
       ;;
     Linux)
-      sudo nixos-rebuild switch --flake .#{{nixos_host}}
+      sudo -H nixos-rebuild switch --flake .#{{nixos_host}}
       ;;
     *)
       print "Unsupported OS: $(uname -s)" >&2
@@ -78,9 +86,10 @@ switch:
 build-nixos:
   nix build --no-link .#nixosConfigurations.{{nixos_host}}.config.system.build.toplevel
 
-# Apply the NixOS system config
+# Apply the NixOS system config.
+# -H resets HOME to /var/root so Nix doesn't warn about HOME ownership.
 switch-nixos:
-  sudo nixos-rebuild switch --flake .#{{nixos_host}}
+  sudo -H nixos-rebuild switch --flake .#{{nixos_host}}
 
 # Show Nix disk usage, roots, and scratch directories that GC will not remove
 audit-nix:
@@ -195,7 +204,7 @@ clean-nix:
   set -euo pipefail
 
   nix-collect-garbage -d
-  sudo nix-collect-garbage -d
+  sudo -H nix-collect-garbage -d
 
   print "\n== remaining garbage =="
   nix store gc --dry-run || true

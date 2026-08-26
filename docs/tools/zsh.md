@@ -10,7 +10,7 @@ Core setup
 
 Aliases
 - Shared aliases are in shared/aliases.nix
-- Linux-only alias: update -> sudo nixos-rebuild switch
+- Linux-only alias: update -> sudo -H nixos-rebuild switch (-H so Nix doesn't warn $HOME not owned by root)
 
 Tooling hooks
 - mise activates on shell start

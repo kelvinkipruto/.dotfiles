@@ -92,4 +92,4 @@ Apply macOS config:
 just switch-darwin
 ```
 
-`switch-darwin` runs `sudo darwin-rebuild switch --flake .#kelvinkipruto` because nix-darwin system activation now runs as `root`.
+`switch-darwin` runs `sudo -H darwin-rebuild switch --flake .#kelvinkipruto` because nix-darwin system activation now runs as `root`. `-H` resets HOME to /var/root so Nix doesn't warn that $HOME isn't owned by the effective UID.

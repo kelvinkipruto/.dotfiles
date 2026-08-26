@@ -12,7 +12,7 @@
 ## Build, Test, and Development Commands
 - `nix run nix-darwin -- switch --flake .#kelvinkipruto` applies macOS config.
 - `nix build .#darwinConfigurations.kelvinkipruto.system` builds macOS config only.
-- `sudo nixos-rebuild switch --flake .#kelvinkipruto` applies NixOS config.
+- `sudo -H nixos-rebuild switch --flake .#kelvinkipruto` applies NixOS config. `-H` sets HOME=/var/root to avoid Nix's "HOME is not owned by you" warning.
 - `nix build .#nixosConfigurations.kelvinkipruto.config.system.build.toplevel` builds NixOS config only.
 - `nix develop` enters the dev shell defined by the flake.
 

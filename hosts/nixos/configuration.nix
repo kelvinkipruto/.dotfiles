@@ -1,8 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, lib, userConfig, nixpkgsConfig, systemStateVersion, ... }: {
 
   imports = [
     ./hardware-configuration.nix
-    ./wayland.nix
+    ../../shared/modules/nix.nix
+    ../../shared/modules/fonts.nix
+    ../../shared/modules/zsh.nix
+    ./overrides.nix
   ];
 
   documentation.nixos.enable = false;
@@ -10,22 +13,19 @@
   nix = {
     settings = {
       warn-dirty = false;
-      experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
   };
 
   nixpkgs = {
-    config = {
-      allowUnfree = true;
-
+    config = nixpkgsConfig // {
       permittedInsecurePackages = [
         "openssl-1.1.1w"
         "python-2.7.18.7"
       ];
     };
     overlays = [
-      (self: super: {
+      (_self: super: {
         waybar = super.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
         });
@@ -63,8 +63,12 @@
       # timeout = 300;
     };
 
-    kernelModules = [ "kvm-intel" "vfio-pci" ];
-    kernelParams = [ "nohibernate" "intel_iommu=on" "iommu=pt" ];
+    kernelModules =
+      lib.optionals pkgs.stdenv.isx86_64 [ "kvm-intel" "vfio-pci" ]
+      ++ lib.optionals pkgs.stdenv.isAarch64 [ "kvm" ];
+    kernelParams =
+      [ "nohibernate" ]
+      ++ lib.optionals pkgs.stdenv.isx86_64 [ "intel_iommu=on" "iommu=pt" ];
 
     # kernel.sysctl = {
     #   "net.ipv4.tcp_congestion_control" = "bbr";
@@ -117,7 +121,7 @@
         enable = true;
         enableHidpi = true;
       };
-      defaultSession = "hyprland";
+      defaultSession = "plasma";
       # lightdm.enable = true;
       # setupCommands = ''
       #   ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal
@@ -165,23 +169,9 @@
   #     dwm = prev.dwm.overrideAttrs (old: {src = /home/${user}/CTT-Nix/system/dwm-titus;}); #FIX ME: Update with path to your dwm folder
   #   })
   # ];
-  # programs.zsh.enable = true;
-  programs = {
-    zsh = {
-      enable = true;
-    };
-    # hyprland = {
-    #   enable = true;
-    #   xwayland = {
-    #     enable = true;
-    #   };
-    # };
-  };
-  users.defaultUserShell = pkgs.zsh;
-
-  users.users.kelvinkipruto = {
+  users.users.${userConfig.name} = {
     isNormalUser = true;
-    description = "Kelvin Kipruto";
+    description = userConfig.fullName;
     shell = pkgs.zsh;
     extraGroups = [
       "flatpak"
@@ -205,27 +195,6 @@
   #   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
   #   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   # };
-
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      font-awesome
-      source-han-sans
-      source-han-sans-japanese
-      source-han-serif-japanese
-      # (nerdfonts.override { fonts = [ "Meslo" ]; })
-    ];
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        monospace = [ "Meslo LG M Regular Nerd Font Complete Mono" ];
-        serif = [ "Noto Serif" "Source Han Serif" ];
-        sansSerif = [ "Noto Sans" "Source Han Sans" ];
-      };
-    };
-  };
 
   environment = {
     systemPackages = with pkgs; [
@@ -255,23 +224,6 @@
       # (waybar.overrideAttrs (old: {
       #   mesonFlags = old.mesonFlags or [] ++ ["-Dexperimental=true"];
       # }))
-
-      # PHP with global debugging enabled
-      (php.buildEnv {
-        extensions = ({ enabled, all }: enabled ++ (with all; [
-          grpc
-          xdebug
-        ]));
-        extraConfig = ''
-          xdebug.mode = debug
-          xdebug.start_with_request = yes
-          xdebug.client_host = 127.0.0.1
-          xdebug.client_port = 9003
-          xdebug.remote_enable = true
-          xdebug.remote_host = 127.0.0.1
-          xdebug.remote_port = 9000
-        '';
-      })
     ];
     # sessionVariables = {
     #   NIXOS_OZONE_WL = "1";
@@ -301,7 +253,6 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
     config.common.default = "*";
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
@@ -325,7 +276,7 @@
   #   };
   # };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = systemStateVersion.nixos;
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;
 }

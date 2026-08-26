@@ -2,21 +2,13 @@
   description = "My Dotfiles Flake for NixOS and macOS";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/master";
+      url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs = {
@@ -40,33 +32,43 @@
     , nix-darwin
     , mac-app-util
     , nix-homebrew
-    , homebrew-core
-    , homebrew-cask
+    , ...
     }  @inputs:
     let
-      user = "kelvinkipruto";
+      userConfig = {
+        name = "kelvinkipruto";
+        fullName = "Kelvin Kipruto";
+        email = "kelvin@example.com";
+      };
+      user = userConfig.name;
       hostName = "kelvinkipruto";
+      systemStateVersion = {
+        nixos = "26.05";
+        darwin = 6;
+      };
 
       # System definitions
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
+      nixpkgsConfig = {
+        allowUnfree = true;
+        allowBroken = false;
+        android_sdk.accept_license = true;
+      };
+
       # Package sets with overlays
       pkgsFor = system: import nixpkgs {
         inherit system;
-        config = {
-          allowUnfree = true;
-          allowBroken = false;
-        };
+        config = nixpkgsConfig;
         overlays = [
         ];
       };
-
-      darwinConfig = import ./hosts/darwin/configuration.nix { inherit nixpkgs self user hostName; };
     in
     {
       darwinConfigurations.${user} = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit inputs self user userConfig hostName nixpkgsConfig systemStateVersion; };
         modules = [
-          darwinConfig
+          ./hosts/darwin/configuration.nix
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
@@ -74,6 +76,20 @@
               enableRosetta = true;
               user = user;
               autoMigrate = true;
+              # Declaratively trust third-party tap items (Homebrew 6.0+ tap-trust).
+              # Prefer formula/cask granularity over whole-tap trust per upstream guidance:
+              # https://docs.brew.sh/Tap-Trust
+              trust = {
+                formulae = [
+                  "null-dev/firefox-profile-switcher/firefox-profile-switcher-connector"
+                ];
+                casks = [
+                  "alielsokary/tap/caskhub"
+                  "microsoft/sysinternalstap/zoomit"
+                ];
+                commands = [ ];
+                taps = [ ];
+              };
             };
           }
           home-manager.darwinModules.home-manager
@@ -82,11 +98,11 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
-              extraSpecialArgs = { inherit inputs self user; };
+              extraSpecialArgs = { inherit inputs self user userConfig; };
 
               users.${user} = {
                 imports = [
-                  mac-app-util.homeManagerModules.default
+                  # mac-app-util.homeManagerModules.default
                   ./hosts/darwin/home.nix
                 ];
               };
@@ -96,14 +112,38 @@
       };
       nixosConfigurations.${user} = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs self user userConfig hostName nixpkgsConfig systemStateVersion; };
         modules = [
           ./hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.kelvinkipruto = import ./hosts/nixos/home.nix;
-            home-manager.extraSpecialArgs = { inherit inputs self user; };
+            home-manager.users.${user} = {
+              imports = [
+                ./hosts/nixos/home.nix
+              ];
+            };
+            home-manager.extraSpecialArgs = { inherit inputs self user userConfig; };
+          }
+        ];
+      };
+
+      nixosConfigurations."${user}-aarch64" = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { inherit inputs self user userConfig hostName nixpkgsConfig systemStateVersion; };
+        modules = [
+          ./hosts/nixos/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${user} = {
+              imports = [
+                ./hosts/nixos/home.nix
+              ];
+            };
+            home-manager.extraSpecialArgs = { inherit inputs self user userConfig; };
           }
         ];
       };
@@ -115,6 +155,8 @@
             buildInputs = with pkgs; [
               nixd
               nixpkgs-fmt
+              deadnix
+              statix
             ];
           };
         }

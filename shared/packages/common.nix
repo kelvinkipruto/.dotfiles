@@ -1,98 +1,64 @@
 { pkgs, ... }:
-let
-  phpWithXdebug = pkgs.php.buildEnv {
-    extensions = ({ enabled, all }: enabled ++ (with all; [
-      grpc
-      xdebug
-    ]));
-    extraConfig = ''
-      xdebug.mode = debug
-      xdebug.start_with_request = yes
-      xdebug.client_host = 127.0.0.1
-      xdebug.client_port = 9003
-      xdebug.remote_enable = true
-      xdebug.remote_host = 127.0.0.1
-      xdebug.remote_port = 9000
-    '';
-  };
-in
 # Common packages shared between Darwin and NixOS
-  # Note: ollama uses stable version for better reliability
 [
   # Development tools
-  pkgs.android-tools
-  pkgs.apktool
   pkgs.cmake
   # pkgs.bat # Managed via programs.bat
   # pkgs.bun
-  # pkgs.cargo # Provided by rustup
+  # pkgs.cargo # Managed via mise/rust
   pkgs.cloudflared
   # pkgs.deno
-  pkgs.dex2jar
-  pkgs.ffmpeg
+  pkgs.fastfetch
   # pkgs.fnm
-  pkgs.frida-tools
   # pkgs.git # Managed via programs.git
   # pkgs.gh # Managed via programs.gh
   pkgs.git-lfs
-  pkgs.gleam
   # pkgs.go
   pkgs.httrack
-  pkgs.jadx
-  pkgs.kotlin
+  # pkgs.kotlin # Managed via mise
   pkgs.lazydocker
-  pkgs.lua
-  pkgs.luarocks
-  pkgs.mise
+  # pkgs.mise # Darwin: installed via Homebrew brew; NixOS: in shared/packages/nixos.nix
   # pkgs.neovim # Managed via programs.neovim
   pkgs.ngrok
   pkgs.nixd
+  pkgs.nim
   pkgs.nixpkgs-fmt
+  pkgs.statix
+  pkgs.deadnix
   pkgs.nmap
   # pkgs.obsidian
-  pkgs.ocaml
-  pkgs.ollama # Using stable version
-  phpWithXdebug
-  pkgs.pipx
+  # pkgs.pipx
   # pkgs.python3Full
   # pkgs.ripgrep # Managed via programs.ripgrep
-  # pkgs.rustup
-  pkgs.slack-cli
-  pkgs.stockfish
+  # pkgs.rustup # Managed via mise/rust
   # pkgs.telegram-desktop
-  pkgs.turso-cli
   pkgs.unzip
-  pkgs.uv
+  # pkgs.uv # Managed via mise
   # pkgs.zoxide # Managed via programs.zoxide
 
   # Browsers
-  pkgs.brave
-  pkgs.firefox
-  pkgs.firefox-devedition
+  # GUI browsers are installed via Homebrew casks on Darwin and NixOS-specific packages on Linux.
+  # pkgs.brave
+  # pkgs.firefox-bin
+  # pkgs.firefox-devedition
 
   # Applications
   # pkgs.alacritty # Managed via programs.alacritty
-  pkgs.colima
-  pkgs.docker
-  pkgs.kitty
-  pkgs.duckdb
-
-  # Fonts
-  pkgs.nerd-fonts.fira-code
+  # pkgs.kitty # Managed via programs.kitty on Linux and Homebrew cask on Darwin
 
   # Media and utilities
-  pkgs.flameshot
-  pkgs.spotify
-  pkgs.yt-dlp
+  # pkgs.flameshot # Managed via Homebrew cask on Darwin and NixOS-specific packages on Linux
+  # pkgs.spotify # Managed via Homebrew cask on Darwin and NixOS-specific packages on Linux
   pkgs.zip
   pkgs.unrar
   pkgs.croc
 
   pkgs.wget
-  pkgs.imhex
+  # pkgs.imhex # Managed via Homebrew cask on Darwin and NixOS-specific packages on Linux
 
   # Terminal and shell tools
   pkgs.zsh
+  pkgs.zellij
   # pkgs.tmux # Managed via programs.tmux
   # pkgs.yazi # Managed via programs.yazi
   # pkgs.htop # Managed via programs.htop
@@ -102,36 +68,28 @@ in
   # pkgs.eza # Managed via programs.eza
   # pkgs.lazygit # Managed via programs.lazygit
   # pkgs.direnv # Managed via programs.direnv
+  pkgs.bottom
+  pkgs.dua
+  pkgs.duf
   pkgs.nushell
-
-  #Misc
-  pkgs.poppler
-  pkgs.imagemagick
-  pkgs.resvg
-
-  # dotnet
-  pkgs.dotnet-sdk_9
-
-  # pdf
-  pkgs.qpdf
-  # pkgs.wkhtmltopdf
+  pkgs.just
+  pkgs.tokei
 
   #other
-  pkgs.qbittorrent
+  # pkgs.qbittorrent
   pkgs.mkcert
 
-  #raylib
-  pkgs.raylib
-
   #c++
-  pkgs.vcpkg
-  pkgs.ninja
-
-  #db
-  pkgs.redis
-  pkgs.mongodb-tools
+  # pkgs.vcpkg
+  # pkgs.ninja
 
   #other
   pkgs.pkg-config
   pkgs.dnsmasq
+
+  #Android
+  pkgs.androidenv.androidPkgs.platform-tools
+
+  # Windows
+  pkgs.osslsigncode
 ]

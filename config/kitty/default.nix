@@ -1,14 +1,22 @@
+{ pkgs, ... }:
+let
+  theme = import ../../shared/themes/terminal.nix;
+in
 {
   programs.kitty = {
     enable = true;
+    package =
+      if pkgs.stdenv.hostPlatform.isDarwin
+      then null
+      else pkgs.kitty;
     font = {
-      name = "MesloLGS NF";
-      size = 13;
+      name = theme.font.family;
+      size = theme.font.size;
     };
     settings = {
       # Window appearance
-      background_opacity = "0.95";
-      window_padding_width = 8;
+      background_opacity = toString theme.window.opacity;
+      window_padding_width = theme.window.padding.x;
       window_margin_width = 0;
       single_window_margin_width = 0;
       window_border_width = "1pt";
@@ -50,14 +58,14 @@
       tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
 
       # Color scheme - Tokyo Night
-      foreground = "#c0caf5";
-      background = "#1a1b26";
-      selection_foreground = "#c0caf5";
-      selection_background = "#33467c";
+      foreground = theme.colors.primary.foreground;
+      background = theme.colors.primary.background;
+      selection_foreground = theme.colors.selection.foreground;
+      selection_background = theme.colors.selection.background;
 
       # Cursor colors
-      cursor = "#c0caf5";
-      cursor_text_color = "#1a1b26";
+      cursor = theme.colors.cursor.background;
+      cursor_text_color = theme.colors.cursor.foreground;
 
       # URL underline color when hovering with mouse
       url_color = "#73daca";
@@ -89,36 +97,36 @@
       # The 16 terminal colors
 
       # black
-      color0 = "#15161e";
-      color8 = "#414868";
+      color0 = theme.colors.normal.black;
+      color8 = theme.colors.bright.black;
 
       # red
-      color1 = "#f7768e";
-      color9 = "#f7768e";
+      color1 = theme.colors.normal.red;
+      color9 = theme.colors.bright.red;
 
       # green
-      color2 = "#9ece6a";
-      color10 = "#9ece6a";
+      color2 = theme.colors.normal.green;
+      color10 = theme.colors.bright.green;
 
       # yellow
-      color3 = "#e0af68";
-      color11 = "#e0af68";
+      color3 = theme.colors.normal.yellow;
+      color11 = theme.colors.bright.yellow;
 
       # blue
-      color4 = "#7aa2f7";
-      color12 = "#7aa2f7";
+      color4 = theme.colors.normal.blue;
+      color12 = theme.colors.bright.blue;
 
       # magenta
-      color5 = "#bb9af7";
-      color13 = "#bb9af7";
+      color5 = theme.colors.normal.magenta;
+      color13 = theme.colors.bright.magenta;
 
       # cyan
-      color6 = "#7dcfff";
-      color14 = "#7dcfff";
+      color6 = theme.colors.normal.cyan;
+      color14 = theme.colors.bright.cyan;
 
       # white
-      color7 = "#a9b1d6";
-      color15 = "#c0caf5";
+      color7 = theme.colors.normal.white;
+      color15 = theme.colors.bright.white;
     };
   };
 }

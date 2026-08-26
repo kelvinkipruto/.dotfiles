@@ -1,0 +1,27 @@
+#!/bin/sh
+set -eu
+
+if [ "${SKIP_NIX_CHECK:-}" = "1" ]; then
+  exit 0
+fi
+
+echo "Running: nix flake check"
+nix flake check
+
+if [ "${SKIP_LINT:-}" = "1" ]; then
+  exit 0
+fi
+
+echo "Running: statix check"
+if [ "${STRICT_LINT:-}" = "1" ]; then
+  statix check
+else
+  statix check || true
+fi
+
+echo "Running: deadnix"
+if [ "${STRICT_LINT:-}" = "1" ]; then
+  deadnix
+else
+  deadnix || true
+fi

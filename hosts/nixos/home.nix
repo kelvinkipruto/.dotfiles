@@ -1,9 +1,7 @@
-{ pkgs, lib, ... }:
-let
-  shared = import ../../shared { inherit pkgs lib; system = pkgs.system; };
-in
+{ lib, ... }:
 {
   imports = [
+    ../../shared/home-manager
     ../../config
   ];
 
@@ -15,24 +13,9 @@ in
     };
   };
 
-  home = {
-    username = shared.user.user.name;
-    homeDirectory = shared.user.getHomeDirectory pkgs.system;
-    stateVersion = shared.user.stateVersion;
+  home.packages = lib.mkAfter [
+    # NixOS-specific packages go here.
+  ];
 
-    packages = shared.packages.forNixOS ++ shared.fonts.packages ++ [
-      # Additional NixOS-specific packages not in shared
-    ];
-  };
-
-  programs = shared.programs // {
-    # NixOS-specific program overrides or additions
-    # Add any Linux-specific program configurations here
-  };
-
-  # Import shared environment variables
-  home.sessionVariables = shared.environment.sessionVariables;
-
-  # Import shared font configuration
-  fonts.fontconfig = shared.fonts.fontconfig;
+  # Add more NixOS-specific Home Manager config here.
 }

@@ -1,24 +1,56 @@
-{ self, pkgs, ... }:
+{ ... }:
 {
   homebrew = {
     enable = true;
-    caskArgs.no_quarantine = true;
     onActivation = {
-      autoUpdate = true;
+      autoUpdate = false;
       cleanup = "zap";
-      upgrade = true;
+      upgrade = false;
       extraFlags = [ "--verbose" ];
     };
     taps = [
       "homebrew/services"
       "null-dev/firefox-profile-switcher"
+      "alielsokary/tap"
+      "microsoft/sysinternalstap"
     ];
     brews = [
-      "elixir"
       "firefox-profile-switcher-connector"
+      "media-control"
+      "mise"
+      "mole"
+      "mysql-client"
     ];
     casks = [
+      "alacritty"
+      "alt-tab"
+      "brave-browser"
+      "alielsokary/tap/caskhub"
       "chatgpt"
+      # Firefox (release + DevEdition) as casks on Darwin.
+      # Homebrew casks install real, writable .app bundles into /Applications which is
+      # required for (a) macOS quarantine/xattr writes (no EPERM-13 on /nix/store),
+      # (b) valid Mozilla code signatures honored for sandbox/plugin-container extensions,
+      # (c) the null-dev/firefox-profile-switcher-connector native-messaging manifest
+      #     finding the browser via its hardcoded /Applications/Firefox.app paths.
+      "firefox"
+      "firefox@developer-edition"
+      "flameshot"
+      "ghostty"
+      "imhex"
+      "kitty"
+      "localsend"
+      # "mole-app"
+      "orbstack"
+      "raycast"
+      "rectangle"
+      "responsively"
+      "shottr"
+      "slack"
+      "spotify"
+      # Microsoft Sysinternals ZoomIt (screen zoom, annotation, recording).
+      # Tap-qualified name required since this cask lives in microsoft/sysinternalstap.
+      "microsoft/sysinternalstap/zoomit"
     ];
   };
 }

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 {
   programs.yazi = {
@@ -69,7 +69,7 @@
       open = {
         # File associations
         rules = [
-          { name = "*/"; use = [ "edit" "open" "reveal" ]; }
+          { url = "*/"; use = [ "edit" "open" "reveal" ]; }
           { mime = "text/*"; use = [ "edit" "reveal" ]; }
           { mime = "image/*"; use = [ "open" "reveal" ]; }
           { mime = "video/*"; use = [ "play" "reveal" ]; }
@@ -101,11 +101,13 @@
           { mime = "image/{avif,heix}"; run = "magick"; }
           { mime = "image/svg+xml"; run = "magick"; }
           { mime = "image/webp"; run = "magick"; }
-          { name = "*.md"; run = "glow"; }
+          # url (not name): valid matchers for plugin.previewers/preloaders are url or mime only.
+          { url = "*.md"; run = "glow"; }
         ];
 
         append_previewers = [
-          { name = "*.md"; run = "glow"; }
+          { mime = "text/*"; run = "bat"; }
+          { url = "*.md"; run = "glow"; }
           { mime = "text/csv"; run = "miller"; }
           { mime = "application/json"; run = "jq"; }
         ];
@@ -311,47 +313,48 @@
           { mime = "application/x-rar"; fg = "#f7768e"; }
           # Documents
           { mime = "application/pdf"; fg = "#f7768e"; }
-          { name = "*.md"; fg = "#c0caf5"; }
-          { name = "*.txt"; fg = "#c0caf5"; }
+          # filetype.rules only accepts url or mime as matchers (not name).
+          { url = "*.md"; fg = "#c0caf5"; }
+          { url = "*.txt"; fg = "#c0caf5"; }
           # Code
-          { name = "*.js"; fg = "#e0af68"; }
-          { name = "*.ts"; fg = "#7aa2f7"; }
-          { name = "*.jsx"; fg = "#7dcfff"; }
-          { name = "*.tsx"; fg = "#7dcfff"; }
-          { name = "*.py"; fg = "#e0af68"; }
-          { name = "*.rs"; fg = "#f7768e"; }
-          { name = "*.go"; fg = "#7dcfff"; }
-          { name = "*.php"; fg = "#bb9af7"; }
-          { name = "*.rb"; fg = "#f7768e"; }
-          { name = "*.java"; fg = "#f7768e"; }
-          { name = "*.c"; fg = "#7aa2f7"; }
-          { name = "*.cpp"; fg = "#7aa2f7"; }
-          { name = "*.h"; fg = "#7aa2f7"; }
-          { name = "*.hpp"; fg = "#7aa2f7"; }
-          { name = "*.css"; fg = "#7aa2f7"; }
-          { name = "*.scss"; fg = "#bb9af7"; }
-          { name = "*.html"; fg = "#f7768e"; }
-          { name = "*.xml"; fg = "#f7768e"; }
-          { name = "*.json"; fg = "#e0af68"; }
-          { name = "*.yaml"; fg = "#e0af68"; }
-          { name = "*.yml"; fg = "#e0af68"; }
-          { name = "*.toml"; fg = "#e0af68"; }
-          { name = "*.ini"; fg = "#e0af68"; }
-          { name = "*.conf"; fg = "#e0af68"; }
-          { name = "*.nix"; fg = "#7aa2f7"; }
+          { url = "*.js"; fg = "#e0af68"; }
+          { url = "*.ts"; fg = "#7aa2f7"; }
+          { url = "*.jsx"; fg = "#7dcfff"; }
+          { url = "*.tsx"; fg = "#7dcfff"; }
+          { url = "*.py"; fg = "#e0af68"; }
+          { url = "*.rs"; fg = "#f7768e"; }
+          { url = "*.go"; fg = "#7dcfff"; }
+          { url = "*.php"; fg = "#bb9af7"; }
+          { url = "*.rb"; fg = "#f7768e"; }
+          { url = "*.java"; fg = "#f7768e"; }
+          { url = "*.c"; fg = "#7aa2f7"; }
+          { url = "*.cpp"; fg = "#7aa2f7"; }
+          { url = "*.h"; fg = "#7aa2f7"; }
+          { url = "*.hpp"; fg = "#7aa2f7"; }
+          { url = "*.css"; fg = "#7aa2f7"; }
+          { url = "*.scss"; fg = "#bb9af7"; }
+          { url = "*.html"; fg = "#f7768e"; }
+          { url = "*.xml"; fg = "#f7768e"; }
+          { url = "*.json"; fg = "#e0af68"; }
+          { url = "*.yaml"; fg = "#e0af68"; }
+          { url = "*.yml"; fg = "#e0af68"; }
+          { url = "*.toml"; fg = "#e0af68"; }
+          { url = "*.ini"; fg = "#e0af68"; }
+          { url = "*.conf"; fg = "#e0af68"; }
+          { url = "*.nix"; fg = "#7aa2f7"; }
           # Shell
-          { name = "*.sh"; fg = "#9ece6a"; }
-          { name = "*.bash"; fg = "#9ece6a"; }
-          { name = "*.zsh"; fg = "#9ece6a"; }
-          { name = "*.fish"; fg = "#9ece6a"; }
+          { url = "*.sh"; fg = "#9ece6a"; }
+          { url = "*.bash"; fg = "#9ece6a"; }
+          { url = "*.zsh"; fg = "#9ece6a"; }
+          { url = "*.fish"; fg = "#9ece6a"; }
           # Git
-          { name = ".gitignore"; fg = "#565f89"; }
-          { name = ".gitmodules"; fg = "#565f89"; }
-          { name = ".gitattributes"; fg = "#565f89"; }
+          { url = ".gitignore"; fg = "#565f89"; }
+          { url = ".gitmodules"; fg = "#565f89"; }
+          { url = ".gitattributes"; fg = "#565f89"; }
           # Directories
-          { name = "*/"; fg = "#7aa2f7"; }
+          { url = "*/"; fg = "#7aa2f7"; }
           # Default
-          { name = "*"; fg = "#c0caf5"; }
+          { url = "*"; fg = "#c0caf5"; }
         ];
       };
     };

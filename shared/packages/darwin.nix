@@ -8,5 +8,5 @@
   # (2) Mozilla code signatures to be honored by sandbox extensions;
   # (3) the native firefox-profile-switcher-connector (brew formula) to find the
   #     browser via its hardcoded /Applications/Firefox.app paths.
-  pkgs.asdf-vm
+  # pkgs.asdf-vm  # disabled: version 0.20.1 tarball 404s upstream; replaced by mise
 ]

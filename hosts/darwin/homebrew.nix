@@ -37,10 +37,12 @@
       "firefox@developer-edition"
       "flameshot"
       "ghostty"
+      "handy"
       "imhex"
       "kitty"
       "localsend"
       # "mole-app"
+      "macpacker"
       "orbstack"
       "raycast"
       "rectangle"
@@ -51,6 +53,7 @@
       # Microsoft Sysinternals ZoomIt (screen zoom, annotation, recording).
       # Tap-qualified name required since this cask lives in microsoft/sysinternalstap.
       "microsoft/sysinternalstap/zoomit"
+      "vorssaint"
     ];
   };
 }

@@ -53,7 +53,9 @@
       nixpkgsConfig = {
         allowUnfree = true;
         allowBroken = false;
-        android_sdk.accept_license = true;
+        # Android SDK license acceptance was here for Nix-managed SDK installs.
+        # Disabled: SDK is now fully managed by Android Studio.
+        # android_sdk.accept_license = true;
       };
 
       # Package sets with overlays

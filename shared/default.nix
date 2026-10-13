@@ -7,8 +7,9 @@ let
   aliases = import ./aliases.nix;
   environment = import ./environment.nix {
     inherit pkgs lib packageProfiles system;
-    # Pass Nix-managed Android SDK root (or null) for correct env vars.
-    androidSdkRoot = packages.androidSdkRoot;
+    # Android SDK management is disabled here; Android Studio manages SDK now.
+    # androidSdkRoot = packages.androidSdkRoot;
+    androidSdkRoot = null;
   };
   fonts = import ./fonts.nix { inherit pkgs; };
 in

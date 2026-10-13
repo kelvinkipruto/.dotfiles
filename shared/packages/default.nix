@@ -18,12 +18,12 @@ let
   darwin = import ./darwin.nix { inherit pkgs; };
   nixos = import ./nixos.nix { inherit pkgs; };
   profiles = import ./profiles.nix { inherit pkgs; };
-  # Android SDK composition (androidsdk package + sdkRoot path).
-  androidSdkModule = import ./android-sdk.nix { inherit pkgs; };
-  # Nix-managed Android SDK packages added to home.packages.
-  androidSdkPackages = androidSdkModule.packages;
-  # Nix-managed Android SDK root (${androidsdk}/libexec/android-sdk).
-  androidSdkRoot = androidSdkModule.sdkRoot;
+  # Android SDK management is disabled; Android Studio manages SDK now.
+  # androidSdkModule = import ./android-sdk.nix { inherit pkgs; };
+  # androidSdkPackages = androidSdkModule.packages;
+  androidSdkPackages = [ ];
+  # androidSdkRoot = androidSdkModule.sdkRoot;
+  androidSdkRoot = null;
 
   profileNames = [
     "ai"
@@ -48,10 +48,12 @@ in
   inherit common darwin nixos profiles enabledProfilePackages;
 
   # Expose Android SDK composition + sdkRoot for env vars and other callers.
-  inherit androidSdkRoot androidSdkModule;
+  # Both set to null/empty here while dotfile-level SDK management is disabled.
+  inherit androidSdkRoot;
+  androidSdkModule = null;
 
   # Helper functions to get packages for specific systems.
-  # Always include the Nix-managed Android SDK packages (androidsdk, etc.).
+  # Android SDK packages are intentionally disabled here (managed by Android Studio).
   forDarwin = common ++ androidSdkPackages ++ enabledCommonProfilePackages ++ enabledDarwinProfilePackages ++ darwin;
   forNixOS = common ++ androidSdkPackages ++ enabledCommonProfilePackages ++ enabledNixOSProfilePackages ++ nixos;
 

@@ -71,7 +71,7 @@
   pkgs.bottom
   pkgs.dua
   pkgs.duf
-  pkgs.nushell
+  # pkgs.nushell
   pkgs.just
   pkgs.tokei
 
@@ -87,8 +87,8 @@
   pkgs.pkg-config
   pkgs.dnsmasq
 
-  #Android
-  pkgs.androidenv.androidPkgs.platform-tools
+  # Android — disabled in the dotfiles; managed by Android Studio now.
+  # pkgs.androidenv.androidPkgs.platform-tools
 
   # Windows
   pkgs.osslsigncode

@@ -1,3 +1,4 @@
+{ userConfig, ... }:
 {
   programs.git = {
     enable = true;
@@ -5,20 +6,21 @@
     settings = {
       init.defaultBranch = "main";
       pull.rebase = true;
-      # TODO: Pass the user name and email as arguments
       user = {
-        name = "kelvinkipruto";
-        email = "hello@kipruto.dev";
+        name = userConfig.name;
+        email = userConfig.email;
       };
       delta = {
         enable = true;
         enableGitIntegration = true;
         options = {
-          features = "side-by-side";
+          features = "side-by-side line-numbers";
+          navigate = true;
+          syntax-theme = "TwoDark";
         };
       };
 
-      aliases = {
+      alias = {
         br = "branch";
         co = "checkout";
         st = "status";

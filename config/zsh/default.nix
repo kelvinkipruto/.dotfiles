@@ -1,41 +1,8 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, userConfig, ... }:
 let
-  cfg = config.programs.zsh;
   homeDir = config.home.homeDirectory;
-  sharedAliases = {
-    # File and directory operations
-    cat = "bat --paging=never";
-    ls = "eza --icons=always --color=always --group-directories-first";
-    ll = "eza --icons=always --color=always --group-directories-first -l";
-    la = "eza --icons=always --color=always --group-directories-first -la";
-    lt = "eza --tree";
-
-    # Git and development
-    lg = "lazygit";
-
-    # System maintenance
-    clean = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
-
-    # Common shortcuts
-    grep = "rg";
-    find = "fd";
-    top = "htop";
-
-    # Docker shortcuts
-    dc = "docker-compose";
-    dcu = "docker-compose up";
-    dcd = "docker-compose down";
-    dcb = "docker-compose build";
-
-    # Nix shortcuts
-    nix-search = "nix search nixpkgs";
-    nix-shell = "nix-shell --run zsh";
-
-    # Zoxide shortcuts
-    zi = "z -i"; # Interactive selection
-    zq = "z -";
-    zb = "z -b"; # Go back
-  };
+  system = pkgs.stdenv.hostPlatform.system;
+  shared = import ../../shared { inherit pkgs lib userConfig system; };
 in
 {
   programs.zsh = {
@@ -44,10 +11,10 @@ in
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = sharedAliases // {
-      # System-specific aliases can be added here
-      update = "sudo nixos-rebuild switch";
-    };
+    shellAliases =
+      shared.aliases.shellAliases
+      # -H resets HOME to /var/root so Nix doesn't warn that $HOME isn't owned by root.
+      // lib.optionalAttrs pkgs.stdenv.isLinux { update = "sudo -H nixos-rebuild switch"; };
     history.size = 10000;
 
     # Oh my zsh setup
@@ -86,6 +53,10 @@ in
     ];
 
     initContent = ''
+      # Mise shims keep backend-managed CLIs, including npm tools, from being
+      # shadowed by stale npm globals inside the active Node install.
+      eval "$(mise activate zsh --shims)"
+
       # Source p10k configuration from dotfiles
       if [ -f "${homeDir}/.dotfiles/config/zsh/p10k.zsh" ]; then
         source "${homeDir}/.dotfiles/config/zsh/p10k.zsh"
@@ -104,15 +75,28 @@ in
       # export PATH="$PATH":"${homeDir}/.pub-cache/bin"
       #Mysql
       # export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-      #Android
+      # Android: ANDROID_HOME, ANDROID_SDK_ROOT and PATH additions are set via
+      # shared/environment.nix sessionVariables (platform-aware paths).
       # export ANDROID_HOME="${homeDir}/Library/Android/sdk"
       # export PATH=$PATH:$ANDROID_HOME/emulator
       # export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+      # Kill process by port
+      killport() {
+        if [ -z "$1" ]; then
+          echo "Usage: killport <port>"; return 1;
+        fi
+        local pids
+        pids=$(lsof -tiTCP:$1 -sTCP:LISTEN 2>/dev/null)
+        if [ -z "$pids" ]; then
+          echo "No process listening on port $1"; return 0;
+        fi
+        echo "$pids" | xargs kill -9
+        echo "Killed $pids on port $1"
+      }
+
       # Cargo
       # export PATH="$HOME/.cargo/bin:$PATH"
-      # Mise
-      eval "$(mise activate zsh)"
       eval "$(devbox global shellenv)"
     '';
   };

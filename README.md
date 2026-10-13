@@ -1,54 +1,76 @@
 # Nix Dotfiles
 
-A well-structured Nix configuration for both macOS (Darwin) and NixOS systems.
+Minimal Nix configuration for macOS (Darwin) and NixOS.
 
 ## Structure
 
 ```
 ├── config/                 # Shared application configurations
+├── docs/                   # Usage docs for configured tools
+│   ├── tools/              # Tool usage guides
+│   └── workflows/          # Practical workflows
 ├── hosts/
 │   ├── darwin/            # macOS-specific configurations
 │   └── nixos/             # NixOS-specific configurations
 ├── shared/                # Shared packages and programs
+│   ├── home-manager/      # Shared Home Manager module
+│   ├── modules/           # Shared system modules
 │   ├── packages/
 │   │   ├── common.nix     # Packages shared between both systems
 │   │   ├── darwin.nix     # macOS-specific packages
 │   │   ├── nixos.nix      # NixOS-specific packages
+│   │   ├── profiles.nix   # Optional package profile definitions
 │   │   └── default.nix    # Package set exports
 │   ├── programs/
 │   │   └── default.nix    # Shared program configurations
+│   ├── aliases.nix        # Central shell aliases
+│   ├── package-profiles.nix # Global package profile defaults
+│   ├── user.nix           # Shared user metadata and home paths
 │   └── default.nix        # Main shared exports
 └── flake.nix              # Main flake configuration
 ```
 
-## Features
-
-- **Shared Package Management**: Common packages are defined once and reused across systems
-- **OS-Specific Packages**: Platform-specific packages are organized separately
-- **Stable + Unstable**: Uses nixpkgs-unstable by default with stable packages available via `pkgs.stable.*`
-- **Modular Structure**: Easy to maintain and extend
-- **Program Configurations**: Shared program settings across both systems
-
 ## Usage
 
-### macOS (Darwin)
+### Cross-platform
 
 ```bash
-# Build and switch
-nix run nix-darwin -- switch --flake .#kelvinkipruto
+# Build the current OS system
+just build
 
-# Build only
-nix build .#darwinConfigurations.kelvinkipruto.system
+# Apply the current OS system
+just switch
+
+# Clean safe package-manager leftovers
+just clean
+
+# Run broader maintenance across Nix, mise, and Homebrew
+just maintain
 ```
 
-### NixOS
+### Updates
 
 ```bash
-# Build and switch
-sudo nixos-rebuild switch --flake .#kelvinkipruto
+# Update inputs only
+just update
 
-# Build only
-nix build .#nixosConfigurations.kelvinkipruto.config.system.build.toplevel
+# Update inputs and build the current OS system
+just update-check
+
+# Update inputs, build, and switch
+just update-switch
+```
+
+### System-specific commands
+
+```bash
+# macOS
+just build-darwin
+just switch-darwin
+
+# NixOS
+just build-nixos
+just switch-nixos
 ```
 
 ### Development Shell
@@ -57,30 +79,4 @@ nix build .#nixosConfigurations.kelvinkipruto.config.system.build.toplevel
 nix develop
 ```
 
-## Package Management
-
-### Adding Packages
-
-- **Common packages** (both systems): Add to `shared/packages/common.nix`
-- **macOS-only packages**: Add to `shared/packages/darwin.nix`
-- **NixOS-only packages**: Add to `shared/packages/nixos.nix`
-
-### Using Stable Packages
-
-By default, packages come from nixpkgs-unstable. To use a stable version:
-
-```nix
-# In any package list
-pkgs.stable.packageName  # Uses stable version
-pkgs.packageName         # Uses unstable version (default)
-```
-
-## Program Configurations
-
-Shared program configurations are in `shared/programs/default.nix`. OS-specific overrides can be added in the respective `home.nix` files.
-
-## Customization
-
-1. **System-specific packages**: Add to the respective host's `home.nix` file
-2. **Program overrides**: Use the merge operator `//` in the programs section
-3. **New shared programs**: Add to `shared/programs/default.nix`
+For program and workflow docs, see `docs/README.md`.

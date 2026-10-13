@@ -1,12 +1,14 @@
-{ inputs, pkgs, self, ... }: {
+{ ... }: {
   imports = [
     ./gh
     ./git
-    # ./gpg
+    ./gpg
+    ./mise
     ./zsh
     ./alacritty
     ./kitty
     ./tmux
     ./yazi
+    ./zellij
   ];
 }

@@ -20,6 +20,7 @@
       "mise"
       "mole"
       "mysql-client"
+      "scrcpy"
     ];
     casks = [
       "alacritty"
@@ -39,6 +40,9 @@
       "ghostty"
       "handy"
       "imhex"
+      # KDE Connect: GUI app bundle, must live in /Applications to register the
+      # menu-bar app, plugins, and the Android-side pairing service.
+      "kde-connect"
       "kitty"
       "localsend"
       # "mole-app"

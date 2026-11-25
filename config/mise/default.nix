@@ -23,7 +23,7 @@ let
       "aqua:astral-sh/uv" = "latest";
 
       "npm:@openai/codex" = "latest";
-      "npm:opencode-ai" = "latest";
+      "npm:@opencode/cli" = "latest";
       "npm:@qwen-code/qwen-code" = "latest";
       "npm:eas-cli" = "latest";
       "npm:@google/gemini-cli" = "latest";

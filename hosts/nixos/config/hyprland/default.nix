@@ -1,4 +1,4 @@
-{ pkgs, lib, config, inputs, ... }:
+{ pkgs, inputs, ... }:
 let
   startupScript = pkgs.pkgs.writeShellScriptBin "start.sh" ''
     #!/usr/bin/env bash
@@ -19,7 +19,7 @@ in
     grim
     slurp
     swww
-    rofi-wayland
+    rofi
     waybar
   ];
 

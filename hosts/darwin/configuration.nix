@@ -1,41 +1,27 @@
-{ nixpkgs, self, user, hostName, ... }:
+{ pkgs, lib, self, user, userConfig, hostName, nixpkgsConfig, systemStateVersion, ... }:
 let
-  pkgs = import nixpkgs { system = "aarch64-darwin"; };
-  systemDefaults = import ./system.nix { inherit self hostName user; };
+  packageProfiles = import ../../shared/package-profiles.nix;
+  systemDefaults = import ./system.nix { inherit self hostName user systemStateVersion; };
   servicesConfig = import ./services.nix { inherit self; };
-  environmentConfig = import ./environment.nix { inherit self pkgs; };
-  userConfig = import ./user.nix { inherit self pkgs user; };
-  fontsConfig = import ./fonts.nix { inherit self pkgs; };
+  userModule = import ./user.nix { inherit self pkgs userConfig; };
   programsConfig = import ./programs.nix { inherit self pkgs; };
   homebrewConfig = import ./homebrew.nix { inherit self pkgs; };
-  autostartConfig = import ./autostart.nix { inherit self pkgs; };
+  autostartConfig = import ./autostart.nix { inherit self pkgs lib packageProfiles; };
 in
 {
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
-    config = {
-      allowUnfree = true;
-    };
-  };
-
-  nix = {
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-    };
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 7d";
-    };
+    config = nixpkgsConfig;
   };
 
   imports = [
+    ../../shared/modules/nix.nix
     systemDefaults
     servicesConfig
-    environmentConfig
-    userConfig
-    fontsConfig
+    userModule
     programsConfig
     homebrewConfig
     autostartConfig
+    ./overrides.nix
   ];
 }

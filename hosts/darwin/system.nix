@@ -1,4 +1,4 @@
-{ self, hostName, user, ... }:
+{ self, hostName, user, systemStateVersion, ... }:
 {
   system = {
     # Primary User
@@ -40,7 +40,7 @@
 
     };
     configurationRevision = self.rev or self.dirtyRev or null;
-    stateVersion = 6;
+    stateVersion = systemStateVersion.darwin;
   };
 
   networking = {
@@ -48,7 +48,6 @@
   };
   security = {
     pam = {
-      # enableSudoTouchIdAuth = true;
       services.sudo_local.touchIdAuth = true;
     };
   };
